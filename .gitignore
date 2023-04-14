@@ -12,6 +12,10 @@
 **/.next/
 /out/
 
+# Foundry Stuff
+contracts/broadcast/**
+contracts/cache/**
+
 # TypeScript build output
 /dist/
 /tsconfig.tsbuildinfo
