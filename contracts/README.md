@@ -32,6 +32,12 @@ forge create --rpc-url $GOERLI_RPC_URL \
     src/Hackathon721.sol:Hackathon721
 ```
 
+To deploy the paymaster with the script
+
+```
+forge script script/HackathonPaymaster.s.sol:MyScript --rpc-url $GOERLI_RPC_URL --broadcast --etherscan-api-key $ETHERSCAN_API_KEY --verify -vvvv
+```
+
 ## Testing Contracts
 
 Read here for more information: https://book.getfoundry.sh/forge/tests
