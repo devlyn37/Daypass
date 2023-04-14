@@ -1,0 +1,12 @@
+[profile.default]
+src = 'src'
+out = '../client/contracts'
+libs = ['lib']
+solc = "0.8.19"
+
+[rpc_endpoints]
+goerli = "${GOERLI_RPC_URL}"
+
+[etherscan]
+goerli = { key = "${ETHERSCAN_API_KEY}" }
+# See more config options https://github.com/foundry-rs/foundry/tree/master/config
