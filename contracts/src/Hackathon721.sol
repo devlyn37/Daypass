@@ -38,7 +38,7 @@ contract Hackathon721 is ERC721, Ownable {
 
     function mint(uint256 quantity) external payable maxTokens(quantity) isCorrectPayment(quantity) {
         for (uint256 i = 0; i < quantity; i++) {
-            _safeMint(msg.sender, ++currentTokenId);
+            _mint(msg.sender, ++currentTokenId);
         }
     }
 

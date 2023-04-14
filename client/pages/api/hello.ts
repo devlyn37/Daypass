@@ -24,9 +24,10 @@ import { getHttpRpcClient } from "../../utils/getHttpRpcClient";
 // const PAYMASTER_ADDRESS = "0x78EE0c52DB08972CdC8F056B748a003B649F28AC";
 // const PAYMASTER_ADDRESS = "0x92D8FA41e2FD5A4daFb84A72CE5c63908bAB6105";
 
-const PAYMASTER_ADDRESS = "0x31089cc43cB16d829262D6673c788c8Ce5F7e81d";
+const PAYMASTER_ADDRESS = "0x31089cc43cB16d829262D6673c788c8Ce5F7e81d"; // paymaster with whitelisted addresses
 const ENTRY_POINT_ADDRESS = "0x0576a174D229E3cFA37253523E645A78A0C91B57";
-const FREE_NFT_CONTRACT = "0xe358557b9e2a9a67318c32c09daa3cd781b1a58b";
+// const FREE_NFT_CONTRACT = "0xe358557b9e2a9a67318c32c09daa3cd781b1a58b"; // NFT contract that is acting as pass for paymaster
+const FREE_NFT_CONTRACT = "0x5a89d913b098c30fcb34f60382dce707177e171e"; // NFT contract that will mint to smart contract accounts
 const SIMPLE_ACCOUNT_FACTORY = "0x71D63edCdA95C61D6235552b5Bc74E32d8e2527B";
 const BUNDLER_URL =
   "https://node.stackup.sh/v1/rpc/ab97ef3654d7664efdd076bf751b06225e339ff4e506de6d710445e2cf4829ef";
@@ -43,8 +44,8 @@ export default async function handler(
     provider,
     pk,
     ENTRY_POINT_ADDRESS,
-    SIMPLE_ACCOUNT_FACTORY,
-    paymasterAPI
+    SIMPLE_ACCOUNT_FACTORY
+    // paymasterAPI
   );
 
   console.log(
@@ -62,8 +63,8 @@ export default async function handler(
 
   const op = await accountAPI.createSignedUserOp({
     value: parseEther("0"),
-    target: getAddress("0xE898BBd704CCE799e9593a9ADe2c1cA0351Ab660"),
-    data: "0x",
+    data: nftContract.interface.encodeFunctionData("mint", [1]),
+    target: nftContract.address,
     ...gasFee,
   });
 

@@ -13,7 +13,7 @@ contract HackathonPaymaster is BasePaymaster {
     address public nftPassAddress;
     address[] public whiteAddresses;
 
-    constructor(IEntryPoint _entryPoint, address memory nftPassAddress, address[] memory addresses)
+    constructor(IEntryPoint _entryPoint, address nftPassAddress, address[] memory addresses)
         BasePaymaster(_entryPoint)
     {
         nftPassAddress = nftPassAddress;
