@@ -1,23 +1,28 @@
 import { Box, Button, Heading, Input, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useAccount } from "wagmi";
+import { useAccount, useSigner } from "wagmi";
 import AdminDashboardLayout from "./AdminDashboardLayout";
-import nftArtifact from "../../../contracts/Hackathon721.sol/Hackathon721.json";
+import { ethers } from "ethers";
+import { mintNFT } from "../../../clients/nft";
 
-const NFT_CONTRACT_ADDRESS = "0x5a89d913b098c30fcb34f60382dce707177e171e";
+// const NFT_CONTRACT_ADDRESS = "0x5a89d913b098c30fcb34f60382dce707177e171e";
+const NFT_CONTRACT_ADDRESS="0xf03C1cB42c64628DE52d8828D534bFa2c6Fd65Df";
 
 const AirdropPage = () => {
   const router = useRouter();
   const { address } = useAccount();
   const [airdropAddress, setAirdropAddress] = useState("");
   const handleChange = (event: any) => setAirdropAddress(event.target.value);
+  const [submiting, setSubmiting] = useState(false);
 
   useEffect(() => {
     if (!address) {
       router.push("/admin/dashboard");
     }
   }, [address]);
+
+  const { data: signer } = useSigner();
 
   return (
     <AdminDashboardLayout>
@@ -50,16 +55,39 @@ const AirdropPage = () => {
         <Input
           value={airdropAddress}
           onChange={handleChange}
-          placeholder="Here is a sample placeholder"
+          placeholder="Input recipient address"
           size="sm"
         />
         <Button
+          isLoading={submiting}
           colorScheme="blue"
           mt="16px"
           onClick={() => {
-            console.log(
-              `Clicked the button, the address value is ${airdropAddress}`
-            );
+            if (!ethers.utils.isAddress(airdropAddress)) {
+              console.error("not address: " + airdropAddress);
+              return
+            }
+
+            if (!signer) {
+              console.error("signer is not ready");
+              return;
+            }
+
+            (async () => {
+              setSubmiting(true);
+              try {
+                await mintNFT(
+                  NFT_CONTRACT_ADDRESS,
+                  signer,
+                  airdropAddress
+                );
+                setAirdropAddress('');
+              } catch (error) {
+                console.error(error);
+              } finally {
+                setSubmiting(false);
+              }
+            })()
           }}
         >
           Send Daypass
