@@ -52,6 +52,17 @@ contract Hackathon721Test is Test {
         vm.stopPrank();
     }
 
+    function testTokenUri() public {
+        vm.startPrank(normalAddress);
+        assertEq(nft.balanceOf(normalAddress), 0);
+
+        nft.mint{value: nft.salePrice() * 1}(1);
+        console.log(nft.tokenURI(1));
+
+        assertEq(nft.balanceOf(normalAddress), 1);
+        vm.stopPrank();
+    }
+
     function testValidity(uint256 quantity) public {
         vm.startPrank(normalAddress);
         assertEq(nft.balanceOf(normalAddress), 0);
