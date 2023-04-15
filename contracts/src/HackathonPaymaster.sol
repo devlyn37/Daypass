@@ -26,9 +26,7 @@ contract HackathonPaymaster is BasePaymaster {
         uint256 _gasLimitPerOperation,
         uint256 _spendingLimitPerOperation,
         uint256 _timeLimitInSecond
-    )
-        BasePaymaster(_entryPoint)
-    {
+    ) BasePaymaster(_entryPoint) {
         nftPassAddress = _nftPassAddress;
         whiteAddresses = addresses;
         gasLimitPerOperation = _gasLimitPerOperation;
@@ -55,17 +53,17 @@ contract HackathonPaymaster is BasePaymaster {
             return ("", 1);
         }
 
-        if (_exceedsGasLimit(userOp.callGasLimit)) {
-            return ("", 1);
-        }
+        // if (_exceedsGasLimit(userOp.callGasLimit)) {
+        //     return ("", 1);
+        // }
 
-        if (_exceedsSpendingLimit(maxCost)) {
-            return ("", 1);
-        }
+        // if (_exceedsSpendingLimit(maxCost)) {
+        //     return ("", 1);
+        // }
 
-        if (!_hasAvailablePass(userOp.sender)) {
-            return ("", 1);
-        }
+        // if (!_hasAvailablePass(userOp.sender)) {
+        //     return ("", 1);
+        // }
 
         // Pay for the operation! the user owns a pass
         return ("", 0);
@@ -98,7 +96,8 @@ contract HackathonPaymaster is BasePaymaster {
             uint256 mintedAt = nft.getMintedAt(tokenId);
 
             // if timeLimitInSecond, sender just needs to have a token
-            if (timeLimitInSecond == 0 || block.timestamp < mintedAt + timeLimitInSecond) {
+            // TODO figure out how to work around not being able to access timestamp XD
+            if (timeLimitInSecond == 0 || 1684151208 > mintedAt + timeLimitInSecond) {
                 return true;
             }
         }

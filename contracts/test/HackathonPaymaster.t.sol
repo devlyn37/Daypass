@@ -3,16 +3,19 @@ pragma solidity 0.8.19;
 import "../lib/forge-std/src/Test.sol";
 import "../src/HackathonPaymaster.sol";
 import "../src/Hackathon721.sol";
-import {ERC721TokenReceiver} from "solmate/tokens/ERC721.sol";
 import "../lib/account-abstraction/contracts/core/EntryPoint.sol";
 import "../lib/account-abstraction/contracts/interfaces/IEntryPoint.sol";
 import "../lib/account-abstraction/contracts/interfaces/UserOperation.sol";
 import "../lib/account-abstraction/contracts/samples/SimpleAccount.sol";
 import "../lib/account-abstraction/contracts/bls/BLSSignatureAggregator.sol";
 
-contract SimpleAccountNFTReceiver is SimpleAccount, ERC721TokenReceiver {
+contract SimpleAccountNFTReceiver is SimpleAccount {
     constructor(IEntryPoint anEntryPoint) SimpleAccount(anEntryPoint) {}
     // Enable erc721 transfers
+
+    function onERC721Received(address, address, uint256, bytes calldata) external virtual returns (bytes4) {
+        return SimpleAccountNFTReceiver.onERC721Received.selector;
+    }
 }
 
 contract HackathonPaymasterTest is Test {
@@ -52,7 +55,8 @@ contract HackathonPaymasterTest is Test {
 
         entrypoint = EntryPoint(payable(0x0576a174D229E3cFA37253523E645A78A0C91B57));
         // entrypoint = new EntryPoint();
-        hackathonPaymaster = new HackathonPaymaster(entrypoint, address(nftPass), whiteListedAddresses, 500000_00, 0, 5000);
+        hackathonPaymaster =
+            new HackathonPaymaster(entrypoint, address(nftPass), whiteListedAddresses, 500000_00, 0, 5000);
         hackathonPaymaster.addStake{value: 500 ether}(100000);
         hackathonPaymaster.deposit{value: 500 ether}();
         // hackathonPaymaster = HackathonPaymaster(payable(0x38A310a0D9a015d23B973478c1EF961C3e44Ee62));

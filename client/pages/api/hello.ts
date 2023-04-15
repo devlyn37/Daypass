@@ -40,59 +40,66 @@ export default async function handler(
   const pk = process.env.PRIVATE_KEY!;
   const rpc_url = process.env.GOERLI_RPC_URL!;
   const provider = new ethers.providers.JsonRpcProvider(rpc_url);
-  const paymasterAPI = new contractOnlyPaymaster();
-  const accountAPI = getSimpleAccount(
-    provider,
-    pk,
-    ENTRY_POINT_ADDRESS,
-    SIMPLE_ACCOUNT_FACTORY
-    // paymasterAPI
-  );
-
-  console.log(
-    `account contract ${accountAPI.accountContract}, account address ${accountAPI.accountAddress}`
-  );
-
-  const nftContract = new Contract(
-    FREE_NFT_CONTRACT,
-    new Interface(Hackathon721Output.abi)
-  );
-
-  console.log("Creating the signed user op");
-  const gasFee = await getGasFee(provider);
-  console.log(`Here's the gas fee ${JSON.stringify(gasFee, undefined, 2)}`);
-
-  const op = await accountAPI.createSignedUserOp({
-    value: parseEther("0"),
-    data: nftContract.interface.encodeFunctionData("mint", [1]),
-    target: nftContract.address,
-    ...gasFee,
-  });
-
-  // op.verificationGasLimit = BigNumber.from(await op.verificationGasLimit).mul(
-  //   2
+  const signer = new Wallet(pk, provider);
+  // const paymasterAPI = new contractOnlyPaymaster();
+  // const accountAPI = getSimpleAccount(
+  //   provider,
+  //   pk,
+  //   ENTRY_POINT_ADDRESS,
+  //   SIMPLE_ACCOUNT_FACTORY
+  //   // paymasterAPI
   // );
-  // op.preVerificationGas = BigNumber.from(await op.preVerificationGas).mul(2);
-  // op.callGasLimit = BigNumber.from(await op.callGasLimit).mul(2);
 
-  console.log(`Signed UserOperation: ${await printOp(op)}`);
-  const client = await getHttpRpcClient(
-    provider,
-    BUNDLER_URL,
-    ENTRY_POINT_ADDRESS
+  // console.log(
+  //   `account contract ${accountAPI.accountContract}, account address ${accountAPI.accountAddress}`
+  // );
+
+  const latestDaypassAddress = "0xf682611A1FC6080aa23463F8E614A79Eb9eDb87e";
+  const nftContract = new Contract(
+    latestDaypassAddress,
+    new Interface(Hackathon721Output.abi),
+    signer
   );
-  const uoHash = await client.sendUserOpToBundler(op);
-  console.log(`UserOpHash: ${uoHash}`);
+  const response = await nftContract.mintTo(
+    1,
+    "0xb2Fa18B41e77EbB56e318c676A288290F3330894"
+  );
+  const receipt = await response.wait();
 
-  console.log("Waiting for transaction...");
-  const txHash = await accountAPI.getUserOpReceipt(uoHash);
-  console.log(`Transaction hash: ${txHash}`);
+  // console.log("Creating the signed user op");
+  // const gasFee = await getGasFee(provider);
+  // console.log(`Here's the gas fee ${JSON.stringify(gasFee, undefined, 2)}`);
 
-  console.log(`account contract: ${await accountAPI.getAccountAddress()}`);
+  // const op = await accountAPI.createSignedUserOp({
+  //   value: parseEther("0"),
+  //   data: nftContract.interface.encodeFunctionData("mint", [1]),
+  //   target: nftContract.address,
+  //   ...gasFee,
+  // });
+
+  // // op.verificationGasLimit = BigNumber.from(await op.verificationGasLimit).mul(
+  // //   2
+  // // );
+  // // op.preVerificationGas = BigNumber.from(await op.preVerificationGas).mul(2);
+  // // op.callGasLimit = BigNumber.from(await op.callGasLimit).mul(2);
+
+  // console.log(`Signed UserOperation: ${await printOp(op)}`);
+  // const client = await getHttpRpcClient(
+  //   provider,
+  //   BUNDLER_URL,
+  //   ENTRY_POINT_ADDRESS
+  // );
+  // const uoHash = await client.sendUserOpToBundler(op);
+  // console.log(`UserOpHash: ${uoHash}`);
+
+  // console.log("Waiting for transaction...");
+  // const txHash = await accountAPI.getUserOpReceipt(uoHash);
+  // console.log(`Transaction hash: ${txHash}`);
+
+  // console.log(`account contract: ${await accountAPI.getAccountAddress()}`);
 
   res.status(200).json({
-    address: accountAPI.accountContract,
-    done: true,
+    receipt,
   });
 }
 
@@ -103,3 +110,9 @@ class contractOnlyPaymaster extends PaymasterAPI {
     return PAYMASTER_ADDRESS;
   }
 }
+
+// Latest Contracts
+// Setup Helper: https://goerli.etherscan.io/address/0x4e82e06e959a37b3fd12b5c2a2157715481a25db
+// Free Random NFT for Demo: https://goerli.etherscan.io/address/0xe358557b9e2a9a67318c32c09daa3cd781b1a58b
+// Daypass: 0x4dae56d4a4db37edf6f89f376d56c53e531a28da
+// Paymaster: 0xf6fca2b973d644c4f78db568753654cbe52e61e8

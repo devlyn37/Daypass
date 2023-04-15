@@ -6,11 +6,7 @@ import "./Hackathon721.sol";
 import "./HackathonPaymaster.sol";
 
 contract SetupHelper {
-    event DaypassSetUp(
-        address dayPass,
-        address spaceCanNFT,
-        address payMaster
-    );
+    event DaypassSetUp(address dayPass, address spaceCanNFT, address payMaster);
 
     function setupDaypass(
         IEntryPoint entryPoint,
@@ -23,33 +19,28 @@ contract SetupHelper {
     )
         public
         payable
-        returns (
-            Hackathon721 dayPassContract,
-            Hackathon721 spaceCanNFTContract,
-            HackathonPaymaster paymasterContract
-        )
+        returns (Hackathon721 dayPassContract, Hackathon721 spaceCanNFTContract, HackathonPaymaster paymasterContract)
     {
         // Deploy the NFT contract
         dayPassContract = new Hackathon721("Daypass", "DPASS", isDayPassTransferble);
-        spaceCanNFTContract = new Hackathon721("SpaceCans", "SCAN", true);
 
         // Deploy the Hackathon Paymaster Contract, then deposit and stake
-        paymasterContract = new HackathonPaymaster(entryPoint, address(dayPassContract), targetAdddresses, gasLimitPerOperation, spendingLimitPerOperation, timeLimitInSecond);
+        paymasterContract =
+        new HackathonPaymaster(entryPoint, address(dayPassContract), targetAdddresses, gasLimitPerOperation, spendingLimitPerOperation, timeLimitInSecond);
         paymasterContract.deposit{value: msg.value / 2}();
         paymasterContract.addStake{value: msg.value / 2}(86400);
 
         // AirDrop
-        for(uint256 i=0; i<addresses.length; i++) {
+        for (uint256 i = 0; i < addresses.length; i++) {
             dayPassContract.mintTo(1, addresses[i]);
         }
 
         // Transfer ownership of the Paymaster and NFT contracts to the called
         paymasterContract.transferOwnership(msg.sender);
         dayPassContract.transferOwnership(msg.sender);
-        spaceCanNFTContract.transferOwnership(msg.sender);
 
         emit DaypassSetUp(address(dayPassContract), address(spaceCanNFTContract), address(paymasterContract));
 
-        return (dayPassContract, spaceCanNFTContract, paymasterContract);
+        return (dayPassContract, Hackathon721(0x38853627cadCB75B7537453b12bFc2AB6eE16E23), paymasterContract);
     }
 }

@@ -13,8 +13,9 @@ import { PaymasterAPI } from "@account-abstraction/sdk";
 import { UserOperationStruct } from "@account-abstraction/contracts";
 import Link from "next/link";
 
-const NFT_CONTRACT_ADDRESS = "0x5a89d913b098c30fcb34f60382dce707177e171e";
-const PAYMASTER_ADDRESS = "0x38A310a0D9a015d23B973478c1EF961C3e44Ee62"; // paymaster with whitelisted addresses, latest version
+const NFT_CONTRACT_ADDRESS = "0x38853627cadCB75B7537453b12bFc2AB6eE16E23";
+const PAYMASTER_ADDRESS = "0x6437Cf677a933cAE4888142A29C31c468df705f8"; // paymaster with whitelisted addresses, latest version
+
 class contractOnlyPaymaster extends PaymasterAPI {
   async getPaymasterAndData(
     userOp: Partial<UserOperationStruct>
@@ -22,9 +23,6 @@ class contractOnlyPaymaster extends PaymasterAPI {
     return PAYMASTER_ADDRESS;
   }
 }
-
-// Gas before on the plain paymaster 1061069010183180134
-// 1060664411159720024
 
 export default function Home() {
   const { address, isConnected } = useAccount();
@@ -34,7 +32,7 @@ export default function Home() {
   const mint = async () => {
     setIsLoading(true);
     try {
-      console.log("trying to mint..")
+      console.log("trying to mint..");
       const socialWallet = new GoogleSocialWallet();
 
       const signer = await getZeroDevSigner({
@@ -46,7 +44,6 @@ export default function Home() {
       });
       signer.smartAccountAPI.paymasterAPI = new contractOnlyPaymaster();
 
-
       const contract = new Contract(
         NFT_CONTRACT_ADDRESS,
         new Interface(nftArtifact.abi),
@@ -54,12 +51,12 @@ export default function Home() {
       );
 
       const txn: providers.TransactionResponse = await contract.mint(1);
-      setTransactionHash(txn.hash);
+      setTransactionHash(txn.hash as any);
       const receipt = await txn.wait();
       setIsLoading(false);
     } catch (e) {
-      console.log(e)
-      setErrorMessage("Minting Failed. Retry")
+      console.log(e);
+      setErrorMessage("Minting Failed. Retry");
       setIsLoading(false);
     }
   };
@@ -69,7 +66,6 @@ export default function Home() {
       `Hey, the address state is changing here's the new value ${address}`
     );
     setErrorMessage("");
-
   }, [address]);
 
   return (
@@ -84,12 +80,22 @@ export default function Home() {
           </Head>
           <Heading>Space Can NFT Collection</Heading>
           <Button onClick={mint} disabled={true}>
-            {isLoading ? "Minting in progress..." : (mintingErrorMessage !== "" ? mintingErrorMessage : "Mint NFT")}
+            {isLoading
+              ? "Minting in progress..."
+              : mintingErrorMessage !== ""
+              ? mintingErrorMessage
+              : "Mint NFT"}
           </Button>
-          {transactionHash ? <Link href={`https://www.jiffyscan.xyz/userOpHash/${transactionHash}?network=goerli`} passHref>
-            <Button as="a">Go to target page</Button>
-          </Link> : <></>}
-
+          {transactionHash ? (
+            <Link
+              href={`https://www.jiffyscan.xyz/userOpHash/${transactionHash}?network=goerli`}
+              passHref
+            >
+              <Button as="a">Go to target page</Button>
+            </Link>
+          ) : (
+            <></>
+          )}
         </Flex>
       </WalletLayout>
     </>
