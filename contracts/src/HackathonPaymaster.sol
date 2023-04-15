@@ -10,14 +10,23 @@ import "../lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol";
 contract HackathonPaymaster is BasePaymaster {
     using UserOperationLib for UserOperation;
 
+    error ExceedingGasLimit();
+
     address public nftPassAddress;
     address[] public whiteAddresses;
+    uint256 public gasLimitPerOperation;
 
-    constructor(IEntryPoint _entryPoint, address _nftPassAddress, address[] memory addresses)
+    constructor(
+        IEntryPoint _entryPoint,
+        address _nftPassAddress,
+        address[] memory addresses,
+        uint256 _gasLimitPerOperation
+    )
         BasePaymaster(_entryPoint)
     {
         nftPassAddress = _nftPassAddress;
         whiteAddresses = addresses;
+        gasLimitPerOperation = _gasLimitPerOperation;
     }
 
     function setNftPassAddress(address newNftPassAddress) external onlyOwner {
@@ -34,13 +43,17 @@ contract HackathonPaymaster is BasePaymaster {
         override
         returns (bytes memory context, uint256 deadline)
     {
-        IERC721 nftContract = IERC721(nftPassAddress);
-        uint256 tokenCount = nftContract.balanceOf(userOp.sender);
-
         (address dest, uint256 value, bytes memory func) = abi.decode(userOp.callData[4:], (address, uint256, bytes));
         if (!_isInWhiteList(dest)) {
             return ("", 1);
         }
+
+        if (_exceedsGasLimit(userOp.callGasLimit)) {
+            return ("", 1);
+        }
+
+        IERC721 nftContract = IERC721(nftPassAddress);
+        uint256 tokenCount = nftContract.balanceOf(userOp.sender);
 
         if (tokenCount > 0) {
             // Pay for the operation! the user owns a pass
@@ -60,5 +73,9 @@ contract HackathonPaymaster is BasePaymaster {
         }
 
         return false;
+    }
+
+    function _exceedsGasLimit(uint256 operationGasLimit) internal view returns (bool) {
+        return gasLimitPerOperation != 0 && operationGasLimit > gasLimitPerOperation;
     }
 }

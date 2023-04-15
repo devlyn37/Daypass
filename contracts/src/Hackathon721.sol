@@ -102,6 +102,10 @@ contract Hackathon721 is ERC721Enumerable, Ownable {
         return uri;
     }
 
+    function getIsTransferable() public view returns (bool) {
+        return isTransferable;
+    }
+
     // Override
     function _beforeTokenTransfer(
         address from,

@@ -19,7 +19,7 @@ contract MyScript is Script {
         address[] memory whiteListedAddresses = new address[](1);
         whiteListedAddresses[0] = 0xe358557b9e2a9a67318c32c09Daa3CD781b1A58b;
 
-        HackathonPaymaster paymaster = new HackathonPaymaster(entryPoint, nftPassAddress, whiteListedAddresses);
+        HackathonPaymaster paymaster = new HackathonPaymaster(entryPoint, nftPassAddress, whiteListedAddresses, 0);
 
         vm.stopBroadcast();
     }
