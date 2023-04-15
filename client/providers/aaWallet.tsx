@@ -25,12 +25,31 @@ import {
   goerli,
   mainnet,
 } from "wagmi";
+import { polygon, polygonMumbai } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 
-const projectId = "14507bac-5aad-47ba-8b9a-66d745436246";
+const projectId = (() => {
+  switch (process.env.NEXT_PUBLIC_CHAIN!) {
+    case "ethereum":
+      return "14507bac-5aad-47ba-8b9a-66d745436246";
+    case "polygon":
+      return "d00b56eb-3a21-44d7-803a-b7cca690fe6a";
+  }
+
+  return "14507bac-5aad-47ba-8b9a-66d745436246";
+})();
 
 const { chains, provider, webSocketProvider } = configureChains(
-  [...(process.env.NEXT_PUBLIC_TESTNET === "true" ? [goerli] : [mainnet])],
+  [...((): any[] => {
+    switch (process.env.NEXT_PUBLIC_CHAIN!) {
+      case "ethereum":
+        return process.env.NEXT_PUBLIC_TESTNET === "true" ? [goerli] : [mainnet];
+      case "polygon":
+        return process.env.NEXT_PUBLIC_TESTNET === "true" ? [polygonMumbai] : [polygon];
+    }
+
+    return process.env.NEXT_PUBLIC_TESTNET === "true" ? [goerli] : [mainnet];
+  })()],
   [publicProvider()]
 );
 

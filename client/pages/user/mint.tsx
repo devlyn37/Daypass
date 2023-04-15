@@ -6,6 +6,7 @@ import {
   Input,
   Text,
   Image as ChakraImage,
+  Flex,
 } from "@chakra-ui/react";
 import Head from "next/head";
 import WalletLayout from "./wallet/WalletLayout";
@@ -20,8 +21,8 @@ import { PaymasterAPI } from "@account-abstraction/sdk";
 import { UserOperationStruct } from "@account-abstraction/contracts";
 import Link from "next/link";
 import { useNetwork } from "wagmi";
-import { LOCALSTORAGE_KEY_DAY_PASS_ADDRESS, LOCALSTORAGE_PAYMASTER_ADDRESS } from "../consts/localstorage";
-import { GOERLI_SPACE_CAN_COLLECTION, MUMBAI_SPACE_CAN_COLLECTION } from "../consts/address";
+import { LOCALSTORAGE_KEY_DAY_PASS_ADDRESS, LOCALSTORAGE_PAYMASTER_ADDRESS } from "../../consts/localstorage";
+import { MUMBAI_SPACE_CAN_COLLECTION, SPACE_CAN } from "../../consts/address";
 
 // const NFT_CONTRACT_ADDRESS = "0x38853627cadCB75B7537453b12bFc2AB6eE16E23";
 // const PAYMASTER_ADDRESS = "0xF66b5E3Cb034391d44E09365A2150a5E60a9c53d"; // paymaster with whitelisted addresses, latest version
@@ -68,10 +69,9 @@ export default function Home() {
 
     switch (chainName) {
       case "GOERLI":
-        return mayAddress ?? GOERLI_SPACE_CAN_COLLECTION;
+        return mayAddress ?? SPACE_CAN;
       case "MATICMUM":
-        // return mayAddress ?? MUMBAI_SPACE_CAN_COLLECTION;
-        return MUMBAI_SPACE_CAN_COLLECTION;
+        return mayAddress ?? MUMBAI_SPACE_CAN_COLLECTION;
     }
 
     return mayAddress ?? "";
@@ -137,7 +137,7 @@ export default function Home() {
         LOCALSTORAGE_PAYMASTER_ADDRESS
       );
       if (paymasterAddress) {
-        setpaymasterAddress(paymasterAddress);
+        setPaymasterAddress(paymasterAddress);
       }
     }
   }, []);
@@ -178,7 +178,7 @@ export default function Home() {
               <Button
                 bg="#FF44EC"
                 onClick={mint}
-                isDisabled={!isConnected}
+                isDisabled={!address}
                 width="50vw"
               >
                 {isLoading
