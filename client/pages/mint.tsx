@@ -115,10 +115,11 @@ export default function Home() {
           </Button>
           {transactionHash ? (
             <Link
+              style={{ marginTop: "10px" }}
               href={`https://www.jiffyscan.xyz/userOpHash/${transactionHash}?network=goerli`}
               passHref
             >
-              <Button as="a">Go to target page</Button>
+              <Button as="a">See your transaction</Button>
             </Link>
           ) : (
             <></>
