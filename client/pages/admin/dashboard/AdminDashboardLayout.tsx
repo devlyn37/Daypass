@@ -65,9 +65,11 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
           borderRadius: "small",
         })}
       >
-        <ChakraProvider>
+        <ChakraProvider theme={theme}>
           <Flex
-            margin={10}
+            marginTop="30px"
+            marginLeft="70px"
+            marginRight="70px"
             flexDirection="column"
             alignItems="stretch"
             justifyContent="space-between"
