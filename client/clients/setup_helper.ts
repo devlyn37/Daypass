@@ -32,7 +32,7 @@ export const setupDaypass = async (
     req.holders,
     {
       // for now 2 ether because needs to stake 1 ether at least
-      value: ethers.utils.parseEther("2"),
+      value: ethers.utils.parseEther("1"),
     }
   );
 
