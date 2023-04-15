@@ -4,7 +4,7 @@ type AdminDashboardLayoutProps = {
   children: ReactNode;
 };
 
-import { ChakraProvider, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, ChakraProvider, Flex, Heading, Text, extendTheme } from "@chakra-ui/react";
 import {
   ConnectButton,
   RainbowKitProvider,
@@ -48,6 +48,13 @@ const wagmiClient = createClient({
   webSocketProvider,
 });
 
+const theme = extendTheme({
+  fonts: {
+    heading: "PolySans Median",
+    body: "PolySans Neutral",
+  },
+});
+
 const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
   return (
     <WagmiConfig client={wagmiClient}>
@@ -58,25 +65,23 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
           borderRadius: "small",
         })}
       >
-        <ChakraProvider>
-          <Flex
-            minH="100vh"
-            margin={10}
-            flexDirection="column"
-            alignItems="stretch"
-            justifyContent="space-between"
-          >
-            <Flex justifyContent="space-between" alignItems="center">
-              <DayPassLogo />
-              <ConnectButton />
-            </Flex>
-            <Flex flexGrow={1}>{children}</Flex>
-            <Flex justifyContent="space-between" alignItems="center">
-              <Heading>AdminDashboard</Heading>
-              <Text>Hi</Text>
-              <Text>Hi</Text>
-            </Flex>
-          </Flex>
+        <ChakraProvider theme={theme}>
+          <Box px={12}>
+            <Box as="header">
+              <Flex
+                as="header"
+                w="100%"
+                py={4}
+                mb={6}
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <DayPassLogo />
+                <ConnectButton />
+              </Flex>
+            </Box>
+            <Box as="main">{children}</Box>
+          </Box>
         </ChakraProvider>
       </RainbowKitProvider>
     </WagmiConfig>
