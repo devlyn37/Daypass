@@ -15,7 +15,7 @@ contract Hackathon721Test is Test {
     function setUp() public {
         deployerAddress = address(1);
         vm.prank(deployerAddress);
-        nft = new Hackathon721();
+        nft = new Hackathon721("", "", true);
         contractAddress = address(nft);
         normalAddress = address(2);
 
