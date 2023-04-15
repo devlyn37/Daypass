@@ -10,9 +10,12 @@ contract Hackathon721 is ERC721Enumerable, Ownable {
     uint256 public maxTokensPerTxn = 6;
     uint256 public currentTokenId;
 
+    uint256 constant defaultValidPeriod = 3 * 24 * 60 * 60;
+
     string public uri = "https://gateway.pinata.cloud/ipfs/QmPux5QgyPHfxjuCBf1GL6bnbYRoDdzwh9UGdnz2UXx58D";
 
     mapping(uint256 => uint256) public mintedAt;
+    mapping(uint256 => uint256) public validPeriod;
 
     // ERRORS & MODIFIERS
 
@@ -38,36 +41,14 @@ contract Hackathon721 is ERC721Enumerable, Ownable {
 
     // PUBLIC
 
+    // For Normal NFT minting
     function mint(uint256 quantity) external payable maxTokens(quantity) isCorrectPayment(quantity) {
-        for (uint256 i = 0; i < quantity; i++) {
-            currentTokenId++;
-            _safeMint(msg.sender, currentTokenId);
-            mintedAt[currentTokenId] = block.timestamp;
-        }
+        _mintMultiple(quantity, 0);
     }
 
-    function isPassValid(uint256 tokenId) public view returns (bool) {
-        uint256 mintTimestamp = mintedAt[tokenId];
-        uint256 threeDays = 3 * 24 * 60 * 60;
-
-        if (block.timestamp < mintTimestamp + threeDays) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    function hasValidPass(address owner) public view returns (bool) {
-        uint256 tokenCount = balanceOf(owner);
-
-        for (uint256 i = 0; i < tokenCount; i++) {
-            uint256 tokenId = tokenOfOwnerByIndex(owner, i);
-            if (isPassValid(tokenId)) {
-                return true;
-            }
-        }
-
-        return false;
+    // For NFT Pass minting
+    function mintWithPeriod(uint256 quantity, uint256 period) external payable maxTokens(quantity) isCorrectPayment(quantity) {
+        _mintMultiple(quantity, period);
     }
 
     // ADMIN
@@ -88,9 +69,28 @@ contract Hackathon721 is ERC721Enumerable, Ownable {
         }
     }
 
+    // PRIVATE
+    function _mintMultiple(uint256 quantity, uint256 period) private {
+        for (uint256 i = 0; i < quantity; i++) {
+            currentTokenId++;
+            _safeMint(msg.sender, currentTokenId);
+
+            mintedAt[currentTokenId] = block.timestamp;
+            validPeriod[currentTokenId] = period;
+        }
+    }
+
     // VIEW
 
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
         return uri;
+    }
+
+    function getMintedAt(uint256 tokenId) public view returns (uint256) {
+        return mintedAt[tokenId];
+    }
+
+    function getValidPeriod(uint256 tokenId) public view returns (uint256) {
+        return validPeriod[tokenId];
     }
 }

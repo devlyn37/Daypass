@@ -60,24 +60,24 @@ contract HackathonPaymasterTest is Test {
         vm.stopPrank();
     }
 
-    function test_transfer_eth_to_contract() external {
-        // Create a user OP transaction to create a contract
-        // Some basic contract bytecode
-
-        // CHANGE THIS FOR DIFF TEST
-        //You only need to change the address, value and bytes in the call
-        bytes memory callData = abi.encodeWithSignature("execute(address,uint256,bytes)", address(0), 0, abi.encode());
-        sendUserOp(callData);
-    }
-
     function test_mint_erc721_free_mint() external {
+        // Give NFT Pass
+        uint256 period = 10000;
+
+        // Give a PassNFT to player
+        vm.prank(address(player));
+        nftPass.mintWithPeriod(1, period);
+
         uint256 mintAmount = 1;
-        uint256 salePrice = 0.0001 ether * mintAmount;
         bytes memory mintFunction = abi.encodeWithSignature("mint(uint256)", mintAmount);
         bytes memory callData =
-            abi.encodeWithSignature("execute(address,uint256,bytes)", address(randomNFT), salePrice, mintFunction);
+            abi.encodeWithSignature("execute(address,uint256,bytes)", address(randomNFT), 0, mintFunction);
+
         // Make sure the main account has some funds
         vm.deal(address(player), 1 ether);
+
+        // Move to 5000
+        vm.warp(5000);
         sendUserOp(callData);
     }
 

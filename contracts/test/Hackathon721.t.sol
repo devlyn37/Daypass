@@ -42,30 +42,46 @@ contract Hackathon721Test is Test {
     }
 
     function testMint(uint256 quantity) public {
+        uint256 blockTime = 1000;
+
         vm.startPrank(normalAddress);
         assertEq(nft.balanceOf(normalAddress), 0);
 
         vm.assume(quantity < nft.maxTokensPerTxn() && quantity > 0);
+
+        vm.warp(blockTime);
+
         nft.mint{value: nft.salePrice() * quantity}(quantity);
 
         assertEq(nft.balanceOf(normalAddress), quantity);
+
+        for(uint256 i=1; i<=quantity; i++) {
+            assertEq(nft.getMintedAt(i), blockTime);
+            assertEq(nft.getValidPeriod(i), 0);
+        }
+
         vm.stopPrank();
     }
 
-    function testValidity(uint256 quantity) public {
+    function testMintWithPeriod(uint256 quantity) public {
+        uint256 blockTime = 1000;
+        uint256 period = 20000;
+        
         vm.startPrank(normalAddress);
         assertEq(nft.balanceOf(normalAddress), 0);
-        assertEq(nft.hasValidPass(normalAddress), false);
 
         vm.assume(quantity < nft.maxTokensPerTxn() && quantity > 0);
-        nft.mint{value: nft.salePrice() * quantity}(quantity);
+
+        vm.warp(blockTime);
+
+        nft.mintWithPeriod{value: nft.salePrice() * quantity}(quantity, period);
 
         assertEq(nft.balanceOf(normalAddress), quantity);
-        assertEq(nft.hasValidPass(normalAddress), true);
 
-        // Go way into the future, these passes shouldn't be valid anymore
-        vm.warp(1000000000000000);
-        assertEq(nft.hasValidPass(normalAddress), false);
+        for(uint256 i=1; i<=quantity; i++) {
+            assertEq(nft.getMintedAt(i), blockTime);
+            assertEq(nft.getValidPeriod(i), period);
+        }
 
         vm.stopPrank();
     }

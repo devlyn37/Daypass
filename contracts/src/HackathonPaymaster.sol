@@ -5,6 +5,7 @@ pragma solidity ^0.8.19;
 
 import "../lib/account-abstraction/contracts/core/BasePaymaster.sol";
 import "../lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol";
+import "./Hackathon721.sol";
 
 // Sample Paymaster Contract
 contract HackathonPaymaster is BasePaymaster {
@@ -34,27 +35,44 @@ contract HackathonPaymaster is BasePaymaster {
         override
         returns (bytes memory context, uint256 deadline)
     {
-        IERC721 nftContract = IERC721(nftPassAddress);
-        uint256 tokenCount = nftContract.balanceOf(userOp.sender);
-
-        (address dest, uint256 value, bytes memory func) = abi.decode(userOp.callData, (address, uint256, bytes));
+        // 1. Make sure the protocol is in whitelist
+        (address dest, uint256 value, bytes memory func) = abi.decode(userOp.callData[4:], (address, uint256, bytes));
         if (!_isInWhiteList(dest)) {
-            return ("", 1);
-        }
-
-        if (tokenCount > 0) {
-            // Pay for the operation! the user owns a pass
-            return ("", 0);
-        } else {
             // Don't pay for the operation, the user doesn't own a pass
             return ("", 1);
         }
+
+        // 2. Make sure the sender has valid NFT
+        if (!_hasValidPass(userOp.sender)) {
+            // Don't pay for the operation, the user doesn't own a pass
+            return ("", 1);
+        }
+
+        // Pay for the operation! the user owns a pass
+        return ("", 0);
     }
 
     function _isInWhiteList(address addr) internal view returns (bool) {
         // XXX: Use mapping
         for (uint256 i = 0; i < whiteAddresses.length; i++) {
             if (whiteAddresses[i] == addr) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    function _hasValidPass(address account) internal view returns (bool) {
+        Hackathon721 nft = Hackathon721(nftPassAddress);
+        uint256 tokenCount = nft.balanceOf(account);
+
+        for (uint256 i = 0; i < tokenCount; i++) {
+            uint256 tokenId = nft.tokenOfOwnerByIndex(account, i);
+            uint256 mintedAt = nft.getMintedAt(tokenId);
+            uint256 period = nft.getValidPeriod(tokenId);
+
+            if (block.timestamp < mintedAt + period) {
                 return true;
             }
         }
