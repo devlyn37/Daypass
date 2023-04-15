@@ -13,7 +13,7 @@ import { PaymasterAPI } from "@account-abstraction/sdk";
 import { UserOperationStruct } from "@account-abstraction/contracts";
 import {
   LOCALSTORAGE_PAYMASTER_ADDRESS,
-} from "../consts/localstorage";
+} from "../../consts/localstorage";
 
 import Link from "next/link";
 
