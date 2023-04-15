@@ -67,6 +67,7 @@ const AdminDashboardPage = () => {
           style={{ position: "fixed", top: "71px", left: "696px" }}
         />
         <Button
+          colorScheme="blue"
           onClick={() => {
             router.push("/contracts");
           }}
