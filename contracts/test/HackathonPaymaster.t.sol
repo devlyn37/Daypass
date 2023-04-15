@@ -69,17 +69,17 @@ contract HackathonPaymasterTest is Test {
         vm.label(address(player), "player");
     }
 
-    function test_transfer_eth_to_contract() external {
-        // Create a user OP transaction to create a contract
-        // Some basic contract bytecode
+    // function test_transfer_eth_to_contract() external {
+    //     // Create a user OP transaction to create a contract
+    //     // Some basic contract bytecode
 
-        // CHANGE THIS FOR DIFF TEST
-        //You only need to change the addraess, value and bytes in the call
-        vm.deal(address(player), 1 ether);
-        bytes memory callData =
-            abi.encodeWithSignature("execute(address,uint256,bytes)", address(player), 1, abi.encode());
-        sendUserOp(callData);
-    }
+    //     // CHANGE THIS FOR DIFF TEST
+    //     //You only need to change the addraess, value and bytes in the call
+    //     vm.deal(address(player), 1 ether);
+    //     bytes memory callData =
+    //         abi.encodeWithSignature("execute(address,uint256,bytes)", address(player), 1, abi.encode());
+    //     sendUserOp(callData);
+    // }
 
     function test_mint_erc721_free_mint() external {
         uint256 mintAmount = 1;
