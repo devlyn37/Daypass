@@ -18,10 +18,15 @@ import {
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useAccount, useSigner } from "wagmi";
+import { useAccount, useNetwork, useSigner } from "wagmi";
 import AdminDashboardLayout from "./AdminDashboardLayout";
 import { setupDaypass } from "../clients/setup_helper";
-import { GOERLI_ENTRYPOINT, GOERLI_SETUP_HELPER } from "../consts/address";
+import { 
+  GOERLI_ENTRYPOINT,
+  GOERLI_SETUP_HELPER,
+  MUMBAI_ENTRYPOINT,
+  MUMBAI_SETUP_HELPER,
+ } from "../consts/address";
 import { BigNumber, ethers } from "ethers";
 import {
   LOCALSTORAGE_KEY_DAY_PASS_ADDRESS,
@@ -35,8 +40,20 @@ const AdminDashboardPage = () => {
   const { register, handleSubmit, watch } = useForm();
   const watchAllFields = watch();
   const [submitting, setSubmitting] = useState(false);
+  const { chain } = useNetwork();
 
   const { data: signer } = useSigner();
+
+  const getSetupHelperAndEntryPoint = (chainName: string) => {
+    switch (chainName) {
+      case "goerli":
+        return [GOERLI_SETUP_HELPER, GOERLI_ENTRYPOINT] as const;
+      case "maticmum":
+        return [MUMBAI_SETUP_HELPER, MUMBAI_ENTRYPOINT] as const;
+    }
+
+    return ["", ""];
+  }
 
   const onSubmit = (values: any, e?: React.BaseSyntheticEvent) => {
     e?.preventDefault();
@@ -91,10 +108,12 @@ const AdminDashboardPage = () => {
       setSubmitting(true);
 
       try {
+        const [setupHelper, entryPoint] = getSetupHelperAndEntryPoint(chain?.network!);
+
         const { passNFT, paymaster } = await setupDaypass(
           signer!,
-          GOERLI_SETUP_HELPER,
-          GOERLI_ENTRYPOINT,
+          setupHelper!,
+          entryPoint!,
           {
             targets: [contract],
             transferable: enableTransfer,
@@ -105,17 +124,17 @@ const AdminDashboardPage = () => {
           }
         );
 
-        localStorage.setItem(LOCALSTORAGE_KEY_DAY_PASS_ADDRESS, passNFT);
+        const chainName = (chain?.network ?? "").toUpperCase();
 
         console.log(
           `Saved ${passNFT} into localstorage ${LOCALSTORAGE_KEY_DAY_PASS_ADDRESS}`
         );
 
-        localStorage.setItem(LOCALSTORAGE_PAYMASTER_ADDRESS, paymaster);
+        console.log(`Saved ${passNFT} into localstorage ${LOCALSTORAGE_KEY_DAY_PASS_ADDRESS}_${chainName}`)
 
-        console.log(
-          `Saved ${paymaster} into localstorage ${LOCALSTORAGE_PAYMASTER_ADDRESS}`
-        );
+        localStorage.setItem(`${LOCALSTORAGE_PAYMASTER_ADDRESS}_${chainName}`, paymaster);
+
+        console.log(`Saved ${paymaster} into localstorage ${LOCALSTORAGE_PAYMASTER_ADDRESS}${chainName}`)
 
         router.push("/airdrop");
       } catch (error) {
@@ -126,7 +145,7 @@ const AdminDashboardPage = () => {
     })();
   };
 
-  console.log("watchAllFields", watchAllFields);
+  console.log("chain?.network", chain?.network)
 
   return (
     <AdminDashboardLayout>
@@ -251,10 +270,11 @@ const AdminDashboardPage = () => {
                       disabled={submitting}
                       placeholder="Specify Network"
                       size="lg"
-                      defaultValue="goerli"
+                      defaultValue={chain?.network ?? "goerli"}
                       {...register("network")}
                     >
                       <option value="goerli">Goerli</option>
+                      <option value="maticmum">Mumbai</option>
                       <option value="ethereum">Ethereum</option>
                     </Select>
                   </Box>
