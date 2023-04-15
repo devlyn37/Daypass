@@ -634,8 +634,8 @@ const AdminDashboardPage = () => {
                 </Flex>
               </Box>
             </Box>
-            <Flex justify="flex-end" mt="8">
-              <Button type="submit" width="206px" height="40px">
+            <Flex justify="flex-end" mt="8" mb="12">
+              <Button width="206px" height="40px">
                 Next
               </Button>
             </Flex>
