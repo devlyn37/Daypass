@@ -1,4 +1,4 @@
-import { ChakraProvider, Flex, Heading } from "@chakra-ui/react";
+import { Box, ChakraProvider, Flex, Heading, Image as ChakraImage } from "@chakra-ui/react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import "@rainbow-me/rainbowkit/styles.css";
 
@@ -13,13 +13,21 @@ const WalletLayout = ({ children }: WalletLayoutProps) => {
     <ChakraProvider>
       <Flex
         minH="100vh"
-        margin={10}
         flexDirection="column"
         alignItems="stretch"
         justifyContent="space-between"
+        style={{
+          backgroundImage: `url('background.png')`,
+          backgroundSize: 'cover',
+        }}
       >
-        <Flex justifyContent="space-between" alignItems="center">
-          <Heading>Hackathon</Heading>
+        <Flex justifyContent="space-between" alignItems="center" style={{ padding: "20px 20px 20px 20px" }}>
+          <Flex>
+            <Box justifyContent="center" alignItems="center">
+              <ChakraImage src="logo.png" alt="Logo" width="60px" paddingRight="10px" />
+            </Box>
+            <Heading color="#FF44EC">Space Can</Heading>
+          </Flex>
           <ConnectButton />
         </Flex>
         <Flex flexGrow={1}>{children}</Flex>
