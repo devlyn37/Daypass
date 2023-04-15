@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { useAccount, useSigner } from "wagmi";
 import AdminDashboardLayout from "./AdminDashboardLayout";
 import { ethers } from "ethers";
-import { mintNFT } from "../../../clients/nft";
-import { LOCALSTORAGE_KEY_DAY_PASS_ADDRESS } from "../../../consts/localstorage";
+import { mintNFT } from "../clients/nft";
+import { LOCALSTORAGE_KEY_DAY_PASS_ADDRESS } from "../consts/localstorage";
 
 // const NFT_CONTRACT_ADDRESS = "0x5a89d913b098c30fcb34f60382dce707177e171e";
 // const NFT_CONTRACT_ADDRESS="0xf03C1cB42c64628DE52d8828D534bFa2c6Fd65Df";
