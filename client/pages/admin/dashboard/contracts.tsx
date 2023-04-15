@@ -16,7 +16,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAccount, useSigner } from "wagmi";
 import AdminDashboardLayout from "./AdminDashboardLayout";
@@ -25,6 +25,8 @@ import {
   GOERLI_ENTRYPOINT,
   GOERLI_SETUP_HELPER,
 } from "../../../consts/address";
+import { BigNumber, ethers } from "ethers";
+import { LOCALSTORAGE_KEY_DAY_PASS_ADDRESS, LOCALSTORAGE_PAYMASTER_ADDRESS } from "../../../consts/localstorage";
 
 const AdminDashboardPage = () => {
   const router = useRouter();
@@ -32,6 +34,7 @@ const AdminDashboardPage = () => {
 
   const { register, handleSubmit, watch } = useForm();
   const watchAllFields = watch();
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     if (!address) {
@@ -54,11 +57,9 @@ const AdminDashboardPage = () => {
       enableTimeLimit,
     } = values;
 
-    let gasLimit = 0;
+    let gasLimit = BigNumber.from(0);
     if (enableGasLimit) {
-      gasLimit = values.gasLimitAmount
-        ? Number.parseInt(values.gasLimitAmount)
-        : 0;
+      gasLimit = values.gasLimitAmount ? ethers.utils.parseUnits(values.gasLimitAmount, 'gwei') : BigNumber.from(0);
     }
 
     let spendingLimit = 0;
@@ -91,26 +92,41 @@ const AdminDashboardPage = () => {
     });
 
     (async () => {
-      // TODO: move to other page
-      const res = await setupDaypass(
-        signer!,
-        GOERLI_SETUP_HELPER,
-        GOERLI_ENTRYPOINT,
-        {
-          targets: [contract],
-          transferable: enableTransfer,
-          gasLimitPerOperation: gasLimit,
-          spendingLimitPerOperation: spendingLimit,
-          timeLimitPerOperation: timeLimit,
-          holders: [
-            // TODO: account addresses
-          ],
-        }
-      );
+      setSubmitting(true);
 
-      console.log("res", res);
-    })();
-  };
+      try {
+        const {passNFT, paymaster} = await setupDaypass(
+          signer!,
+          GOERLI_SETUP_HELPER,
+          GOERLI_ENTRYPOINT,
+          {
+            targets: [
+              contract
+            ],
+            transferable: enableTransfer,
+            gasLimitPerOperation: gasLimit,
+            spendingLimitPerOperation: spendingLimit,
+            timeLimitPerOperation: timeLimit,
+            holders: []
+          }
+        );
+
+        localStorage.setItem(LOCALSTORAGE_KEY_DAY_PASS_ADDRESS, passNFT);
+
+        console.log(`Saved ${passNFT} into localstorage ${LOCALSTORAGE_KEY_DAY_PASS_ADDRESS}`)
+
+        localStorage.setItem(LOCALSTORAGE_PAYMASTER_ADDRESS, paymaster);
+
+        console.log(`Saved ${paymaster} into localstorage ${LOCALSTORAGE_PAYMASTER_ADDRESS}`)
+
+        router.push("/admin/dashboard/airdrop");
+      } catch(error) {
+        console.error(error);
+      }finally {
+        setSubmitting(false);
+      }
+    })()
+  }
 
   console.log("watchAllFields", watchAllFields);
 
@@ -217,12 +233,13 @@ const AdminDashboardPage = () => {
                       </Text>
                     </Heading>
                     <Input
+                      disabled={submitting}
                       placeholder="Paste your Contract Address"
                       size="lg"
                       width="548px"
                       height="48px"
                       maxWidth="100%"
-                      {...register("contract")}
+                      {...register('contract')}
                     />
                   </Box>
                   <Box w="320px" pl="5">
@@ -240,6 +257,7 @@ const AdminDashboardPage = () => {
                       </Text>
                     </Heading>
                     <Select
+                      disabled={submitting}
                       placeholder="Specify Network"
                       size="lg"
                       defaultValue="goerli"
@@ -350,7 +368,7 @@ const AdminDashboardPage = () => {
                       >
                         Off
                       </Text>
-                      <Switch {...register("enableTransfer")} />
+                      <Switch isDisabled={submitting} {...register("enableTransfer")} />
                       <Text
                         fontFamily="PolySans Neutral"
                         lineHeight="1.5"
@@ -407,7 +425,7 @@ const AdminDashboardPage = () => {
                       >
                         Off
                       </Text>
-                      <Switch {...register("enableTrade")} />
+                      <Switch isDisabled={submitting} {...register("enableTrade")} />
                       <Text
                         fontFamily="PolySans Neutral"
                         lineHeight="1.5"
@@ -468,7 +486,7 @@ const AdminDashboardPage = () => {
                           >
                             Off
                           </Text>
-                          <Switch {...register("enableGasLimit")} />
+                          <Switch isDisabled={submitting} {...register("enableGasLimit")} />
                           <Text
                             fontFamily="PolySans Neutral"
                             lineHeight="1.5"
@@ -484,6 +502,7 @@ const AdminDashboardPage = () => {
                       <Box w="60%">
                         <InputGroup>
                           <Input
+                            isDisabled={submitting}
                             type="gaslimit"
                             placeholder="0"
                             disabled={!watchAllFields.enableGasLimit}
@@ -545,7 +564,7 @@ const AdminDashboardPage = () => {
                           >
                             Off
                           </Text>
-                          <Switch {...register("enableSpendingLimit")} />
+                          <Switch disabled={submitting} {...register("enableSpendingLimit")} />
                           <Text
                             fontFamily="PolySans Neutral"
                             lineHeight="1.5"
@@ -562,6 +581,7 @@ const AdminDashboardPage = () => {
                       <Box w="60%">
                         <InputGroup>
                           <Input
+                            isDisabled={submitting}
                             type="spendinglimit"
                             placeholder="0"
                             disabled={!watchAllFields.enableSpendingLimit}
@@ -621,7 +641,7 @@ const AdminDashboardPage = () => {
                           >
                             Off
                           </Text>
-                          <Switch {...register("enableTimeLimit")} />
+                          <Switch disabled={submitting} {...register("enableTimeLimit")} />
                           <Text
                             fontFamily="PolySans Neutral"
                             lineHeight="1.5"
@@ -635,7 +655,7 @@ const AdminDashboardPage = () => {
                         </Stack>
                       </Box>
                       <Box w="60%">
-                        <RadioGroup>
+                        <RadioGroup isDisabled={submitting}>
                           <Stack direction="row">
                             <Radio value="week" {...register("timeLimit")}>
                               <Text
@@ -681,7 +701,7 @@ const AdminDashboardPage = () => {
                 </Box>
               </Box>
               <Flex justify="flex-end" mt="8" mb="12">
-                <Button type="submit" width="206px" height="40px">
+                <Button type="submit" width="206px" height="40px" isLoading={submitting}>
                   Next
                 </Button>
               </Flex>

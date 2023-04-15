@@ -1,14 +1,14 @@
-import { Signer, ethers } from "ethers";
+import { BigNumber, Signer, ethers } from "ethers";
 const setupHelpersABI = require("../contracts/SetupHelper.sol/SetupHelper.json");
 
 export type SetupDaypassRequest = {
   targets: string[];
   transferable: boolean;
-  gasLimitPerOperation: number;
+  gasLimitPerOperation: BigNumber;
   spendingLimitPerOperation: number;
   timeLimitPerOperation: number;
   holders: string[];
-};
+}
 
 export const setupDaypass = async (
   signer: Signer,
@@ -52,17 +52,17 @@ export const setupDaypass = async (
 
   const passNFT = setupEvent.args![0];
   const NFT = setupEvent.args![1];
-  const Paymaster = setupEvent.args![2];
+  const paymaster = setupEvent.args![2];
 
   console.log("setup", {
     passNFT,
     NFT,
-    Paymaster,
+    paymaster,
   });
 
   return {
     passNFT,
     NFT,
-    Paymaster,
+    paymaster,
   };
 };
