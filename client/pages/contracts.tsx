@@ -20,13 +20,13 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAccount, useSigner } from "wagmi";
 import AdminDashboardLayout from "./AdminDashboardLayout";
-import { setupDaypass } from "../../../clients/setup_helper";
-import {
-  GOERLI_ENTRYPOINT,
-  GOERLI_SETUP_HELPER,
-} from "../../../consts/address";
+import { setupDaypass } from "../clients/setup_helper";
+import { GOERLI_ENTRYPOINT, GOERLI_SETUP_HELPER } from "../consts/address";
 import { BigNumber, ethers } from "ethers";
-import { LOCALSTORAGE_KEY_DAY_PASS_ADDRESS, LOCALSTORAGE_PAYMASTER_ADDRESS } from "../../../consts/localstorage";
+import {
+  LOCALSTORAGE_KEY_DAY_PASS_ADDRESS,
+  LOCALSTORAGE_PAYMASTER_ADDRESS,
+} from "../consts/localstorage";
 
 const AdminDashboardPage = () => {
   const router = useRouter();
@@ -38,7 +38,7 @@ const AdminDashboardPage = () => {
 
   useEffect(() => {
     if (!address) {
-      router.push("/admin/dashboard");
+      router.push("/");
     }
   }, [address]);
 
@@ -59,7 +59,9 @@ const AdminDashboardPage = () => {
 
     let gasLimit = BigNumber.from(0);
     if (enableGasLimit) {
-      gasLimit = values.gasLimitAmount ? ethers.utils.parseUnits(values.gasLimitAmount, 'gwei') : BigNumber.from(0);
+      gasLimit = values.gasLimitAmount
+        ? ethers.utils.parseUnits(values.gasLimitAmount, "gwei")
+        : BigNumber.from(0);
     }
 
     let spendingLimit = 0;
@@ -95,38 +97,40 @@ const AdminDashboardPage = () => {
       setSubmitting(true);
 
       try {
-        const {passNFT, paymaster} = await setupDaypass(
+        const { passNFT, paymaster } = await setupDaypass(
           signer!,
           GOERLI_SETUP_HELPER,
           GOERLI_ENTRYPOINT,
           {
-            targets: [
-              contract
-            ],
+            targets: [contract],
             transferable: enableTransfer,
             gasLimitPerOperation: gasLimit,
             spendingLimitPerOperation: spendingLimit,
             timeLimitPerOperation: timeLimit,
-            holders: []
+            holders: [],
           }
         );
 
         localStorage.setItem(LOCALSTORAGE_KEY_DAY_PASS_ADDRESS, passNFT);
 
-        console.log(`Saved ${passNFT} into localstorage ${LOCALSTORAGE_KEY_DAY_PASS_ADDRESS}`)
+        console.log(
+          `Saved ${passNFT} into localstorage ${LOCALSTORAGE_KEY_DAY_PASS_ADDRESS}`
+        );
 
         localStorage.setItem(LOCALSTORAGE_PAYMASTER_ADDRESS, paymaster);
 
-        console.log(`Saved ${paymaster} into localstorage ${LOCALSTORAGE_PAYMASTER_ADDRESS}`)
+        console.log(
+          `Saved ${paymaster} into localstorage ${LOCALSTORAGE_PAYMASTER_ADDRESS}`
+        );
 
-        router.push("/admin/dashboard/airdrop");
-      } catch(error) {
+        router.push("/airdrop");
+      } catch (error) {
         console.error(error);
-      }finally {
+      } finally {
         setSubmitting(false);
       }
-    })()
-  }
+    })();
+  };
 
   console.log("watchAllFields", watchAllFields);
 
@@ -239,7 +243,7 @@ const AdminDashboardPage = () => {
                       width="548px"
                       height="48px"
                       maxWidth="100%"
-                      {...register('contract')}
+                      {...register("contract")}
                     />
                   </Box>
                   <Box w="320px" pl="5">
@@ -368,7 +372,10 @@ const AdminDashboardPage = () => {
                       >
                         Off
                       </Text>
-                      <Switch isDisabled={submitting} {...register("enableTransfer")} />
+                      <Switch
+                        isDisabled={submitting}
+                        {...register("enableTransfer")}
+                      />
                       <Text
                         fontFamily="PolySans Neutral"
                         lineHeight="1.5"
@@ -425,7 +432,10 @@ const AdminDashboardPage = () => {
                       >
                         Off
                       </Text>
-                      <Switch isDisabled={submitting} {...register("enableTrade")} />
+                      <Switch
+                        isDisabled={submitting}
+                        {...register("enableTrade")}
+                      />
                       <Text
                         fontFamily="PolySans Neutral"
                         lineHeight="1.5"
@@ -486,7 +496,10 @@ const AdminDashboardPage = () => {
                           >
                             Off
                           </Text>
-                          <Switch isDisabled={submitting} {...register("enableGasLimit")} />
+                          <Switch
+                            isDisabled={submitting}
+                            {...register("enableGasLimit")}
+                          />
                           <Text
                             fontFamily="PolySans Neutral"
                             lineHeight="1.5"
@@ -564,7 +577,10 @@ const AdminDashboardPage = () => {
                           >
                             Off
                           </Text>
-                          <Switch disabled={submitting} {...register("enableSpendingLimit")} />
+                          <Switch
+                            disabled={submitting}
+                            {...register("enableSpendingLimit")}
+                          />
                           <Text
                             fontFamily="PolySans Neutral"
                             lineHeight="1.5"
@@ -641,7 +657,10 @@ const AdminDashboardPage = () => {
                           >
                             Off
                           </Text>
-                          <Switch disabled={submitting} {...register("enableTimeLimit")} />
+                          <Switch
+                            disabled={submitting}
+                            {...register("enableTimeLimit")}
+                          />
                           <Text
                             fontFamily="PolySans Neutral"
                             lineHeight="1.5"
@@ -701,7 +720,12 @@ const AdminDashboardPage = () => {
                 </Box>
               </Box>
               <Flex justify="flex-end" mt="8" mb="12">
-                <Button type="submit" width="206px" height="40px" isLoading={submitting}>
+                <Button
+                  type="submit"
+                  width="206px"
+                  height="40px"
+                  isLoading={submitting}
+                >
                   Next
                 </Button>
               </Flex>

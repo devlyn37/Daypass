@@ -7,7 +7,7 @@ type AdminDashboardLayoutProps = {
 import { ChakraProvider, Flex, extendTheme } from "@chakra-ui/react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import "@rainbow-me/rainbowkit/styles.css";
-import DayPassLogo from "../../../components/DayPassLogo";
+import DayPassLogo from "../components/DayPassLogo";
 
 const theme = extendTheme({
   fonts: {

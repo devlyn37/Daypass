@@ -4,12 +4,13 @@ import { useEffect, useState } from "react";
 import { useAccount, useSigner } from "wagmi";
 import AdminDashboardLayout from "./AdminDashboardLayout";
 import { ethers } from "ethers";
-import { mintNFT } from "../../../clients/nft";
-import { LOCALSTORAGE_KEY_DAY_PASS_ADDRESS } from "../../../consts/localstorage";
+import { mintNFT } from "../clients/nft";
+import { LOCALSTORAGE_KEY_DAY_PASS_ADDRESS } from "../consts/localstorage";
 
 // const NFT_CONTRACT_ADDRESS = "0x5a89d913b098c30fcb34f60382dce707177e171e";
 // const NFT_CONTRACT_ADDRESS="0xf03C1cB42c64628DE52d8828D534bFa2c6Fd65Df";
-const DEFAULT_NFT_CONTRACT_ADDRESS="0xf03C1cB42c64628DE52d8828D534bFa2c6Fd65Df";
+const DEFAULT_NFT_CONTRACT_ADDRESS =
+  "0xf03C1cB42c64628DE52d8828D534bFa2c6Fd65Df";
 // const DaypassAddress = "0xa1F209805fBc1eb69BDeE37D7Ce629e80b31B722";
 
 const AirdropPage = () => {
@@ -19,15 +20,18 @@ const AirdropPage = () => {
   const handleChange = (event: any) => setAirdropAddress(event.target.value);
   const [submiting, setSubmiting] = useState(false);
 
-  const [nftContractAddress, setNftContractAddress] = useState('');
+  const [nftContractAddress, setNftContractAddress] = useState("");
 
   useEffect(() => {
-    setNftContractAddress(localStorage.getItem(LOCALSTORAGE_KEY_DAY_PASS_ADDRESS) ?? DEFAULT_NFT_CONTRACT_ADDRESS)
+    setNftContractAddress(
+      localStorage.getItem(LOCALSTORAGE_KEY_DAY_PASS_ADDRESS) ??
+        DEFAULT_NFT_CONTRACT_ADDRESS
+    );
   }, []);
 
   useEffect(() => {
     if (!address) {
-      router.push("/admin/dashboard");
+      router.push("/");
     }
   }, [address]);
 
@@ -86,12 +90,8 @@ const AirdropPage = () => {
             (async () => {
               setSubmiting(true);
               try {
-                await mintNFT(
-                  nftContractAddress!,
-                  signer,
-                  airdropAddress
-                );
-                setAirdropAddress('');
+                await mintNFT(nftContractAddress!, signer, airdropAddress);
+                setAirdropAddress("");
               } catch (error) {
                 console.error(error);
               } finally {
