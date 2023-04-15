@@ -60,12 +60,12 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider
         appInfo={demoAppInfo}
-        chains={chains} 
+        chains={chains}
         theme={darkTheme({
           borderRadius: "small",
         })}
       >
-        <ChakraProvider>
+        <ChakraProvider theme={theme}>
           <Flex
             marginTop="30px"
             marginLeft="70px"
