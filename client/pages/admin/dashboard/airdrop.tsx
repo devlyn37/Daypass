@@ -66,6 +66,7 @@ const AirdropPage = () => {
           onChange={handleChange}
           placeholder="Input recipient address"
           size="sm"
+          disabled={submiting}
         />
         <Button
           isLoading={submiting}

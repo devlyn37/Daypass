@@ -59,7 +59,7 @@ const AdminDashboardPage = () => {
 
     let gasLimit = BigNumber.from(0);
     if (enableGasLimit) {
-      gasLimit = values.gasLimitAmount ? ethers.utils.parseUnits(values.gasLimit, 'gwei') : BigNumber.from(0);
+      gasLimit = values.gasLimitAmount ? ethers.utils.parseUnits(values.gasLimitAmount, 'gwei') : BigNumber.from(0);
     }
 
     let spendingLimit = 0;
@@ -233,6 +233,7 @@ const AdminDashboardPage = () => {
                       </Text>
                     </Heading>
                     <Input
+                      disabled={submitting}
                       placeholder="Paste your Contract Address"
                       size="lg"
                       width="548px"
@@ -256,6 +257,7 @@ const AdminDashboardPage = () => {
                       </Text>
                     </Heading>
                     <Select
+                      disabled={submitting}
                       placeholder="Specify Network"
                       size="lg"
                       defaultValue="goerli"
@@ -366,7 +368,7 @@ const AdminDashboardPage = () => {
                       >
                         Off
                       </Text>
-                      <Switch {...register("enableTransfer")} />
+                      <Switch isDisabled={submitting} {...register("enableTransfer")} />
                       <Text
                         fontFamily="PolySans Neutral"
                         lineHeight="1.5"
@@ -423,7 +425,7 @@ const AdminDashboardPage = () => {
                       >
                         Off
                       </Text>
-                      <Switch {...register("enableTrade")} />
+                      <Switch isDisabled={submitting} {...register("enableTrade")} />
                       <Text
                         fontFamily="PolySans Neutral"
                         lineHeight="1.5"
@@ -484,7 +486,7 @@ const AdminDashboardPage = () => {
                           >
                             Off
                           </Text>
-                          <Switch {...register("enableGasLimit")} />
+                          <Switch isDisabled={submitting} {...register("enableGasLimit")} />
                           <Text
                             fontFamily="PolySans Neutral"
                             lineHeight="1.5"
@@ -500,6 +502,7 @@ const AdminDashboardPage = () => {
                       <Box w="60%">
                         <InputGroup>
                           <Input
+                            isDisabled={submitting}
                             type="gaslimit"
                             placeholder="0"
                             disabled={!watchAllFields.enableGasLimit}
@@ -561,7 +564,7 @@ const AdminDashboardPage = () => {
                           >
                             Off
                           </Text>
-                          <Switch {...register("enableSpendingLimit")} />
+                          <Switch disabled={submitting} {...register("enableSpendingLimit")} />
                           <Text
                             fontFamily="PolySans Neutral"
                             lineHeight="1.5"
@@ -578,6 +581,7 @@ const AdminDashboardPage = () => {
                       <Box w="60%">
                         <InputGroup>
                           <Input
+                            isDisabled={submitting}
                             type="spendinglimit"
                             placeholder="0"
                             disabled={!watchAllFields.enableSpendingLimit}
@@ -637,7 +641,7 @@ const AdminDashboardPage = () => {
                           >
                             Off
                           </Text>
-                          <Switch {...register("enableTimeLimit")} />
+                          <Switch disabled={submitting} {...register("enableTimeLimit")} />
                           <Text
                             fontFamily="PolySans Neutral"
                             lineHeight="1.5"
@@ -651,7 +655,7 @@ const AdminDashboardPage = () => {
                         </Stack>
                       </Box>
                       <Box w="60%">
-                        <RadioGroup>
+                        <RadioGroup isDisabled={submitting}>
                           <Stack direction="row">
                             <Radio value="week" {...register("timeLimit")}>
                               <Text
@@ -697,7 +701,7 @@ const AdminDashboardPage = () => {
                 </Box>
               </Box>
               <Flex justify="flex-end" mt="8" mb="12">
-                <Button type="submit" width="206px" height="40px">
+                <Button type="submit" width="206px" height="40px" isLoading={submitting}>
                   Next
                 </Button>
               </Flex>
