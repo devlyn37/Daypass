@@ -204,7 +204,7 @@
         35018
       ],
       "StorageSlot": [
-        37516
+        37563
       ]
     },
     "nodeType": "SourceUnit",
@@ -270,7 +270,7 @@
         "file": "../../utils/StorageSlot.sol",
         "nameLocation": "-1:-1:-1",
         "scope": 35337,
-        "sourceUnit": 37517,
+        "sourceUnit": 37564,
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -465,10 +465,10 @@
                           "name": "StorageSlot",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 37516,
+                          "referencedDeclaration": 37563,
                           "src": "1380:11:40",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_contract$_StorageSlot_$37516_$",
+                            "typeIdentifier": "t_type$_t_contract$_StorageSlot_$37563_$",
                             "typeString": "type(library StorageSlot)"
                           }
                         },
@@ -480,10 +480,10 @@
                         "memberLocation": "1392:14:40",
                         "memberName": "getAddressSlot",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 37482,
+                        "referencedDeclaration": 37529,
                         "src": "1380:26:40",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_function_internal_pure$_t_bytes32_$returns$_t_struct$_AddressSlot_$37462_storage_ptr_$",
+                          "typeIdentifier": "t_function_internal_pure$_t_bytes32_$returns$_t_struct$_AddressSlot_$37509_storage_ptr_$",
                           "typeString": "function (bytes32) pure returns (struct StorageSlot.AddressSlot storage pointer)"
                         }
                       },
@@ -499,7 +499,7 @@
                       "src": "1380:48:40",
                       "tryCall": false,
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_AddressSlot_$37462_storage_ptr",
+                        "typeIdentifier": "t_struct$_AddressSlot_$37509_storage_ptr",
                         "typeString": "struct StorageSlot.AddressSlot storage pointer"
                       }
                     },
@@ -511,7 +511,7 @@
                     "memberLocation": "1429:5:40",
                     "memberName": "value",
                     "nodeType": "MemberAccess",
-                    "referencedDeclaration": 37461,
+                    "referencedDeclaration": 37508,
                     "src": "1380:54:40",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -758,10 +758,10 @@
                             "name": "StorageSlot",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 37516,
+                            "referencedDeclaration": 37563,
                             "src": "1710:11:40",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_contract$_StorageSlot_$37516_$",
+                              "typeIdentifier": "t_type$_t_contract$_StorageSlot_$37563_$",
                               "typeString": "type(library StorageSlot)"
                             }
                           },
@@ -773,10 +773,10 @@
                           "memberLocation": "1722:14:40",
                           "memberName": "getAddressSlot",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 37482,
+                          "referencedDeclaration": 37529,
                           "src": "1710:26:40",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_function_internal_pure$_t_bytes32_$returns$_t_struct$_AddressSlot_$37462_storage_ptr_$",
+                            "typeIdentifier": "t_function_internal_pure$_t_bytes32_$returns$_t_struct$_AddressSlot_$37509_storage_ptr_$",
                             "typeString": "function (bytes32) pure returns (struct StorageSlot.AddressSlot storage pointer)"
                           }
                         },
@@ -792,7 +792,7 @@
                         "src": "1710:48:40",
                         "tryCall": false,
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_AddressSlot_$37462_storage_ptr",
+                          "typeIdentifier": "t_struct$_AddressSlot_$37509_storage_ptr",
                           "typeString": "struct StorageSlot.AddressSlot storage pointer"
                         }
                       },
@@ -804,7 +804,7 @@
                       "memberLocation": "1759:5:40",
                       "memberName": "value",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 37461,
+                      "referencedDeclaration": 37508,
                       "src": "1710:54:40",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -1479,10 +1479,10 @@
                           "name": "StorageSlot",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 37516,
+                          "referencedDeclaration": 37563,
                           "src": "3096:11:40",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_contract$_StorageSlot_$37516_$",
+                            "typeIdentifier": "t_type$_t_contract$_StorageSlot_$37563_$",
                             "typeString": "type(library StorageSlot)"
                           }
                         },
@@ -1494,10 +1494,10 @@
                         "memberLocation": "3108:14:40",
                         "memberName": "getBooleanSlot",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 37493,
+                        "referencedDeclaration": 37540,
                         "src": "3096:26:40",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_function_internal_pure$_t_bytes32_$returns$_t_struct$_BooleanSlot_$37465_storage_ptr_$",
+                          "typeIdentifier": "t_function_internal_pure$_t_bytes32_$returns$_t_struct$_BooleanSlot_$37512_storage_ptr_$",
                           "typeString": "function (bytes32) pure returns (struct StorageSlot.BooleanSlot storage pointer)"
                         }
                       },
@@ -1513,7 +1513,7 @@
                       "src": "3096:42:40",
                       "tryCall": false,
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_BooleanSlot_$37465_storage_ptr",
+                        "typeIdentifier": "t_struct$_BooleanSlot_$37512_storage_ptr",
                         "typeString": "struct StorageSlot.BooleanSlot storage pointer"
                       }
                     },
@@ -1525,7 +1525,7 @@
                     "memberLocation": "3139:5:40",
                     "memberName": "value",
                     "nodeType": "MemberAccess",
-                    "referencedDeclaration": 37464,
+                    "referencedDeclaration": 37511,
                     "src": "3096:48:40",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
@@ -2293,10 +2293,10 @@
                           "name": "StorageSlot",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 37516,
+                          "referencedDeclaration": 37563,
                           "src": "4178:11:40",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_contract$_StorageSlot_$37516_$",
+                            "typeIdentifier": "t_type$_t_contract$_StorageSlot_$37563_$",
                             "typeString": "type(library StorageSlot)"
                           }
                         },
@@ -2308,10 +2308,10 @@
                         "memberLocation": "4190:14:40",
                         "memberName": "getAddressSlot",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 37482,
+                        "referencedDeclaration": 37529,
                         "src": "4178:26:40",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_function_internal_pure$_t_bytes32_$returns$_t_struct$_AddressSlot_$37462_storage_ptr_$",
+                          "typeIdentifier": "t_function_internal_pure$_t_bytes32_$returns$_t_struct$_AddressSlot_$37509_storage_ptr_$",
                           "typeString": "function (bytes32) pure returns (struct StorageSlot.AddressSlot storage pointer)"
                         }
                       },
@@ -2327,7 +2327,7 @@
                       "src": "4178:39:40",
                       "tryCall": false,
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_AddressSlot_$37462_storage_ptr",
+                        "typeIdentifier": "t_struct$_AddressSlot_$37509_storage_ptr",
                         "typeString": "struct StorageSlot.AddressSlot storage pointer"
                       }
                     },
@@ -2339,7 +2339,7 @@
                     "memberLocation": "4218:5:40",
                     "memberName": "value",
                     "nodeType": "MemberAccess",
-                    "referencedDeclaration": 37461,
+                    "referencedDeclaration": 37508,
                     "src": "4178:45:40",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -2612,10 +2612,10 @@
                             "name": "StorageSlot",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 37516,
+                            "referencedDeclaration": 37563,
                             "src": "4450:11:40",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_contract$_StorageSlot_$37516_$",
+                              "typeIdentifier": "t_type$_t_contract$_StorageSlot_$37563_$",
                               "typeString": "type(library StorageSlot)"
                             }
                           },
@@ -2627,10 +2627,10 @@
                           "memberLocation": "4462:14:40",
                           "memberName": "getAddressSlot",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 37482,
+                          "referencedDeclaration": 37529,
                           "src": "4450:26:40",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_function_internal_pure$_t_bytes32_$returns$_t_struct$_AddressSlot_$37462_storage_ptr_$",
+                            "typeIdentifier": "t_function_internal_pure$_t_bytes32_$returns$_t_struct$_AddressSlot_$37509_storage_ptr_$",
                             "typeString": "function (bytes32) pure returns (struct StorageSlot.AddressSlot storage pointer)"
                           }
                         },
@@ -2646,7 +2646,7 @@
                         "src": "4450:39:40",
                         "tryCall": false,
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_AddressSlot_$37462_storage_ptr",
+                          "typeIdentifier": "t_struct$_AddressSlot_$37509_storage_ptr",
                           "typeString": "struct StorageSlot.AddressSlot storage pointer"
                         }
                       },
@@ -2658,7 +2658,7 @@
                       "memberLocation": "4490:5:40",
                       "memberName": "value",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 37461,
+                      "referencedDeclaration": 37508,
                       "src": "4450:45:40",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -3103,10 +3103,10 @@
                           "name": "StorageSlot",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 37516,
+                          "referencedDeclaration": 37563,
                           "src": "5359:11:40",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_contract$_StorageSlot_$37516_$",
+                            "typeIdentifier": "t_type$_t_contract$_StorageSlot_$37563_$",
                             "typeString": "type(library StorageSlot)"
                           }
                         },
@@ -3118,10 +3118,10 @@
                         "memberLocation": "5371:14:40",
                         "memberName": "getAddressSlot",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 37482,
+                        "referencedDeclaration": 37529,
                         "src": "5359:26:40",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_function_internal_pure$_t_bytes32_$returns$_t_struct$_AddressSlot_$37462_storage_ptr_$",
+                          "typeIdentifier": "t_function_internal_pure$_t_bytes32_$returns$_t_struct$_AddressSlot_$37509_storage_ptr_$",
                           "typeString": "function (bytes32) pure returns (struct StorageSlot.AddressSlot storage pointer)"
                         }
                       },
@@ -3137,7 +3137,7 @@
                       "src": "5359:40:40",
                       "tryCall": false,
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_AddressSlot_$37462_storage_ptr",
+                        "typeIdentifier": "t_struct$_AddressSlot_$37509_storage_ptr",
                         "typeString": "struct StorageSlot.AddressSlot storage pointer"
                       }
                     },
@@ -3149,7 +3149,7 @@
                     "memberLocation": "5400:5:40",
                     "memberName": "value",
                     "nodeType": "MemberAccess",
-                    "referencedDeclaration": 37461,
+                    "referencedDeclaration": 37508,
                     "src": "5359:46:40",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -3598,10 +3598,10 @@
                             "name": "StorageSlot",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 37516,
+                            "referencedDeclaration": 37563,
                             "src": "5800:11:40",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_contract$_StorageSlot_$37516_$",
+                              "typeIdentifier": "t_type$_t_contract$_StorageSlot_$37563_$",
                               "typeString": "type(library StorageSlot)"
                             }
                           },
@@ -3613,10 +3613,10 @@
                           "memberLocation": "5812:14:40",
                           "memberName": "getAddressSlot",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 37482,
+                          "referencedDeclaration": 37529,
                           "src": "5800:26:40",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_function_internal_pure$_t_bytes32_$returns$_t_struct$_AddressSlot_$37462_storage_ptr_$",
+                            "typeIdentifier": "t_function_internal_pure$_t_bytes32_$returns$_t_struct$_AddressSlot_$37509_storage_ptr_$",
                             "typeString": "function (bytes32) pure returns (struct StorageSlot.AddressSlot storage pointer)"
                           }
                         },
@@ -3632,7 +3632,7 @@
                         "src": "5800:40:40",
                         "tryCall": false,
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_AddressSlot_$37462_storage_ptr",
+                          "typeIdentifier": "t_struct$_AddressSlot_$37509_storage_ptr",
                           "typeString": "struct StorageSlot.AddressSlot storage pointer"
                         }
                       },
@@ -3644,7 +3644,7 @@
                       "memberLocation": "5841:5:40",
                       "memberName": "value",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 37461,
+                      "referencedDeclaration": 37508,
                       "src": "5800:46:40",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
