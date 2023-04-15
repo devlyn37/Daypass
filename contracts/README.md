@@ -58,7 +58,7 @@ to run the tests with trace
 
 ### Mantle Testnet
 
-
+0x841b7a8ed11564e94815e069ba64084bf798c06b
 
 ### Scroll Testnet
 
