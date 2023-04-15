@@ -50,7 +50,7 @@ contract SetupHelperTest is Test {
         passHolders[1] = address(22);
 
         (Hackathon721 dayPassContract, Hackathon721 nftContract, HackathonPaymaster paymasterContract) =
-            setupHelper.setupDaypass{value: 1 ether}(entryPoint, whiteListedAddresses, false, 0, 0, passHolders);
+            setupHelper.setupDaypass{value: 1 ether}(entryPoint, whiteListedAddresses, false, 0, 0, 0, passHolders);
 
         // call should own both of the deployed contracts
         assertEq(dayPassContract.owner(), normalAddress);

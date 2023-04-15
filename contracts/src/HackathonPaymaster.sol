@@ -5,6 +5,7 @@ pragma solidity ^0.8.19;
 
 import "../lib/account-abstraction/contracts/core/BasePaymaster.sol";
 import "../lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol";
+import "./Hackathon721.sol";
 
 // Sample Paymaster Contract
 contract HackathonPaymaster is BasePaymaster {
@@ -16,13 +17,15 @@ contract HackathonPaymaster is BasePaymaster {
     address[] public whiteAddresses;
     uint256 public gasLimitPerOperation;
     uint256 public spendingLimitPerOperation;
+    uint256 public timeLimitInSecond;
 
     constructor(
         IEntryPoint _entryPoint,
         address _nftPassAddress,
         address[] memory addresses,
         uint256 _gasLimitPerOperation,
-        uint256 _spendingLimitPerOperation
+        uint256 _spendingLimitPerOperation,
+        uint256 _timeLimitInSecond
     )
         BasePaymaster(_entryPoint)
     {
@@ -30,6 +33,7 @@ contract HackathonPaymaster is BasePaymaster {
         whiteAddresses = addresses;
         gasLimitPerOperation = _gasLimitPerOperation;
         spendingLimitPerOperation = _spendingLimitPerOperation;
+        timeLimitInSecond = _timeLimitInSecond;
     }
 
     function setNftPassAddress(address newNftPassAddress) external onlyOwner {
@@ -55,20 +59,16 @@ contract HackathonPaymaster is BasePaymaster {
             return ("", 1);
         }
 
-        if (_exceedsSpendingLimit()) {
+        if (_exceedsSpendingLimit(maxCost)) {
             return ("", 1);
         }
 
-        IERC721 nftContract = IERC721(nftPassAddress);
-        uint256 tokenCount = nftContract.balanceOf(userOp.sender);
-
-        if (tokenCount > 0) {
-            // Pay for the operation! the user owns a pass
-            return ("", 0);
-        } else {
-            // Don't pay for the operation, the user doesn't own a pass
+        if (!_hasAvailablePass(userOp.sender)) {
             return ("", 1);
         }
+
+        // Pay for the operation! the user owns a pass
+        return ("", 0);
     }
 
     function _isInWhiteList(address addr) internal view returns (bool) {
@@ -85,7 +85,24 @@ contract HackathonPaymaster is BasePaymaster {
         return gasLimitPerOperation != 0 && operationGasLimit > gasLimitPerOperation;
     }
 
-    function _exceedsSpendingLimit() internal view returns (bool) {
-        return spendingLimitPerOperation != 0 && msg.value > spendingLimitPerOperation;
+    function _exceedsSpendingLimit(uint256 maxCost) internal view returns (bool) {
+        return spendingLimitPerOperation != 0 && maxCost > spendingLimitPerOperation;
+    }
+
+    function _hasAvailablePass(address sender) internal view returns (bool) {
+        Hackathon721 nft = Hackathon721(nftPassAddress);
+        uint256 tokenCount = nft.balanceOf(sender);
+
+        for (uint256 i = 0; i < tokenCount; i++) {
+            uint256 tokenId = nft.tokenOfOwnerByIndex(sender, i);
+            uint256 mintedAt = nft.getMintedAt(tokenId);
+
+            // if timeLimitInSecond, sender just needs to have a token
+            if (timeLimitInSecond == 0 || block.timestamp < mintedAt + timeLimitInSecond) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

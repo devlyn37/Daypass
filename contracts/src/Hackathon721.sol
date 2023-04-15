@@ -106,6 +106,10 @@ contract Hackathon721 is ERC721Enumerable, Ownable {
         return isTransferable;
     }
 
+    function getMintedAt(uint256 tokenId) public view returns (uint256) {
+        return mintedAt[tokenId];
+    }
+
     function _mintToken(uint256 quantity, address recipient) internal {
         for (uint256 i = 0; i < quantity; i++) {
             currentTokenId++;

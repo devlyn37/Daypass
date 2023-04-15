@@ -18,7 +18,7 @@ contract SetupHelper {
         bool isDayPassTransferble, // NFT or SBT
         uint256 gasLimitPerOperation, // How much gas AA can consume in a user operation
         uint256 spendingLimitPerOperation, // How much token AA can transfer in a user transaction
-        // uint256 timeLimitInSecond // how long the NFT is available
+        uint256 timeLimitInSecond, // how long the NFT is available
         address[] memory addresses // list of AA address that gets DayPass NFT
     )
         public
@@ -34,7 +34,7 @@ contract SetupHelper {
         spaceCanNFTContract = new Hackathon721("SpaceCans", "SCAN", true);
 
         // Deploy the Hackathon Paymaster Contract, then deposit and stake
-        paymasterContract = new HackathonPaymaster(entryPoint, address(dayPassContract), targetAdddresses, gasLimitPerOperation, spendingLimitPerOperation);
+        paymasterContract = new HackathonPaymaster(entryPoint, address(dayPassContract), targetAdddresses, gasLimitPerOperation, spendingLimitPerOperation, timeLimitInSecond);
         paymasterContract.deposit{value: msg.value / 2}();
         paymasterContract.addStake{value: msg.value / 2}(86400);
 
