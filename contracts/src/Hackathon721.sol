@@ -38,11 +38,7 @@ contract Hackathon721 is ERC721Enumerable, Ownable {
         _;
     }
 
-    constructor(
-        string memory name,
-        string memory symbol,
-        bool _isTransferable
-    ) payable ERC721(name, symbol) {
+    constructor(string memory name, string memory symbol, bool _isTransferable) payable ERC721(name, symbol) {
         isTransferable = _isTransferable;
     }
 
@@ -52,7 +48,12 @@ contract Hackathon721 is ERC721Enumerable, Ownable {
         _mintToken(quantity, msg.sender);
     }
 
-    function mintTo(uint256 quantity, address recipient) external payable maxTokens(quantity) isCorrectPayment(quantity) {
+    function mintTo(uint256 quantity, address recipient)
+        external
+        payable
+        maxTokens(quantity)
+        isCorrectPayment(quantity)
+    {
         _mintToken(quantity, recipient);
     }
 
@@ -167,23 +168,20 @@ contract Hackathon721 is ERC721Enumerable, Ownable {
     function _mintToken(uint256 quantity, address recipient) internal {
         for (uint256 i = 0; i < quantity; i++) {
             currentTokenId++;
-            _safeMint(recipient, currentTokenId);
+            _mint(recipient, currentTokenId);
             mintedAt[currentTokenId] = block.timestamp;
         }
     }
 
     // Override
-    function _beforeTokenTransfer(
-        address from,
-        address to,
-        uint256 firstTokenId,
-        uint256 batchSize
-    ) internal override {
+    function _beforeTokenTransfer(address from, address to, uint256 firstTokenId, uint256 batchSize)
+        internal
+        override
+    {
         super._beforeTokenTransfer(from, to, firstTokenId, batchSize);
 
         if (from != address(0x0) && !isTransferable) {
             revert NotTransferable();
         }
     }
-
 }
