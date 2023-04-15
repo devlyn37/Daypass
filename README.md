@@ -22,6 +22,10 @@ Things are a little rough around the edges right now, and very much optimized fo
     - Disconnect your wallet from only this page (yuck I know)
     - Hit **Connect** again and this time choose a social wallet.
     - Once that's connected, grab the address from the top right corner.
+    - Sometimes this doesn't work do to some upstream issues with ZeroDev :(, You can still check the contracts that are deployed
+
+    Here's proof that it works:
+    https://www.jiffyscan.xyz/userOpHash/0x88a848130614fae589f4210f82189ab00ccfa06cd0f6b413c719bfd5b739834f?network=goerli
 
 5. Send this address an NFT from the airdrop page.
 
