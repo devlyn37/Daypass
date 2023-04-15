@@ -47,11 +47,11 @@ contract Hackathon721 is ERC721Enumerable, Ownable {
     // PUBLIC
 
     function mint(uint256 quantity) external payable maxTokens(quantity) isCorrectPayment(quantity) {
-        for (uint256 i = 0; i < quantity; i++) {
-            currentTokenId++;
-            _safeMint(msg.sender, currentTokenId);
-            mintedAt[currentTokenId] = block.timestamp;
-        }
+        _mintToken(quantity, msg.sender);
+    }
+
+    function mintTo(uint256 quantity, address recipient) external payable maxTokens(quantity) isCorrectPayment(quantity) {
+        _mintToken(quantity, recipient);
     }
 
     function isPassValid(uint256 tokenId) public view returns (bool) {
@@ -104,6 +104,14 @@ contract Hackathon721 is ERC721Enumerable, Ownable {
 
     function getIsTransferable() public view returns (bool) {
         return isTransferable;
+    }
+
+    function _mintToken(uint256 quantity, address recipient) internal {
+        for (uint256 i = 0; i < quantity; i++) {
+            currentTokenId++;
+            _safeMint(recipient, currentTokenId);
+            mintedAt[currentTokenId] = block.timestamp;
+        }
     }
 
     // Override
