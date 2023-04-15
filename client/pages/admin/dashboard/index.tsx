@@ -1,4 +1,4 @@
-import { Box, Container, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Button, Container, Flex, Heading, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -8,12 +8,6 @@ import AdminDashboardLayout from "./AdminDashboardLayout";
 const AdminDashboardPage = () => {
   const { address } = useAccount();
   const router = useRouter();
-
-  useEffect(() => {
-    if (address) {
-      router.push("/admin/dashboard/contracts");
-    }
-  }, [address]);
 
   return (
     <AdminDashboardLayout>
@@ -72,6 +66,13 @@ const AdminDashboardPage = () => {
           height={760}
           style={{ position: "fixed", top: "71px", left: "696px" }}
         />
+        <Button
+          onClick={() => {
+            router.push("/admin/dashboard/contracts");
+          }}
+        >
+          Get Started
+        </Button>
       </Container>
     </AdminDashboardLayout>
   );
