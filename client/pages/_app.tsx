@@ -6,17 +6,16 @@ import WalletProvider from "../providers/wallet";
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   // if path is /admin, use WalletProvider
-  if (router.pathname.startsWith("/admin")) {
+  if (router.pathname.startsWith("/user")) {
     return (
-      <WalletProvider>
+      <AAWalletProvider>
         <Component {...pageProps} />
-      </WalletProvider>
+      </AAWalletProvider>
     );
   }
-
   return (
-    <AAWalletProvider>
+    <WalletProvider>
       <Component {...pageProps} />
-    </AAWalletProvider>
+    </WalletProvider>
   );
 }

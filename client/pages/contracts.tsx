@@ -20,16 +20,13 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAccount, useSigner } from "wagmi";
 import AdminDashboardLayout from "./AdminDashboardLayout";
-import { setupDaypass } from "../../../clients/setup_helper";
-import {
-  GOERLI_ENTRYPOINT,
-  GOERLI_SETUP_HELPER,
-} from "../../../consts/address";
+import { setupDaypass } from "../clients/setup_helper";
+import { GOERLI_ENTRYPOINT, GOERLI_SETUP_HELPER } from "../consts/address";
 import { BigNumber, ethers } from "ethers";
 import {
   LOCALSTORAGE_KEY_DAY_PASS_ADDRESS,
   LOCALSTORAGE_PAYMASTER_ADDRESS,
-} from "../../../consts/localstorage";
+} from "../consts/localstorage";
 
 const AdminDashboardPage = () => {
   const router = useRouter();
@@ -120,7 +117,7 @@ const AdminDashboardPage = () => {
           `Saved ${paymaster} into localstorage ${LOCALSTORAGE_PAYMASTER_ADDRESS}`
         );
 
-        router.push("/admin/dashboard/airdrop");
+        router.push("/airdrop");
       } catch (error) {
         console.error(error);
       } finally {

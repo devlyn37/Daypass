@@ -1,9 +1,9 @@
 import { Button, Flex, Heading, Input, Text } from "@chakra-ui/react";
 import Head from "next/head";
-import WalletLayout from "./user/wallet/WalletLayout";
+import WalletLayout from "./wallet/WalletLayout";
 import { useAccount } from "wagmi";
 import { getZeroDevSigner, getSocialWalletOwner } from "@zerodevapp/sdk";
-import nftArtifact from "../contracts/Hackathon721.sol/Hackathon721.json";
+import nftArtifact from "../../contracts/Hackathon721.sol/Hackathon721.json";
 
 import { GoogleSocialWallet } from "@zerodevapp/social-wallet";
 import { useEffect, useState } from "react";
