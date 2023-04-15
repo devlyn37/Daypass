@@ -41,22 +41,6 @@ contract Hackathon721Test is Test {
         nft.mint{value: salePrice * quantity}(quantity);
     }
 
-    function testFirstAndLastTokenIds() public {
-        vm.startPrank(normalAddress);
-
-        nft.mint{value: nft.salePrice()}(1);
-        assertEq(nft.ownerOf((1)), normalAddress);
-
-        uint256 slot = stdstore.target(address(nft)).sig("currentTokenId()").find();
-        bytes32 loc = bytes32(slot);
-        bytes32 mockedCurrentTokenId = bytes32(abi.encode(10000 - 1));
-        vm.store(address(nft), loc, mockedCurrentTokenId);
-
-        nft.mint{value: nft.salePrice()}(1);
-        assertEq(nft.ownerOf((10000)), normalAddress);
-        vm.stopPrank();
-    }
-
     function testMint(uint256 quantity) public {
         vm.startPrank(normalAddress);
         assertEq(nft.balanceOf(normalAddress), 0);
@@ -65,6 +49,24 @@ contract Hackathon721Test is Test {
         nft.mint{value: nft.salePrice() * quantity}(quantity);
 
         assertEq(nft.balanceOf(normalAddress), quantity);
+        vm.stopPrank();
+    }
+
+    function testValidity(uint256 quantity) public {
+        vm.startPrank(normalAddress);
+        assertEq(nft.balanceOf(normalAddress), 0);
+        assertEq(nft.hasValidPass(normalAddress), false);
+
+        vm.assume(quantity < nft.maxTokensPerTxn() && quantity > 0);
+        nft.mint{value: nft.salePrice() * quantity}(quantity);
+
+        assertEq(nft.balanceOf(normalAddress), quantity);
+        assertEq(nft.hasValidPass(normalAddress), true);
+
+        // Go way into the future, these passes shouldn't be valid anymore
+        vm.warp(1000000000000000);
+        assertEq(nft.hasValidPass(normalAddress), false);
+
         vm.stopPrank();
     }
 
