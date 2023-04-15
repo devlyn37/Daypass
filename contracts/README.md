@@ -45,3 +45,25 @@ Read here for more information: https://book.getfoundry.sh/forge/tests
 to run the tests with trace
 
 ```forge test -vvvv```
+
+## Deployments of SetupHelper contract
+
+### Ethereum Goerli
+
+0xac74de54Ae45Eb8dB7F34545C96CBcab59Be3a47
+
+### Polygon Mumbai
+
+0x1782a694bdb712237aed7b14d3ce93f12b0cffeb
+
+### Mantle Testnet
+
+
+
+### Scroll Testnet
+
+0x841b7a8ed11564e94815e069ba64084bf798c06b
+
+### Celo Alfajores Testnet
+
+0xd8a2e11a8c3776f1f74ea898f54ba86af25c1864
