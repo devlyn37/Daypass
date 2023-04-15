@@ -4,7 +4,7 @@ type AdminDashboardLayoutProps = {
   children: ReactNode;
 };
 
-import { ChakraProvider, Flex, Heading, Text } from "@chakra-ui/react";
+import { ChakraProvider, Flex } from "@chakra-ui/react";
 import {
   ConnectButton,
   RainbowKitProvider,
@@ -60,22 +60,16 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
       >
         <ChakraProvider>
           <Flex
-            minH="100vh"
             margin={10}
             flexDirection="column"
             alignItems="stretch"
             justifyContent="space-between"
           >
-            <Flex justifyContent="space-between" alignItems="center">
+            <Flex justifyContent="space-between" alignItems="center" marginBottom="40px">
               <DayPassLogo />
               <ConnectButton />
             </Flex>
-            <Flex flexGrow={1}>{children}</Flex>
-            <Flex justifyContent="space-between" alignItems="center">
-              <Heading>AdminDashboard</Heading>
-              <Text>Hi</Text>
-              <Text>Hi</Text>
-            </Flex>
+            {children}
           </Flex>
         </ChakraProvider>
       </RainbowKitProvider>
