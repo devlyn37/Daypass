@@ -1,4 +1,4 @@
-import { Button, Flex, Heading } from "@chakra-ui/react";
+import { Button, Flex, Heading, Input } from "@chakra-ui/react";
 import Head from "next/head";
 import WalletLayout from "./user/wallet/WalletLayout";
 import { useAccount } from "wagmi";
@@ -14,21 +14,32 @@ import { UserOperationStruct } from "@account-abstraction/contracts";
 import Link from "next/link";
 
 const NFT_CONTRACT_ADDRESS = "0x38853627cadCB75B7537453b12bFc2AB6eE16E23";
-const PAYMASTER_ADDRESS = "0x6437Cf677a933cAE4888142A29C31c468df705f8"; // paymaster with whitelisted addresses, latest version
+// const PAYMASTER_ADDRESS = "0xF66b5E3Cb034391d44E09365A2150a5E60a9c53d"; // paymaster with whitelisted addresses, latest version
 
 class contractOnlyPaymaster extends PaymasterAPI {
+  public address: string;
+
+  constructor(address: string) {
+    super();
+    this.address = address;
+  }
+
   async getPaymasterAndData(
     userOp: Partial<UserOperationStruct>
   ): Promise<string> {
-    return PAYMASTER_ADDRESS;
+    return this.address;
   }
 }
 
 export default function Home() {
-  const { address, isConnected } = useAccount();
+  const { address } = useAccount();
   const [isLoading, setIsLoading] = useState(false);
   const [mintingErrorMessage, setErrorMessage] = useState("");
   const [transactionHash, setTransactionHash] = useState(undefined);
+
+  const [paymasterAddress, setpaymasterAddress] = useState("");
+  const handleChange = (event: any) => setpaymasterAddress(event.target.value);
+
   const mint = async () => {
     setIsLoading(true);
     try {
@@ -42,7 +53,9 @@ export default function Home() {
           socialWallet
         ),
       });
-      signer.smartAccountAPI.paymasterAPI = new contractOnlyPaymaster();
+      signer.smartAccountAPI.paymasterAPI = new contractOnlyPaymaster(
+        paymasterAddress
+      );
 
       const contract = new Contract(
         NFT_CONTRACT_ADDRESS,
@@ -79,6 +92,14 @@ export default function Home() {
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <Heading>Space Can NFT Collection</Heading>
+          <Input
+            value={paymasterAddress}
+            onChange={handleChange}
+            placeholder="Input recipient address"
+            size="m"
+            mt="12px"
+            mb="12px"
+          />
           <Button onClick={mint} disabled={true}>
             {isLoading
               ? "Minting in progress..."

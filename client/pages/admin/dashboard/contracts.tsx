@@ -17,17 +17,20 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { useForm } from 'react-hook-form'
+import { useForm } from "react-hook-form";
 import { useAccount, useSigner } from "wagmi";
 import AdminDashboardLayout from "./AdminDashboardLayout";
 import { setupDaypass } from "../../../clients/setup_helper";
-import { GOERLI_ENTRYPOINT, GOERLI_SETUP_HELPER } from "../../../consts/address";
+import {
+  GOERLI_ENTRYPOINT,
+  GOERLI_SETUP_HELPER,
+} from "../../../consts/address";
 
 const AdminDashboardPage = () => {
   const router = useRouter();
   const { address } = useAccount();
 
-  const { register, handleSubmit, watch} = useForm();
+  const { register, handleSubmit, watch } = useForm();
   const watchAllFields = watch();
 
   useEffect(() => {
@@ -36,7 +39,7 @@ const AdminDashboardPage = () => {
     }
   }, [address]);
 
-  const {data: signer} = useSigner();
+  const { data: signer } = useSigner();
 
   const onSubmit = (values: any, e?: React.BaseSyntheticEvent) => {
     e?.preventDefault();
@@ -48,17 +51,21 @@ const AdminDashboardPage = () => {
       enableTrade,
       enableGasLimit,
       enableSpendingLimit,
-      enableTimeLimit
+      enableTimeLimit,
     } = values;
 
     let gasLimit = 0;
     if (enableGasLimit) {
-      gasLimit = values.gasLimitAmount ? Number.parseInt(values.gasLimitAmount) : 0;
+      gasLimit = values.gasLimitAmount
+        ? Number.parseInt(values.gasLimitAmount)
+        : 0;
     }
 
     let spendingLimit = 0;
     if (enableSpendingLimit) {
-      spendingLimit = values.spendingLimitAmount ? Number.parseInt(values.spendingLimitAmount) : 0;
+      spendingLimit = values.spendingLimitAmount
+        ? Number.parseInt(values.spendingLimitAmount)
+        : 0;
     }
 
     let timeLimit = 0;
@@ -80,7 +87,7 @@ const AdminDashboardPage = () => {
       enableTrade,
       gasLimit,
       spendingLimit,
-      timeLimit
+      timeLimit,
     });
 
     (async () => {
@@ -90,560 +97,598 @@ const AdminDashboardPage = () => {
         GOERLI_SETUP_HELPER,
         GOERLI_ENTRYPOINT,
         {
-          targets: [
-            contract
-          ],
+          targets: [contract],
           transferable: enableTransfer,
           gasLimitPerOperation: gasLimit,
           spendingLimitPerOperation: spendingLimit,
           timeLimitPerOperation: timeLimit,
           holders: [
             // TODO: account addresses
-          ]
+          ],
         }
       );
 
       console.log("res", res);
-    })()
-  }
+    })();
+  };
 
-  console.log('watchAllFields', watchAllFields)
+  console.log("watchAllFields", watchAllFields);
 
   return (
     <AdminDashboardLayout>
       <form onSubmit={handleSubmit(onSubmit)}>
-      <Flex justifyContent="center">
-        <Box>
-          <FormControl>
-            <Box
-              borderRadius="20px"
-              width="954px"
-              maxWidth="100%"
-              background="#FFFFFF"
-              boxShadow="0px 4px 20px 0px rgba(0, 0, 0, 0.15)"
-              p="6"
-              rounded="md"
-            >
-              <Flex
-                alignItems="center"
-                justifyContent="space-between"
-                borderBottom="1px solid #E2E8F0"
-                mb="5"
-                pb="5"
+        <Flex justifyContent="center">
+          <Box>
+            <FormControl>
+              <Box
+                borderRadius="20px"
+                width="954px"
+                maxWidth="100%"
+                background="#FFFFFF"
+                boxShadow="0px 4px 20px 0px rgba(0, 0, 0, 0.15)"
+                p="6"
+                rounded="md"
               >
-                <Heading variant="h1">
+                <Flex
+                  alignItems="center"
+                  justifyContent="space-between"
+                  borderBottom="1px solid #E2E8F0"
+                  mb="5"
+                  pb="5"
+                >
+                  <Heading variant="h1">
+                    <Text
+                      fontFamily="PolySans Median"
+                      lineHeight="1.5"
+                      fontWeight="regular"
+                      fontSize="24px"
+                      letterSpacing="-0.02em"
+                      color="#000000"
+                    >
+                      Create Paymaster
+                    </Text>
+                  </Heading>
+                  <Flex
+                    alignItems="center"
+                    justifyContent="space-between"
+                    minW="235px"
+                  >
+                    <Circle size="28px" background="#0075FF">
+                      <Text
+                        fontFamily="PolySans Neutral"
+                        lineHeight="1.5"
+                        fontWeight="regular"
+                        fontSize="14px"
+                        letterSpacing="-0.02em"
+                        color="#ffffff"
+                      >
+                        1
+                      </Text>
+                    </Circle>
+                    <Text
+                      fontFamily="PolySans Neutral"
+                      lineHeight="1.5"
+                      fontWeight="regular"
+                      fontSize="14px"
+                      letterSpacing="-0.02em"
+                      color="#000000"
+                    >
+                      Define
+                    </Text>
+
+                    <Box w="72px" h="1px" bg="#E2E8F0"></Box>
+                    <Text
+                      fontFamily="PolySans Neutral"
+                      lineHeight="1.5"
+                      fontWeight="regular"
+                      fontSize="14px"
+                      letterSpacing="-0.02em"
+                      color="#000000"
+                    >
+                      Send
+                    </Text>
+                    <Circle size="28px" background="#A0AEC0">
+                      <Text
+                        fontFamily="PolySans Neutral"
+                        lineHeight="1.5"
+                        fontWeight="regular"
+                        fontSize="14px"
+                        letterSpacing="-0.02em"
+                        color="#ffffff"
+                      >
+                        2
+                      </Text>
+                    </Circle>
+                  </Flex>
+                </Flex>
+                <Flex justifyContent="space-between" mb="5">
+                  <Box>
+                    <Heading variant="h2">
+                      <Text
+                        fontFamily="PolySans Median"
+                        lineHeight="1.5"
+                        fontWeight="regular"
+                        fontSize="18px"
+                        letterSpacing="-0.02em"
+                        color="#000000"
+                        mb="2"
+                      >
+                        Contract Address
+                      </Text>
+                    </Heading>
+                    <Input
+                      placeholder="Paste your Contract Address"
+                      size="lg"
+                      width="548px"
+                      height="48px"
+                      maxWidth="100%"
+                      {...register("contract")}
+                    />
+                  </Box>
+                  <Box w="320px" pl="5">
+                    <Heading variant="h2">
+                      <Text
+                        fontFamily="PolySans Median"
+                        lineHeight="1.5"
+                        fontWeight="regular"
+                        fontSize="18px"
+                        letterSpacing="-0.02em"
+                        color="#000000"
+                        mb="2"
+                      >
+                        Network
+                      </Text>
+                    </Heading>
+                    <Select
+                      placeholder="Specify Network"
+                      size="lg"
+                      defaultValue="goerli"
+                      {...register("network")}
+                    >
+                      <option value="goerli">Goerli</option>
+                      <option value="ethereum">Ethereum</option>
+                    </Select>
+                  </Box>
+                </Flex>
+                <Heading variant="h2">
                   <Text
                     fontFamily="PolySans Median"
                     lineHeight="1.5"
                     fontWeight="regular"
-                    fontSize="24px"
+                    fontSize="18px"
                     letterSpacing="-0.02em"
                     color="#000000"
+                    mb="2"
                   >
-                    Create Paymaster
+                    Restrictions
                   </Text>
                 </Heading>
-                <Flex
-                  alignItems="center"
-                  justifyContent="space-between"
-                  minW="235px"
-                >
-                  <Circle size="28px" background="#0075FF">
-                    <Text
-                      fontFamily="PolySans Neutral"
-                      lineHeight="1.5"
-                      fontWeight="regular"
-                      fontSize="14px"
-                      letterSpacing="-0.02em"
-                      color="#ffffff"
-                    >
-                      1
-                    </Text>
-                  </Circle>
-                  <Text
-                    fontFamily="PolySans Neutral"
-                    lineHeight="1.5"
-                    fontWeight="regular"
-                    fontSize="14px"
-                    letterSpacing="-0.02em"
-                    color="#000000"
-                  >
-                    Define
-                  </Text>
-
-                  <Box w="72px" h="1px" bg="#E2E8F0"></Box>
-                  <Text
-                    fontFamily="PolySans Neutral"
-                    lineHeight="1.5"
-                    fontWeight="regular"
-                    fontSize="14px"
-                    letterSpacing="-0.02em"
-                    color="#000000"
-                  >
-                    Send
-                  </Text>
-                  <Circle size="28px" background="#A0AEC0">
-                    <Text
-                      fontFamily="PolySans Neutral"
-                      lineHeight="1.5"
-                      fontWeight="regular"
-                      fontSize="14px"
-                      letterSpacing="-0.02em"
-                      color="#ffffff"
-                    >
-                      2
-                    </Text>
-                  </Circle>
-                </Flex>
-              </Flex>
-              <Flex justifyContent="space-between" mb="5">
-                <Box>
-                  <Heading variant="h2">
-                    <Text
-                      fontFamily="PolySans Median"
-                      lineHeight="1.5"
-                      fontWeight="regular"
-                      fontSize="18px"
-                      letterSpacing="-0.02em"
-                      color="#000000"
-                      mb="2"
-                    >
-                      Contract Address
-                    </Text>
-                  </Heading>
-                  <Input
-                    placeholder="Paste your Contract Address"
-                    size="lg"
-                    width="548px"
-                    height="48px"
-                    maxWidth="100%"
-                    {...register('contract')}
-                  />
-                </Box>
-                <Box w="320px" pl="5">
-                  <Heading variant="h2">
-                    <Text
-                      fontFamily="PolySans Median"
-                      lineHeight="1.5"
-                      fontWeight="regular"
-                      fontSize="18px"
-                      letterSpacing="-0.02em"
-                      color="#000000"
-                      mb="2"
-                    >
-                      Network
-                    </Text>
-                  </Heading>
-                  <Select placeholder="Specify Network" size="lg" defaultValue="goerli" {...register('network')}>
-                    <option value="goerli">Goerli</option>
-                    <option value="ethereum">Ethereum</option>
-                  </Select>
-                </Box>
-              </Flex>
-              <Heading variant="h2">
                 <Text
-                  fontFamily="PolySans Median"
+                  fontFamily="PolySans Neutral"
                   lineHeight="1.5"
                   fontWeight="regular"
-                  fontSize="18px"
+                  fontSize="16px"
                   letterSpacing="-0.02em"
                   color="#000000"
-                  mb="2"
+                  mb="4"
                 >
-                  Restrictions
+                  Specify the interaction restrictions for the NFTs.
                 </Text>
-              </Heading>
-              <Text
-                fontFamily="PolySans Neutral"
-                lineHeight="1.5"
-                fontWeight="regular"
-                fontSize="16px"
-                letterSpacing="-0.02em"
-                color="#000000"
-                mb="4"
-              >
-                Specify the interaction restrictions for the NFTs.
-              </Text>
-              <Box
-                borderRadius="12px"
-                width="898px"
-                maxWidth="100%"
-                borderColor="gray.200"
-                borderWidth="1px"
-              >
-                <Flex
-                  alignItems="center"
-                  justifyContent="space-between"
-                  borderBottom="1px solid #E2E8F0"
-                  px="7"
-                  py="4"
+                <Box
+                  borderRadius="12px"
+                  width="898px"
+                  maxWidth="100%"
+                  borderColor="gray.200"
+                  borderWidth="1px"
                 >
-                  <Heading variant="h3" mb="1">
-                    <Text
-                      fontFamily="PolySans Median"
-                      lineHeight="1.5"
-                      fontSize="16px"
-                    >
-                      Type
-                    </Text>
-                  </Heading>
-                  <Heading variant="h3" w="50%">
-                    <Text
-                      fontFamily="PolySans Median"
-                      lineHeight="1.5"
-                      fontSize="16px"
-                    >
-                      Action
-                    </Text>
-                  </Heading>
-                </Flex>
-                <Flex
-                  alignItems="center"
-                  justifyContent="space-between"
-                  borderBottom="1px solid #E2E8F0"
-                  px="7"
-                  py="4"
-                >
-                  <Box>
+                  <Flex
+                    alignItems="center"
+                    justifyContent="space-between"
+                    borderBottom="1px solid #E2E8F0"
+                    px="7"
+                    py="4"
+                  >
                     <Heading variant="h3" mb="1">
                       <Text
-                        fontFamily="PolySans Neutral"
+                        fontFamily="PolySans Median"
                         lineHeight="1.5"
                         fontSize="16px"
                       >
-                        Allow to transfer
+                        Type
                       </Text>
                     </Heading>
-                    <Text
-                      fontFamily="PolySans Neutral"
-                      lineHeight="1.5"
-                      fontWeight="regular"
-                      fontSize="16px"
-                      color="#A0AEC0"
-                    >
-                      Make Day Pass NFTs transferable or soulbound.
-                    </Text>
-                  </Box>
-                  <Stack direction="row" justify="left" align="center" w="50%">
-                    <Text
-                      fontFamily="PolySans Neutral"
-                      lineHeight="1.5"
-                      fontWeight="regular"
-                      fontSize="16px"
-                      letterSpacing="-0.02em"
-                      color="#000000"
-                    >
-                      Off
-                    </Text>
-                    <Switch {...register('enableTransfer')} />
-                    <Text
-                      fontFamily="PolySans Neutral"
-                      lineHeight="1.5"
-                      fontWeight="regular"
-                      fontSize="16px"
-                      letterSpacing="-0.02em"
-                      color="#000000"
-                    >
-                      On
-                    </Text>
-                  </Stack>
-                </Flex>
-
-                <Flex
-                  alignItems="center"
-                  justifyContent="space-between"
-                  borderBottom="1px solid #E2E8F0"
-                  px="7"
-                  py="4"
-                >
-                  <Box>
-                    <Heading variant="h3" mb="1">
+                    <Heading variant="h3" w="50%">
                       <Text
-                        fontFamily="PolySans Neutral"
+                        fontFamily="PolySans Median"
                         lineHeight="1.5"
                         fontSize="16px"
                       >
-                        Allow to trade
+                        Action
                       </Text>
                     </Heading>
-                    <Text
-                      fontFamily="PolySans Neutral"
-                      lineHeight="1.5"
-                      fontWeight="regular"
-                      fontSize="16px"
-                      color="#A0AEC0"
-                    >
-                      Block or allow trading.
-                    </Text>
-                  </Box>
-                  <Stack direction="row" justify="left" align="center" w="50%">
-                    <Text
-                      fontFamily="PolySans Neutral"
-                      lineHeight="1.5"
-                      fontWeight="regular"
-                      fontSize="16px"
-                      letterSpacing="-0.02em"
-                      color="#000000"
-                    >
-                      Off
-                    </Text>
-                    <Switch {...register('enableTrade')} />
-                    <Text
-                      fontFamily="PolySans Neutral"
-                      lineHeight="1.5"
-                      fontWeight="regular"
-                      fontSize="16px"
-                      letterSpacing="-0.02em"
-                      color="#000000"
-                    >
-                      On
-                    </Text>
-                  </Stack>
-                </Flex>
-
-                <Flex
-                  alignItems="center"
-                  justifyContent="space-between"
-                  borderBottom="1px solid #E2E8F0"
-                  px="7"
-                  py="4"
-                >
-                  <Box w="50%" pr="2">
-                    <Heading variant="h3" mb="1">
-                      <Text
-                        fontFamily="PolySans Neutral"
-                        lineHeight="1.5"
-                        fontSize="16px"
-                      >
-                        Gas limit
-                      </Text>
-                    </Heading>
-                    <Text
-                      fontFamily="PolySans Neutral"
-                      lineHeight="1.5"
-                      fontWeight="regular"
-                      fontSize="16px"
-                      color="#A0AEC0"
-                    >
-                      Specify a maximum gas limit you want your users to spend.
-                    </Text>
-                  </Box>
-
-                  <Stack direction="row" justify="left" align="center" w="50%">
-                    <Box w="40%">
-                      <Stack direction="row" justify="left" align="center">
+                  </Flex>
+                  <Flex
+                    alignItems="center"
+                    justifyContent="space-between"
+                    borderBottom="1px solid #E2E8F0"
+                    px="7"
+                    py="4"
+                  >
+                    <Box>
+                      <Heading variant="h3" mb="1">
                         <Text
                           fontFamily="PolySans Neutral"
                           lineHeight="1.5"
-                          fontWeight="regular"
                           fontSize="16px"
-                          letterSpacing="-0.02em"
-                          color="#000000"
                         >
-                          Off
+                          Allow to transfer
                         </Text>
-                        <Switch {...register('enableGasLimit')} />
-                        <Text
-                          fontFamily="PolySans Neutral"
-                          lineHeight="1.5"
-                          fontWeight="regular"
-                          fontSize="16px"
-                          letterSpacing="-0.02em"
-                          color="#000000"
-                        >
-                          On
-                        </Text>
-                      </Stack>
+                      </Heading>
+                      <Text
+                        fontFamily="PolySans Neutral"
+                        lineHeight="1.5"
+                        fontWeight="regular"
+                        fontSize="16px"
+                        color="#A0AEC0"
+                      >
+                        Make Day Pass NFTs transferable or soulbound.
+                      </Text>
                     </Box>
-                    <Box w="60%">
-                      <InputGroup>
-                        <Input type="gaslimit" placeholder="0" disabled={!watchAllFields.enableGasLimit} {...register('gasLimitAmount')} />
-                        <InputRightElement
-                          pointerEvents="none"
-                          fontSize="16px"
-                          children="Gwei"
-                          pr="4"
-                        />
-                      </InputGroup>
-                    </Box>
-                  </Stack>
-                </Flex>
-                <Flex
-                  alignItems="center"
-                  justifyContent="space-between"
-                  borderBottom="1px solid #E2E8F0"
-                  px="7"
-                  py="4"
-                >
-                  <Box w="50%" pr="2">
-                    <Heading variant="h3" mb="1">
+                    <Stack
+                      direction="row"
+                      justify="left"
+                      align="center"
+                      w="50%"
+                    >
                       <Text
                         fontFamily="PolySans Neutral"
                         lineHeight="1.5"
+                        fontWeight="regular"
                         fontSize="16px"
+                        letterSpacing="-0.02em"
+                        color="#000000"
                       >
-                        Spending limit
+                        Off
                       </Text>
-                    </Heading>
-                    <Text
-                      fontFamily="PolySans Neutral"
-                      lineHeight="1.5"
-                      fontWeight="regular"
-                      fontSize="16px"
-                      color="#A0AEC0"
+                      <Switch {...register("enableTransfer")} />
+                      <Text
+                        fontFamily="PolySans Neutral"
+                        lineHeight="1.5"
+                        fontWeight="regular"
+                        fontSize="16px"
+                        letterSpacing="-0.02em"
+                        color="#000000"
+                      >
+                        On
+                      </Text>
+                    </Stack>
+                  </Flex>
+
+                  <Flex
+                    alignItems="center"
+                    justifyContent="space-between"
+                    borderBottom="1px solid #E2E8F0"
+                    px="7"
+                    py="4"
+                  >
+                    <Box>
+                      <Heading variant="h3" mb="1">
+                        <Text
+                          fontFamily="PolySans Neutral"
+                          lineHeight="1.5"
+                          fontSize="16px"
+                        >
+                          Allow to trade
+                        </Text>
+                      </Heading>
+                      <Text
+                        fontFamily="PolySans Neutral"
+                        lineHeight="1.5"
+                        fontWeight="regular"
+                        fontSize="16px"
+                        color="#A0AEC0"
+                      >
+                        Block or allow trading.
+                      </Text>
+                    </Box>
+                    <Stack
+                      direction="row"
+                      justify="left"
+                      align="center"
+                      w="50%"
                     >
-                      Specify a maximum spending limit for user per single
-                      transaction.
-                    </Text>
-                  </Box>
-                  <Stack direction="row" justify="left" align="center" w="50%">
-                    <Box w="40%">
-                      <Stack direction="row" justify="left" align="center">
+                      <Text
+                        fontFamily="PolySans Neutral"
+                        lineHeight="1.5"
+                        fontWeight="regular"
+                        fontSize="16px"
+                        letterSpacing="-0.02em"
+                        color="#000000"
+                      >
+                        Off
+                      </Text>
+                      <Switch {...register("enableTrade")} />
+                      <Text
+                        fontFamily="PolySans Neutral"
+                        lineHeight="1.5"
+                        fontWeight="regular"
+                        fontSize="16px"
+                        letterSpacing="-0.02em"
+                        color="#000000"
+                      >
+                        On
+                      </Text>
+                    </Stack>
+                  </Flex>
+
+                  <Flex
+                    alignItems="center"
+                    justifyContent="space-between"
+                    borderBottom="1px solid #E2E8F0"
+                    px="7"
+                    py="4"
+                  >
+                    <Box w="50%" pr="2">
+                      <Heading variant="h3" mb="1">
                         <Text
                           fontFamily="PolySans Neutral"
                           lineHeight="1.5"
-                          fontWeight="regular"
                           fontSize="16px"
-                          letterSpacing="-0.02em"
-                          color="#000000"
                         >
-                          Off
+                          Gas limit
                         </Text>
-                        <Switch {...register('enableSpendingLimit')} />
-                        <Text
-                          fontFamily="PolySans Neutral"
-                          lineHeight="1.5"
-                          fontWeight="regular"
-                          fontSize="16px"
-                          letterSpacing="-0.02em"
-                          color="#000000"
-                        >
-                          On
-                        </Text>
-                      </Stack>
+                      </Heading>
+                      <Text
+                        fontFamily="PolySans Neutral"
+                        lineHeight="1.5"
+                        fontWeight="regular"
+                        fontSize="16px"
+                        color="#A0AEC0"
+                      >
+                        Specify a maximum gas limit you want your users to
+                        spend.
+                      </Text>
                     </Box>
 
-                    <Box w="60%">
-                      <InputGroup>
-                        <Input type="spendinglimit" placeholder="0" disabled={!watchAllFields.enableSpendingLimit} {...register('spendingLimitAmount')} />
-                        <InputRightElement
-                          pointerEvents="none"
-                          fontSize="16px"
-                          children="USD"
-                          pr="4"
-                        />
-                      </InputGroup>
-                    </Box>
-                  </Stack>
-                </Flex>
-                <Flex
-                  alignItems="center"
-                  justifyContent="space-between"
-                  px="7"
-                  py="4"
-                >
-                  <Box w="50%" pr="2">
-                    <Heading variant="h3" mb="1">
-                      <Text
-                        fontFamily="PolySans Neutral"
-                        lineHeight="1.5"
-                        fontSize="16px"
-                      >
-                        Time limit
-                      </Text>
-                    </Heading>
-                    <Text
-                      fontFamily="PolySans Neutral"
-                      lineHeight="1.5"
-                      fontWeight="regular"
-                      fontSize="16px"
-                      color="#A0AEC0"
+                    <Stack
+                      direction="row"
+                      justify="left"
+                      align="center"
+                      w="50%"
                     >
-                      Setup a timeframe after which NFT will expire.
-                    </Text>
-                  </Box>
-                  <Stack direction="row" justify="left" align="center" w="50%">
-                    <Box w="40%">
-                      <Stack direction="row" justify="left" align="center">
-                        <Text
-                          fontFamily="PolySans Neutral"
-                          lineHeight="1.5"
-                          fontWeight="regular"
-                          fontSize="16px"
-                          letterSpacing="-0.02em"
-                          color="#000000"
-                        >
-                          Off
-                        </Text>
-                        <Switch {...register('enableTimeLimit')} />
-                        <Text
-                          fontFamily="PolySans Neutral"
-                          lineHeight="1.5"
-                          fontWeight="regular"
-                          fontSize="16px"
-                          letterSpacing="-0.02em"
-                          color="#000000"
-                        >
-                          On
-                        </Text>
-                      </Stack>
-                    </Box>
-                    <Box w="60%">
-                      <RadioGroup>
-                        <Stack direction="row">
-                          <Radio value="week" {...register('timeLimit')} >
-                            <Text
-                              fontFamily="PolySans Neutral"
-                              lineHeight="1.5"
-                              fontWeight="regular"
-                              fontSize="14px"
-                              letterSpacing="-0.02em"
-                              color="#000000"
-                            >
-                              Week
-                            </Text>
-                          </Radio>
-                          <Radio value="month" {...register('timeLimit')}>
-                            <Text
-                              fontFamily="PolySans Neutral"
-                              lineHeight="1.5"
-                              fontWeight="regular"
-                              fontSize="14px"
-                              letterSpacing="-0.02em"
-                              color="#000000"
-                            >
-                              Month
-                            </Text>
-                          </Radio>
-                          <Radio value="3_months" {...register('timeLimit')}>
-                            <Text
-                              fontFamily="PolySans Neutral"
-                              lineHeight="1.5"
-                              fontWeight="regular"
-                              fontSize="14px"
-                              letterSpacing="-0.02em"
-                              color="#000000"
-                            >
-                              3 months
-                            </Text>
-                          </Radio>
+                      <Box w="40%">
+                        <Stack direction="row" justify="left" align="center">
+                          <Text
+                            fontFamily="PolySans Neutral"
+                            lineHeight="1.5"
+                            fontWeight="regular"
+                            fontSize="16px"
+                            letterSpacing="-0.02em"
+                            color="#000000"
+                          >
+                            Off
+                          </Text>
+                          <Switch {...register("enableGasLimit")} />
+                          <Text
+                            fontFamily="PolySans Neutral"
+                            lineHeight="1.5"
+                            fontWeight="regular"
+                            fontSize="16px"
+                            letterSpacing="-0.02em"
+                            color="#000000"
+                          >
+                            On
+                          </Text>
                         </Stack>
-                      </RadioGroup>
+                      </Box>
+                      <Box w="60%">
+                        <InputGroup>
+                          <Input
+                            type="gaslimit"
+                            placeholder="0"
+                            disabled={!watchAllFields.enableGasLimit}
+                            {...register("gasLimitAmount")}
+                          />
+                          <InputRightElement
+                            pointerEvents="none"
+                            fontSize="16px"
+                            children="Gwei"
+                            pr="4"
+                          />
+                        </InputGroup>
+                      </Box>
+                    </Stack>
+                  </Flex>
+                  <Flex
+                    alignItems="center"
+                    justifyContent="space-between"
+                    borderBottom="1px solid #E2E8F0"
+                    px="7"
+                    py="4"
+                  >
+                    <Box w="50%" pr="2">
+                      <Heading variant="h3" mb="1">
+                        <Text
+                          fontFamily="PolySans Neutral"
+                          lineHeight="1.5"
+                          fontSize="16px"
+                        >
+                          Spending limit
+                        </Text>
+                      </Heading>
+                      <Text
+                        fontFamily="PolySans Neutral"
+                        lineHeight="1.5"
+                        fontWeight="regular"
+                        fontSize="16px"
+                        color="#A0AEC0"
+                      >
+                        Specify a maximum spending limit for user per single
+                        transaction.
+                      </Text>
                     </Box>
-                  </Stack>
-                </Flex>
-              </Box>
-            </Box>
-            <Flex justify="flex-end" mt="8" mb="12">
-              <Button width="206px" height="40px">
-                Next
-              </Button>
-            </Flex>
-          </FormControl>
-        </Box>
-      </Flex>
-      </form>
+                    <Stack
+                      direction="row"
+                      justify="left"
+                      align="center"
+                      w="50%"
+                    >
+                      <Box w="40%">
+                        <Stack direction="row" justify="left" align="center">
+                          <Text
+                            fontFamily="PolySans Neutral"
+                            lineHeight="1.5"
+                            fontWeight="regular"
+                            fontSize="16px"
+                            letterSpacing="-0.02em"
+                            color="#000000"
+                          >
+                            Off
+                          </Text>
+                          <Switch {...register("enableSpendingLimit")} />
+                          <Text
+                            fontFamily="PolySans Neutral"
+                            lineHeight="1.5"
+                            fontWeight="regular"
+                            fontSize="16px"
+                            letterSpacing="-0.02em"
+                            color="#000000"
+                          >
+                            On
+                          </Text>
+                        </Stack>
+                      </Box>
 
+                      <Box w="60%">
+                        <InputGroup>
+                          <Input
+                            type="spendinglimit"
+                            placeholder="0"
+                            disabled={!watchAllFields.enableSpendingLimit}
+                            {...register("spendingLimitAmount")}
+                          />
+                          <InputRightElement
+                            pointerEvents="none"
+                            fontSize="16px"
+                            children="USD"
+                            pr="4"
+                          />
+                        </InputGroup>
+                      </Box>
+                    </Stack>
+                  </Flex>
+                  <Flex
+                    alignItems="center"
+                    justifyContent="space-between"
+                    px="7"
+                    py="4"
+                  >
+                    <Box w="50%" pr="2">
+                      <Heading variant="h3" mb="1">
+                        <Text
+                          fontFamily="PolySans Neutral"
+                          lineHeight="1.5"
+                          fontSize="16px"
+                        >
+                          Time limit
+                        </Text>
+                      </Heading>
+                      <Text
+                        fontFamily="PolySans Neutral"
+                        lineHeight="1.5"
+                        fontWeight="regular"
+                        fontSize="16px"
+                        color="#A0AEC0"
+                      >
+                        Setup a timeframe after which NFT will expire.
+                      </Text>
+                    </Box>
+                    <Stack
+                      direction="row"
+                      justify="left"
+                      align="center"
+                      w="50%"
+                    >
+                      <Box w="40%">
+                        <Stack direction="row" justify="left" align="center">
+                          <Text
+                            fontFamily="PolySans Neutral"
+                            lineHeight="1.5"
+                            fontWeight="regular"
+                            fontSize="16px"
+                            letterSpacing="-0.02em"
+                            color="#000000"
+                          >
+                            Off
+                          </Text>
+                          <Switch {...register("enableTimeLimit")} />
+                          <Text
+                            fontFamily="PolySans Neutral"
+                            lineHeight="1.5"
+                            fontWeight="regular"
+                            fontSize="16px"
+                            letterSpacing="-0.02em"
+                            color="#000000"
+                          >
+                            On
+                          </Text>
+                        </Stack>
+                      </Box>
+                      <Box w="60%">
+                        <RadioGroup>
+                          <Stack direction="row">
+                            <Radio value="week" {...register("timeLimit")}>
+                              <Text
+                                fontFamily="PolySans Neutral"
+                                lineHeight="1.5"
+                                fontWeight="regular"
+                                fontSize="14px"
+                                letterSpacing="-0.02em"
+                                color="#000000"
+                              >
+                                Week
+                              </Text>
+                            </Radio>
+                            <Radio value="month" {...register("timeLimit")}>
+                              <Text
+                                fontFamily="PolySans Neutral"
+                                lineHeight="1.5"
+                                fontWeight="regular"
+                                fontSize="14px"
+                                letterSpacing="-0.02em"
+                                color="#000000"
+                              >
+                                Month
+                              </Text>
+                            </Radio>
+                            <Radio value="3_months" {...register("timeLimit")}>
+                              <Text
+                                fontFamily="PolySans Neutral"
+                                lineHeight="1.5"
+                                fontWeight="regular"
+                                fontSize="14px"
+                                letterSpacing="-0.02em"
+                                color="#000000"
+                              >
+                                3 months
+                              </Text>
+                            </Radio>
+                          </Stack>
+                        </RadioGroup>
+                      </Box>
+                    </Stack>
+                  </Flex>
+                </Box>
+              </Box>
+              <Flex justify="flex-end" mt="8" mb="12">
+                <Button type="submit" width="206px" height="40px">
+                  Next
+                </Button>
+              </Flex>
+            </FormControl>
+          </Box>
+        </Flex>
+      </form>
     </AdminDashboardLayout>
   );
 };

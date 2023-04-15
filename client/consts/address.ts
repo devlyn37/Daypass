@@ -1,3 +1,11 @@
 export const GOERLI_ENTRYPOINT = "0x0576a174D229E3cFA37253523E645A78A0C91B57";
 
-export const GOERLI_SETUP_HELPER = "0x5b2aa93fc5edd37ca9ff3d7aa74e4eaadc5581b8";
+export const GOERLI_SETUP_HELPER = "0x4EB992D9d8D0f8E10a4BC9828cb52ecdF4eEFAeC";
+// latest daypass address
+// 0xa1F209805fBc1eb69BDeE37D7Ce629e80b31B722
+
+// latest paymaster address
+// 0xF66b5E3Cb034391d44E09365A2150a5E60a9c53d
+
+// address for google wallet
+// 0xb2Fa18B41e77EbB56e318c676A288290F3330894

@@ -7,7 +7,7 @@ import { ethers } from "ethers";
 import { mintNFT } from "../../../clients/nft";
 
 // const NFT_CONTRACT_ADDRESS = "0x5a89d913b098c30fcb34f60382dce707177e171e";
-const NFT_CONTRACT_ADDRESS="0xf03C1cB42c64628DE52d8828D534bFa2c6Fd65Df";
+const DaypassAddress = "0xa1F209805fBc1eb69BDeE37D7Ce629e80b31B722";
 
 const AirdropPage = () => {
   const router = useRouter();
@@ -65,7 +65,7 @@ const AirdropPage = () => {
           onClick={() => {
             if (!ethers.utils.isAddress(airdropAddress)) {
               console.error("not address: " + airdropAddress);
-              return
+              return;
             }
 
             if (!signer) {
@@ -76,18 +76,14 @@ const AirdropPage = () => {
             (async () => {
               setSubmiting(true);
               try {
-                await mintNFT(
-                  NFT_CONTRACT_ADDRESS,
-                  signer,
-                  airdropAddress
-                );
-                setAirdropAddress('');
+                await mintNFT(DaypassAddress, signer, airdropAddress);
+                setAirdropAddress("");
               } catch (error) {
                 console.error(error);
               } finally {
                 setSubmiting(false);
               }
-            })()
+            })();
           }}
         >
           Send Daypass
