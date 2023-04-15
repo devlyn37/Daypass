@@ -77,3 +77,9 @@ https://blockscout.scroll.io/address/0x841b7A8ED11564E94815E069bA64084bF798C06b
 0xd8a2e11a8c3776f1f74ea898f54ba86af25c1864
 
 https://explorer.celo.org/alfajores/address/0xD8A2E11a8C3776f1F74Ea898f54bA86Af25c1864
+
+## GNOSIS mainnet
+
+0xe13f6c3d9f95e1d0cb26050d587fba18d1f57958
+
+https://gnosisscan.io/address/0xe13f6c3d9f95e1d0cb26050d587fba18d1f57958
