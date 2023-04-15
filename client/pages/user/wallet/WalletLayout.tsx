@@ -105,11 +105,6 @@ const WalletLayout = ({ children }: WalletLayoutProps) => {
               <ConnectButton />
             </Flex>
             <Flex flexGrow={1}>{children}</Flex>
-            <Flex justifyContent="space-between" alignItems="center">
-              <Heading>Hackathon</Heading>
-              <Text>Hi</Text>
-              <Text>Hi</Text>
-            </Flex>
           </Flex>
         </ChakraProvider>
       </RainbowKitProvider>
