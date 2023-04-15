@@ -817,7 +817,7 @@
     "id": 37078,
     "exportedSymbols": {
       "IERC165": [
-        38088
+        38135
       ],
       "IERC721": [
         36674
@@ -1161,7 +1161,7 @@
         "linearizedBaseContracts": [
           37077,
           36674,
-          38088
+          38135
         ],
         "name": "IERC721Enumerable",
         "nameLocation": "327:17:48",

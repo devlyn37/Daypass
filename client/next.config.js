@@ -1,15 +1,8 @@
-const withTM = require("next-transpile-modules")([
-  "@zerodevapp/wagmi",
-  "@zerodevapp/social-wallet",
-]);
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  transpilePackages: ["@zerodevapp/wagmi", "@zerodevapp/social-wallet"],
 };
 
-module.exports = withTM({
-  ...nextConfig,
-  webpack5: true,
-});
+module.exports = nextConfig;

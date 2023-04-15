@@ -331,25 +331,25 @@
   },
   "ast": {
     "absolutePath": "lib/account-abstraction/contracts/interfaces/IPaymaster.sol",
-    "id": 463,
+    "id": 5882,
     "exportedSymbols": {
       "IPaymaster": [
-        462
+        5881
       ],
       "UserOperation": [
-        591
+        6010
       ],
       "UserOperationLib": [
-        695
+        6114
       ]
     },
     "nodeType": "SourceUnit",
-    "src": "36:2364:3",
+    "src": "36:2364:16",
     "nodes": [
       {
-        "id": 429,
+        "id": 5848,
         "nodeType": "PragmaDirective",
-        "src": "36:24:3",
+        "src": "36:24:16",
         "nodes": [],
         "literals": [
           "solidity",
@@ -359,32 +359,32 @@
         ]
       },
       {
-        "id": 430,
+        "id": 5849,
         "nodeType": "ImportDirective",
-        "src": "62:29:3",
+        "src": "62:29:16",
         "nodes": [],
         "absolutePath": "lib/account-abstraction/contracts/interfaces/UserOperation.sol",
         "file": "./UserOperation.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 463,
-        "sourceUnit": 696,
+        "scope": 5882,
+        "sourceUnit": 6115,
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
-        "id": 462,
+        "id": 5881,
         "nodeType": "ContractDefinition",
-        "src": "310:2089:3",
+        "src": "310:2089:16",
         "nodes": [
           {
-            "id": 446,
+            "id": 5865,
             "nodeType": "FunctionDefinition",
-            "src": "1244:163:3",
+            "src": "1244:163:16",
             "nodes": [],
             "documentation": {
-              "id": 432,
+              "id": 5851,
               "nodeType": "StructuredDocumentation",
-              "src": "338:901:3",
+              "src": "338:901:16",
               "text": " payment validation: check if paymaster agree to pay.\n Must verify sender is the entryPoint.\n Revert to reject this request.\n Note that bundlers will reject this method if it changes the state, unless the paymaster is trusted (whitelisted)\n The paymaster pre-pays using its deposit, and receive back a refund after the postOp method returns.\n @param userOp the user operation\n @param userOpHash hash of the user's request data.\n @param maxCost the maximum cost of this transaction (based on maximum gas and gas price from userOp)\n @return context value to send to a postOp\n  zero length to signify postOp is not required.\n @return deadline the last block timestamp this operation is valid, or zero if it is valid indefinitely.\n      Note that the validation code cannot use block.timestamp (or block.number) directly."
             },
             "functionSelector": "f465c77e",
@@ -392,43 +392,43 @@
             "kind": "function",
             "modifiers": [],
             "name": "validatePaymasterUserOp",
-            "nameLocation": "1253:23:3",
+            "nameLocation": "1253:23:16",
             "parameters": {
-              "id": 440,
+              "id": 5859,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 435,
+                  "id": 5854,
                   "mutability": "mutable",
                   "name": "userOp",
-                  "nameLocation": "1300:6:3",
+                  "nameLocation": "1300:6:16",
                   "nodeType": "VariableDeclaration",
-                  "scope": 446,
-                  "src": "1277:29:3",
+                  "scope": 5865,
+                  "src": "1277:29:16",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_UserOperation_$591_calldata_ptr",
+                    "typeIdentifier": "t_struct$_UserOperation_$6010_calldata_ptr",
                     "typeString": "struct UserOperation"
                   },
                   "typeName": {
-                    "id": 434,
+                    "id": 5853,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 433,
+                      "id": 5852,
                       "name": "UserOperation",
                       "nameLocations": [
-                        "1277:13:3"
+                        "1277:13:16"
                       ],
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 591,
-                      "src": "1277:13:3"
+                      "referencedDeclaration": 6010,
+                      "src": "1277:13:16"
                     },
-                    "referencedDeclaration": 591,
-                    "src": "1277:13:3",
+                    "referencedDeclaration": 6010,
+                    "src": "1277:13:16",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_UserOperation_$591_storage_ptr",
+                      "typeIdentifier": "t_struct$_UserOperation_$6010_storage_ptr",
                       "typeString": "struct UserOperation"
                     }
                   },
@@ -436,13 +436,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 437,
+                  "id": 5856,
                   "mutability": "mutable",
                   "name": "userOpHash",
-                  "nameLocation": "1316:10:3",
+                  "nameLocation": "1316:10:16",
                   "nodeType": "VariableDeclaration",
-                  "scope": 446,
-                  "src": "1308:18:3",
+                  "scope": 5865,
+                  "src": "1308:18:16",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -450,10 +450,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 436,
+                    "id": 5855,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1308:7:3",
+                    "src": "1308:7:16",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -463,13 +463,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 439,
+                  "id": 5858,
                   "mutability": "mutable",
                   "name": "maxCost",
-                  "nameLocation": "1336:7:3",
+                  "nameLocation": "1336:7:16",
                   "nodeType": "VariableDeclaration",
-                  "scope": 446,
-                  "src": "1328:15:3",
+                  "scope": 5865,
+                  "src": "1328:15:16",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -477,10 +477,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 438,
+                    "id": 5857,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1328:7:3",
+                    "src": "1328:7:16",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -489,21 +489,21 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1276:68:3"
+              "src": "1276:68:16"
             },
             "returnParameters": {
-              "id": 445,
+              "id": 5864,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 442,
+                  "id": 5861,
                   "mutability": "mutable",
                   "name": "context",
-                  "nameLocation": "1380:7:3",
+                  "nameLocation": "1380:7:16",
                   "nodeType": "VariableDeclaration",
-                  "scope": 446,
-                  "src": "1367:20:3",
+                  "scope": 5865,
+                  "src": "1367:20:16",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -511,10 +511,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 441,
+                    "id": 5860,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1367:5:3",
+                    "src": "1367:5:16",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -524,13 +524,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 444,
+                  "id": 5863,
                   "mutability": "mutable",
                   "name": "deadline",
-                  "nameLocation": "1397:8:3",
+                  "nameLocation": "1397:8:16",
                   "nodeType": "VariableDeclaration",
-                  "scope": 446,
-                  "src": "1389:16:3",
+                  "scope": 5865,
+                  "src": "1389:16:16",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -538,10 +538,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 443,
+                    "id": 5862,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1389:7:3",
+                    "src": "1389:7:16",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -550,22 +550,22 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1366:40:3"
+              "src": "1366:40:16"
             },
-            "scope": 462,
+            "scope": 5881,
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           },
           {
-            "id": 457,
+            "id": 5876,
             "nodeType": "FunctionDefinition",
-            "src": "2034:89:3",
+            "src": "2034:89:16",
             "nodes": [],
             "documentation": {
-              "id": 447,
+              "id": 5866,
               "nodeType": "StructuredDocumentation",
-              "src": "1413:616:3",
+              "src": "1413:616:16",
               "text": " post-operation handler.\n Must verify sender is the entryPoint\n @param mode enum with the following options:\n      opSucceeded - user operation succeeded.\n      opReverted  - user op reverted. still has to pay for gas.\n      postOpReverted - user op succeeded, but caused postOp (in mode=opSucceeded) to revert.\n                       Now this is the 2nd call, after user's op was deliberately reverted.\n @param context - the context value returned by validatePaymasterUserOp\n @param actualGasCost - actual gas used so far (without this postOp call)."
             },
             "functionSelector": "a9a23409",
@@ -573,43 +573,43 @@
             "kind": "function",
             "modifiers": [],
             "name": "postOp",
-            "nameLocation": "2043:6:3",
+            "nameLocation": "2043:6:16",
             "parameters": {
-              "id": 455,
+              "id": 5874,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 450,
+                  "id": 5869,
                   "mutability": "mutable",
                   "name": "mode",
-                  "nameLocation": "2061:4:3",
+                  "nameLocation": "2061:4:16",
                   "nodeType": "VariableDeclaration",
-                  "scope": 457,
-                  "src": "2050:15:3",
+                  "scope": 5876,
+                  "src": "2050:15:16",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_PostOpMode_$461",
+                    "typeIdentifier": "t_enum$_PostOpMode_$5880",
                     "typeString": "enum IPaymaster.PostOpMode"
                   },
                   "typeName": {
-                    "id": 449,
+                    "id": 5868,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 448,
+                      "id": 5867,
                       "name": "PostOpMode",
                       "nameLocations": [
-                        "2050:10:3"
+                        "2050:10:16"
                       ],
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 461,
-                      "src": "2050:10:3"
+                      "referencedDeclaration": 5880,
+                      "src": "2050:10:16"
                     },
-                    "referencedDeclaration": 461,
-                    "src": "2050:10:3",
+                    "referencedDeclaration": 5880,
+                    "src": "2050:10:16",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_PostOpMode_$461",
+                      "typeIdentifier": "t_enum$_PostOpMode_$5880",
                       "typeString": "enum IPaymaster.PostOpMode"
                     }
                   },
@@ -617,13 +617,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 452,
+                  "id": 5871,
                   "mutability": "mutable",
                   "name": "context",
-                  "nameLocation": "2082:7:3",
+                  "nameLocation": "2082:7:16",
                   "nodeType": "VariableDeclaration",
-                  "scope": 457,
-                  "src": "2067:22:3",
+                  "scope": 5876,
+                  "src": "2067:22:16",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
@@ -631,10 +631,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 451,
+                    "id": 5870,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2067:5:3",
+                    "src": "2067:5:16",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -644,13 +644,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 454,
+                  "id": 5873,
                   "mutability": "mutable",
                   "name": "actualGasCost",
-                  "nameLocation": "2099:13:3",
+                  "nameLocation": "2099:13:16",
                   "nodeType": "VariableDeclaration",
-                  "scope": 457,
-                  "src": "2091:21:3",
+                  "scope": 5876,
+                  "src": "2091:21:16",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -658,10 +658,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 453,
+                    "id": 5872,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2091:7:3",
+                    "src": "2091:7:16",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -670,50 +670,50 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "2049:64:3"
+              "src": "2049:64:16"
             },
             "returnParameters": {
-              "id": 456,
+              "id": 5875,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "2122:0:3"
+              "src": "2122:0:16"
             },
-            "scope": 462,
+            "scope": 5881,
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           },
           {
-            "id": 461,
+            "id": 5880,
             "nodeType": "EnumDefinition",
-            "src": "2129:268:3",
+            "src": "2129:268:16",
             "nodes": [],
             "canonicalName": "IPaymaster.PostOpMode",
             "members": [
               {
-                "id": 458,
+                "id": 5877,
                 "name": "opSucceeded",
-                "nameLocation": "2155:11:3",
+                "nameLocation": "2155:11:16",
                 "nodeType": "EnumValue",
-                "src": "2155:11:3"
+                "src": "2155:11:16"
               },
               {
-                "id": 459,
+                "id": 5878,
                 "name": "opReverted",
-                "nameLocation": "2197:10:3",
+                "nameLocation": "2197:10:16",
                 "nodeType": "EnumValue",
-                "src": "2197:10:3"
+                "src": "2197:10:16"
               },
               {
-                "id": 460,
+                "id": 5879,
                 "name": "postOpReverted",
-                "nameLocation": "2264:14:3",
+                "nameLocation": "2264:14:16",
                 "nodeType": "EnumValue",
-                "src": "2264:14:3"
+                "src": "2264:14:16"
               }
             ],
             "name": "PostOpMode",
-            "nameLocation": "2134:10:3"
+            "nameLocation": "2134:10:16"
           }
         ],
         "abstract": false,
@@ -722,22 +722,22 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "documentation": {
-          "id": 431,
+          "id": 5850,
           "nodeType": "StructuredDocumentation",
-          "src": "93:216:3",
+          "src": "93:216:16",
           "text": " the interface exposed by a paymaster contract, who agrees to pay the gas for user's operations.\n a paymaster must hold a stake to cover the required entrypoint stake and also the gas for the transaction."
         },
         "fullyImplemented": false,
         "linearizedBaseContracts": [
-          462
+          5881
         ],
         "name": "IPaymaster",
-        "nameLocation": "320:10:3",
-        "scope": 463,
+        "nameLocation": "320:10:16",
+        "scope": 5882,
         "usedErrors": []
       }
     ],
     "license": "GPL-3.0"
   },
-  "id": 3
+  "id": 16
 }

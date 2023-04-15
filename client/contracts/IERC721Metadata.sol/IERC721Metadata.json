@@ -795,7 +795,7 @@
     "id": 37105,
     "exportedSymbols": {
       "IERC165": [
-        38088
+        38135
       ],
       "IERC721": [
         36674
@@ -1083,7 +1083,7 @@
         "linearizedBaseContracts": [
           37104,
           36674,
-          38088
+          38135
         ],
         "name": "IERC721Metadata",
         "nameLocation": "307:15:49",
