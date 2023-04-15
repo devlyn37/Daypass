@@ -37,7 +37,7 @@ contract HackathonPaymaster is BasePaymaster {
         IERC721 nftContract = IERC721(nftPassAddress);
         uint256 tokenCount = nftContract.balanceOf(userOp.sender);
 
-        (address dest, uint256 value, bytes memory func) = abi.decode(userOp.callData, (address, uint256, bytes));
+        (address dest, uint256 value, bytes memory func) = abi.decode(userOp.callData[4:], (address, uint256, bytes));
         if (!_isInWhiteList(dest)) {
             return ("", 1);
         }

@@ -51,10 +51,10 @@ contract HackathonPaymasterTest is Test {
 
         entrypoint = EntryPoint(payable(0x0576a174D229E3cFA37253523E645A78A0C91B57));
         // entrypoint = new EntryPoint();
-        // hackathonPaymaster = new HackathonPaymaster(entrypoint, address(nftPass), whiteListedAddresses);
-        // hackathonPaymaster.addStake{value: 500 ether}(100000);
-        // hackathonPaymaster.deposit{value: 500 ether}();
-        hackathonPaymaster = HackathonPaymaster(payable(0x38A310a0D9a015d23B973478c1EF961C3e44Ee62));
+        hackathonPaymaster = new HackathonPaymaster(entrypoint, address(nftPass), whiteListedAddresses);
+        hackathonPaymaster.addStake{value: 500 ether}(100000);
+        hackathonPaymaster.deposit{value: 500 ether}();
+        // hackathonPaymaster = HackathonPaymaster(payable(0x38A310a0D9a015d23B973478c1EF961C3e44Ee62));
 
         //Some AA wallet
         player = new SimpleAccountNFTReceiver(entrypoint);
@@ -74,9 +74,10 @@ contract HackathonPaymasterTest is Test {
         // Some basic contract bytecode
 
         // CHANGE THIS FOR DIFF TEST
-        //You only need to change the address, value and bytes in the call
+        //You only need to change the addraess, value and bytes in the call
+        vm.deal(address(player), 1 ether);
         bytes memory callData =
-            abi.encodeWithSignature("execute(address,uint256,bytes)", address(player), 0, abi.encode());
+            abi.encodeWithSignature("execute(address,uint256,bytes)", address(player), 1, abi.encode());
         sendUserOp(callData);
     }
 
@@ -89,6 +90,8 @@ contract HackathonPaymasterTest is Test {
         // Make sure the main account has some funds
         vm.deal(address(player), 1 ether);
         sendUserOp(callData);
+        address latestNftOwner = nftPass.ownerOf(nftPass.currentTokenId());
+        assertEq(latestNftOwner, address(player));
     }
 
     function sendUserOp(bytes memory data) internal {
