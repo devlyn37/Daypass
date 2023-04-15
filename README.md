@@ -30,5 +30,6 @@ Things are a little rough around the edges right now, and very much optimized fo
 5. Send this address an NFT from the airdrop page.
 
 6. On the mint page you just connected your social wallet to, hit the mint button!
+    - You're gonna see the paymaster address appear in the input, that's a little hackathon local storage magic for the purposes of the demo
 
 7. Voila, you just created a smart account via socials, then minted an NFT, all while paying zero gas because you hold a daypass!
