@@ -154,7 +154,9 @@ const AdminDashboardPage = () => {
                       Network
                     </Text>
                   </Heading>
-                  <Select placeholder="Specify Network" size="lg" />
+                  <Select placeholder="Specify Network" size="lg" defaultValue="goerli">
+                    <option value="goerli">Goerli</option>
+                  </Select>
                 </Box>
               </Flex>
               <Heading variant="h2">
