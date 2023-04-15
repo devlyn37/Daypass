@@ -1,7 +1,4 @@
-import { ChakraProvider, Flex, Heading } from "@chakra-ui/react";
-import { Image as ChakraImage } from '@chakra-ui/image';
-import Head from 'next/head';
-
+import { ChakraProvider, Flex, Heading, Text } from "@chakra-ui/react";
 import {
   ConnectButton,
   RainbowKitProvider,
@@ -88,16 +85,6 @@ type WalletLayoutProps = {
 const WalletLayout = ({ children }: WalletLayoutProps) => {
   return (
     <WagmiConfig client={wagmiClient}>
-      <Head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Righteous&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
       <RainbowKitProvider
         appInfo={demoAppInfo}
         chains={chains}
@@ -108,24 +95,20 @@ const WalletLayout = ({ children }: WalletLayoutProps) => {
         <ChakraProvider>
           <Flex
             minH="100vh"
-            padding="1vw"
+            margin={10}
             flexDirection="column"
             alignItems="stretch"
             justifyContent="space-between"
           >
-            <Flex align="center">
-              <ChakraImage src="logo.png" alt="Your Image" boxSize="50px" marginRight="1rem" />
-              <Heading
-                fontFamily="'Righteous', sans-serif"
-                fontStyle="normal"
-                fontWeight="400"
-                fontSize="25.8683px"
-                lineHeight="101%"
-                letterSpacing="-0.022em"
-                color="#FF44EC">Space Can</Heading>
+            <Flex justifyContent="space-between" alignItems="center">
+              <Heading>Hackathon</Heading>
+              <ConnectButton />
             </Flex>
             <Flex flexGrow={1}>{children}</Flex>
             <Flex justifyContent="space-between" alignItems="center">
+              <Heading>Hackathon</Heading>
+              <Text>Hi</Text>
+              <Text>Hi</Text>
             </Flex>
           </Flex>
         </ChakraProvider>
