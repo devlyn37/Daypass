@@ -23,8 +23,9 @@ import { getHttpRpcClient } from "../../utils/getHttpRpcClient";
 // const PAYMASTER_ADDRESS = "0x380490ab3a2eefddb64d3459937baa8dadce1f36";
 // const PAYMASTER_ADDRESS = "0x78EE0c52DB08972CdC8F056B748a003B649F28AC";
 // const PAYMASTER_ADDRESS = "0x92D8FA41e2FD5A4daFb84A72CE5c63908bAB6105";
+// const PAYMASTER_ADDRESS = "0x31089cc43cB16d829262D6673c788c8Ce5F7e81d"; // paymaster with whitelisted addresses
+const PAYMASTER_ADDRESS = "0x38A310a0D9a015d23B973478c1EF961C3e44Ee62"; // paymaster with whitelisted addresses, latest version
 
-const PAYMASTER_ADDRESS = "0x31089cc43cB16d829262D6673c788c8Ce5F7e81d"; // paymaster with whitelisted addresses
 const ENTRY_POINT_ADDRESS = "0x0576a174D229E3cFA37253523E645A78A0C91B57";
 // const FREE_NFT_CONTRACT = "0xe358557b9e2a9a67318c32c09daa3cd781b1a58b"; // NFT contract that is acting as pass for paymaster
 const FREE_NFT_CONTRACT = "0x5a89d913b098c30fcb34f60382dce707177e171e"; // NFT contract that will mint to smart contract accounts

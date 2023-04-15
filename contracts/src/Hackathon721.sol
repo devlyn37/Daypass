@@ -34,7 +34,7 @@ contract Hackathon721 is ERC721Enumerable, Ownable {
         _;
     }
 
-    constructor() payable ERC721("Testing Tokens", "XMTEST") {}
+    constructor() payable ERC721("Daypass", "DPASS") {}
 
     // PUBLIC
 
