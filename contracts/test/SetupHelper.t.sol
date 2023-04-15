@@ -46,7 +46,7 @@ contract SetupHelperTest is Test {
         console.log(address(setupHelper));
 
         (Hackathon721 dayPassContract, Hackathon721 nftContract, HackathonPaymaster paymasterContract) =
-            setupHelper.setupDaypass{value: 1 ether}(entryPoint, whiteListedAddresses, false, 0);
+            setupHelper.setupDaypass{value: 1 ether}(entryPoint, whiteListedAddresses, false, 0, 0);
 
         // call should own both of the deployed contracts
         assertEq(dayPassContract.owner(), normalAddress);

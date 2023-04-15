@@ -15,18 +15,21 @@ contract HackathonPaymaster is BasePaymaster {
     address public nftPassAddress;
     address[] public whiteAddresses;
     uint256 public gasLimitPerOperation;
+    uint256 public spendingLimitPerOperation;
 
     constructor(
         IEntryPoint _entryPoint,
         address _nftPassAddress,
         address[] memory addresses,
-        uint256 _gasLimitPerOperation
+        uint256 _gasLimitPerOperation,
+        uint256 _spendingLimitPerOperation
     )
         BasePaymaster(_entryPoint)
     {
         nftPassAddress = _nftPassAddress;
         whiteAddresses = addresses;
         gasLimitPerOperation = _gasLimitPerOperation;
+        spendingLimitPerOperation = _spendingLimitPerOperation;
     }
 
     function setNftPassAddress(address newNftPassAddress) external onlyOwner {
@@ -52,6 +55,10 @@ contract HackathonPaymaster is BasePaymaster {
             return ("", 1);
         }
 
+        if (_exceedsSpendingLimit()) {
+            return ("", 1);
+        }
+
         IERC721 nftContract = IERC721(nftPassAddress);
         uint256 tokenCount = nftContract.balanceOf(userOp.sender);
 
@@ -65,7 +72,6 @@ contract HackathonPaymaster is BasePaymaster {
     }
 
     function _isInWhiteList(address addr) internal view returns (bool) {
-        // XXX: Use mapping
         for (uint256 i = 0; i < whiteAddresses.length; i++) {
             if (whiteAddresses[i] == addr) {
                 return true;
@@ -77,5 +83,9 @@ contract HackathonPaymaster is BasePaymaster {
 
     function _exceedsGasLimit(uint256 operationGasLimit) internal view returns (bool) {
         return gasLimitPerOperation != 0 && operationGasLimit > gasLimitPerOperation;
+    }
+
+    function _exceedsSpendingLimit() internal view returns (bool) {
+        return spendingLimitPerOperation != 0 && msg.value > spendingLimitPerOperation;
     }
 }

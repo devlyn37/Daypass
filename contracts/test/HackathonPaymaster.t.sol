@@ -50,7 +50,7 @@ contract HackathonPaymasterTest is Test {
         whiteListedAddresses[0] = address(randomNFT);
 
         entrypoint = EntryPoint(payable(0x0576a174D229E3cFA37253523E645A78A0C91B57));
-        hackathonPaymaster = new HackathonPaymaster(entrypoint, address(nftPass), whiteListedAddresses, 500000_00);
+        hackathonPaymaster = new HackathonPaymaster(entrypoint, address(nftPass), whiteListedAddresses, 500000_00, 0);
         hackathonPaymaster.addStake{value: 500 ether}(100000);
         hackathonPaymaster.deposit{value: 500 ether}();
 
