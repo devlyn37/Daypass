@@ -45,13 +45,23 @@ contract SetupHelperTest is Test {
         console.log("Here's the address of the deployed setup helper");
         console.log(address(setupHelper));
 
-        (Hackathon721 nftContract, HackathonPaymaster paymasterContract) =
-            setupHelper.setupDaypass{value: 1 ether}(entryPoint, whiteListedAddresses);
+        address[] memory passHolders = new address[](2);
+        passHolders[0] = address(11);
+        passHolders[1] = address(22);
+
+        (Hackathon721 dayPassContract, Hackathon721 nftContract, HackathonPaymaster paymasterContract) =
+            setupHelper.setupDaypass{value: 1 ether}(entryPoint, whiteListedAddresses, false, 0, 0, 0, passHolders);
 
         // call should own both of the deployed contracts
+        assertEq(dayPassContract.owner(), normalAddress);
+        assertEq(dayPassContract.getIsTransferable(), false);
         assertEq(nftContract.owner(), normalAddress);
+        assertEq(nftContract.getIsTransferable(), true);
         assertEq(paymasterContract.owner(), normalAddress);
         assertEq(paymasterContract.getDeposit(), 0.5 ether);
+
+        assertEq(dayPassContract.balanceOf(passHolders[0]), 1);
+        assertEq(dayPassContract.balanceOf(passHolders[1]), 1);
 
         vm.stopPrank();
     }

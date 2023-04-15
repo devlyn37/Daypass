@@ -15,7 +15,7 @@ contract Hackathon721Test is Test {
     function setUp() public {
         deployerAddress = address(1);
         vm.prank(deployerAddress);
-        nft = new Hackathon721();
+        nft = new Hackathon721("", "", true);
         contractAddress = address(nft);
         normalAddress = address(2);
 
@@ -49,6 +49,17 @@ contract Hackathon721Test is Test {
         nft.mint{value: nft.salePrice() * quantity}(quantity);
 
         assertEq(nft.balanceOf(normalAddress), quantity);
+        vm.stopPrank();
+    }
+
+    function testTokenUri() public {
+        vm.startPrank(normalAddress);
+        assertEq(nft.balanceOf(normalAddress), 0);
+
+        nft.mint{value: nft.salePrice() * 1}(1);
+        console.log(nft.tokenURI(1));
+
+        assertEq(nft.balanceOf(normalAddress), 1);
         vm.stopPrank();
     }
 

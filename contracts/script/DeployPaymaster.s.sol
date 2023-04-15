@@ -24,7 +24,7 @@ contract DeployPaymasterScript is Script {
         entrypoint = EntryPoint(payable(0x0576a174D229E3cFA37253523E645A78A0C91B57));
 
         vm.startBroadcast(deployerPrivateKey);
-        hackathonPaymaster = new HackathonPaymaster(entrypoint, address(nftPass), whiteListedAddresses);
+        hackathonPaymaster = new HackathonPaymaster(entrypoint, address(nftPass), whiteListedAddresses, 0, 0, 0);
         vm.stopBroadcast();
 
         // // If new paymaster

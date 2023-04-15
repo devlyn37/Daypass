@@ -44,14 +44,15 @@ contract HackathonPaymasterTest is Test {
         // Paymaster stakes
 
         vm.startPrank(owner);
-        nftPass = Hackathon721(payable(0xe358557b9e2a9a67318c32c09Daa3CD781b1A58b));
-        randomNFT = Hackathon721(payable(0xe358557b9e2a9a67318c32c09Daa3CD781b1A58b));
+        nftPass = new Hackathon721("", "", false);
+        randomNFT = new Hackathon721("", "", true);
+
         address[] memory whiteListedAddresses = new address[](1);
         whiteListedAddresses[0] = address(randomNFT);
 
         entrypoint = EntryPoint(payable(0x0576a174D229E3cFA37253523E645A78A0C91B57));
         // entrypoint = new EntryPoint();
-        hackathonPaymaster = new HackathonPaymaster(entrypoint, address(nftPass), whiteListedAddresses);
+        hackathonPaymaster = new HackathonPaymaster(entrypoint, address(nftPass), whiteListedAddresses, 500000_00, 0, 5000);
         hackathonPaymaster.addStake{value: 500 ether}(100000);
         hackathonPaymaster.deposit{value: 500 ether}();
         // hackathonPaymaster = HackathonPaymaster(payable(0x38A310a0D9a015d23B973478c1EF961C3e44Ee62));
@@ -69,26 +70,19 @@ contract HackathonPaymasterTest is Test {
         vm.label(address(player), "player");
     }
 
-    // function test_transfer_eth_to_contract() external {
-    //     // Create a user OP transaction to create a contract
-    //     // Some basic contract bytecode
-
-    //     // CHANGE THIS FOR DIFF TEST
-    //     //You only need to change the addraess, value and bytes in the call
-    //     vm.deal(address(player), 1 ether);
-    //     bytes memory callData =
-    //         abi.encodeWithSignature("execute(address,uint256,bytes)", address(player), 1, abi.encode());
-    //     sendUserOp(callData);
-    // }
-
     function test_mint_erc721_free_mint() external {
+        // Give a user DayPass NFT to allow randomNFT minting
+        vm.prank(address(player));
+        nftPass.mint(1);
+
         uint256 mintAmount = 1;
-        uint256 salePrice = 0 ether * mintAmount;
         bytes memory mintFunction = abi.encodeWithSignature("mint(uint256)", mintAmount);
         bytes memory callData =
-            abi.encodeWithSignature("execute(address,uint256,bytes)", address(randomNFT), salePrice, mintFunction);
+            abi.encodeWithSignature("execute(address,uint256,bytes)", address(randomNFT), 0, mintFunction);
         // Make sure the main account has some funds
         vm.deal(address(player), 1 ether);
+
+        vm.warp(4500);
         sendUserOp(callData);
         address latestNftOwner = nftPass.ownerOf(nftPass.currentTokenId());
         assertEq(latestNftOwner, address(player));
