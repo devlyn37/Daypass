@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { useAccount, useSigner } from "wagmi";
 import AdminDashboardLayout from "./AdminDashboardLayout";
 import { ethers } from "ethers";
-import { mintNFT } from "../../../clients/nft";
-import { LOCALSTORAGE_KEY_DAY_PASS_ADDRESS } from "../../../consts/localstorage";
+import { mintNFT } from "../clients/nft";
+import { LOCALSTORAGE_KEY_DAY_PASS_ADDRESS } from "../consts/localstorage";
 
 // const NFT_CONTRACT_ADDRESS = "0x5a89d913b098c30fcb34f60382dce707177e171e";
 // const NFT_CONTRACT_ADDRESS="0xf03C1cB42c64628DE52d8828D534bFa2c6Fd65Df";
@@ -14,7 +14,6 @@ const DEFAULT_NFT_CONTRACT_ADDRESS =
 // const DaypassAddress = "0xa1F209805fBc1eb69BDeE37D7Ce629e80b31B722";
 
 const AirdropPage = () => {
-  const router = useRouter();
   const { address } = useAccount();
   const [airdropAddress, setAirdropAddress] = useState("");
   const handleChange = (event: any) => setAirdropAddress(event.target.value);
@@ -64,6 +63,7 @@ const AirdropPage = () => {
             disabled={submiting}
           />
           <Button
+            isDisabled={!address}
             isLoading={submiting}
             colorScheme="blue"
             mt="16px"
