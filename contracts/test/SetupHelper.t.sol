@@ -32,7 +32,7 @@ contract SetupHelperTest is Test {
         vm.deal(normalAddress, 100 ether);
     }
 
-    function testSetup(uint256 quantity) public {
+    function testSetup() public {
         vm.startPrank(normalAddress);
 
         // Sample entry point address

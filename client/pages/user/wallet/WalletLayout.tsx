@@ -1,4 +1,4 @@
-import { ChakraProvider, Container, Flex, Heading, Text } from "@chakra-ui/react";
+import { ChakraProvider, Flex, Heading, Text } from "@chakra-ui/react";
 import {
   ConnectButton,
   RainbowKitProvider,
@@ -29,7 +29,6 @@ import {
   mainnet,
 } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
-import Fonts from "../../../fonts";
 
 const projectId = "14507bac-5aad-47ba-8b9a-66d745436246";
 
@@ -94,27 +93,19 @@ const WalletLayout = ({ children }: WalletLayoutProps) => {
         })}
       >
         <ChakraProvider>
-          <Fonts />
-          <Container>
-            <Flex
-              minH="100vh"
-              margin={10}
-              flexDirection="column"
-              alignItems="stretch"
-              justifyContent="space-between"
-            >
-              <Flex justifyContent="space-between" alignItems="center">
-                <Heading>Hackathon</Heading>
-                <ConnectButton />
-              </Flex>
-              <Flex flexGrow={1}>{children}</Flex>
-              <Flex justifyContent="space-between" alignItems="center">
-                <Heading>Hackathon</Heading>
-                <Text>Hi</Text>
-                <Text>Hi</Text>
-              </Flex>
+          <Flex
+            minH="100vh"
+            margin={10}
+            flexDirection="column"
+            alignItems="stretch"
+            justifyContent="space-between"
+          >
+            <Flex justifyContent="space-between" alignItems="center">
+              <Heading>Hackathon</Heading>
+              <ConnectButton />
             </Flex>
-          </Container>
+            <Flex flexGrow={1}>{children}</Flex>
+          </Flex>
         </ChakraProvider>
       </RainbowKitProvider>
     </WagmiConfig>
