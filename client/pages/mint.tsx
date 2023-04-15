@@ -6,14 +6,14 @@ import { getZeroDevSigner, getSocialWalletOwner } from "@zerodevapp/sdk";
 import nftArtifact from "../contracts/Hackathon721.sol/Hackathon721.json";
 
 import { GoogleSocialWallet } from "@zerodevapp/social-wallet";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Contract, providers } from "ethers";
 import { Interface } from "ethers/lib/utils.js";
 import { PaymasterAPI } from "@account-abstraction/sdk";
 import { UserOperationStruct } from "@account-abstraction/contracts";
 
-const NFT_CONTRACT_ADDRESS = "0xe358557b9e2a9a67318c32c09Daa3CD781b1A58b";
-const PAYMASTER_ADDRESS = "0x380490ab3a2eefddb64d3459937baa8dadce1f36"; // paymaster with whitelisted addresses, latest version
+const NFT_CONTRACT_ADDRESS = "0x5a89d913b098c30fcb34f60382dce707177e171e";
+const PAYMASTER_ADDRESS = "0x38A310a0D9a015d23B973478c1EF961C3e44Ee62"; // paymaster with whitelisted addresses, latest version
 class contractOnlyPaymaster extends PaymasterAPI {
   async getPaymasterAndData(
     userOp: Partial<UserOperationStruct>
@@ -27,36 +27,51 @@ class contractOnlyPaymaster extends PaymasterAPI {
 
 export default function Home() {
   const { address } = useAccount();
+  const [isLoading, setIsLoading] = useState(false);
 
   const walletTesting = async () => {
-    const socialWallet = new GoogleSocialWallet();
+    setIsLoading(true);
+    try {
+      const socialWallet = new GoogleSocialWallet();
 
-    const signer = await getZeroDevSigner({
-      projectId: process.env.NEXT_PUBLIC_ZERO_DEV_PROJECT_ID!,
-      owner: await getSocialWalletOwner(
-        process.env.NEXT_PUBLIC_ZERO_DEV_PROJECT_ID!,
-        socialWallet
-      ),
-    });
-    signer.smartAccountAPI.paymasterAPI = new contractOnlyPaymaster();
+      const signer = await getZeroDevSigner({
+        projectId: process.env.NEXT_PUBLIC_ZERO_DEV_PROJECT_ID!,
+        owner: await getSocialWalletOwner(
+          process.env.NEXT_PUBLIC_ZERO_DEV_PROJECT_ID!,
+          socialWallet
+        ),
+      });
+      signer.smartAccountAPI.paymasterAPI = new contractOnlyPaymaster();
 
-    console.log("Hey here's the signer, wtf is happening");
-    console.log(signer);
+      console.log("Hey here's the signer, wtf is happening");
+      console.log(signer);
 
-    const contract = new Contract(
-      NFT_CONTRACT_ADDRESS,
-      new Interface(nftArtifact.abi),
-      signer
-    );
+      const contract = new Contract(
+        NFT_CONTRACT_ADDRESS,
+        new Interface(nftArtifact.abi),
+        signer
+      );
 
-    const txn: providers.TransactionResponse = await contract.mint(1);
-    console.log("Here's the transaction response");
-    console.log(txn);
+      const txn: providers.TransactionResponse = await contract.mint(1);
+      console.log("Here's the transaction response");
+      console.log(txn);
 
-    const receipt = await txn.wait();
-    console.log("Here's the transaction receipt");
-    console.log(receipt);
+      const receipt = await txn.wait();
+      console.log("Here's the transaction receipt");
+      console.log(receipt);
+      setIsLoading(false);
+    } catch (e) {
+      console.log("hey there was an error");
+      console.log(e);
+      setIsLoading(false);
+    }
   };
+
+  useEffect(() => {
+    console.log(
+      `Hey, the address state is changing here's the new value ${address}`
+    );
+  }, [address]);
 
   return (
     <>
@@ -70,7 +85,7 @@ export default function Home() {
           </Head>
           <Heading>Home Page Content</Heading>
           <Button onClick={walletTesting}>
-            Mint an NFT with this account!
+            {isLoading ? "Loading" : "Mint an NFT with this account!"}
           </Button>
         </Flex>
       </WalletLayout>
