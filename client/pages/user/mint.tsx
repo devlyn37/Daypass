@@ -2,29 +2,29 @@ import {
   Button,
   Card,
   CardBody,
-  Flex,
   Heading,
   Input,
   Text,
   Image as ChakraImage,
+  Flex,
 } from "@chakra-ui/react";
 import Head from "next/head";
 import WalletLayout from "./wallet/WalletLayout";
 import { useAccount } from "wagmi";
 import { getZeroDevSigner, getSocialWalletOwner } from "@zerodevapp/sdk";
 import nftArtifact from "../../contracts/Hackathon721.sol/Hackathon721.json";
-
 import { GoogleSocialWallet } from "@zerodevapp/social-wallet";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Contract, providers } from "ethers";
 import { Interface } from "ethers/lib/utils.js";
 import { PaymasterAPI } from "@account-abstraction/sdk";
 import { UserOperationStruct } from "@account-abstraction/contracts";
-import { LOCALSTORAGE_PAYMASTER_ADDRESS } from "../../consts/localstorage";
-
 import Link from "next/link";
+import { useNetwork } from "wagmi";
+import { LOCALSTORAGE_KEY_DAY_PASS_ADDRESS, LOCALSTORAGE_PAYMASTER_ADDRESS } from "../../consts/localstorage";
+import { MUMBAI_SPACE_CAN_COLLECTION, SPACE_CAN } from "../../consts/address";
 
-const NFT_CONTRACT_ADDRESS = "0x38853627cadCB75B7537453b12bFc2AB6eE16E23";
+// const NFT_CONTRACT_ADDRESS = "0x38853627cadCB75B7537453b12bFc2AB6eE16E23";
 // const PAYMASTER_ADDRESS = "0xF66b5E3Cb034391d44E09365A2150a5E60a9c53d"; // paymaster with whitelisted addresses, latest version
 
 class contractOnlyPaymaster extends PaymasterAPI {
@@ -43,13 +43,48 @@ class contractOnlyPaymaster extends PaymasterAPI {
 }
 
 export default function Home() {
-  const { address, isConnected } = useAccount();
+  const { address } = useAccount();
+  const { chain } = useNetwork();
+
   const [isLoading, setIsLoading] = useState(false);
   const [mintingErrorMessage, setErrorMessage] = useState("");
   const [transactionHash, setTransactionHash] = useState(undefined);
 
-  const [paymasterAddress, setpaymasterAddress] = useState("");
-  const handleChange = (event: any) => setpaymasterAddress(event.target.value);
+  const [nftContractAddress, setNftContractAddress] = useState('');
+  const [paymasterAddress, setPaymasterAddress] = useState("");
+
+  const projectID = useMemo(() => {
+    switch (chain?.network) {
+      case "goerli":
+        return process.env.NEXT_PUBLIC_ZERO_DEV_PROJECT_ID;
+      case "maticmum":
+        return process.env.NEXT_PUBLIC_ZERO_DEV_PROJECT_ID_MUMBAI;
+    }
+  }, [chain?.network]);
+
+  console.log("paymasterAddress", paymasterAddress);
+
+  const loadNFTContractAddress = useCallback((chainName: string) => {
+    const mayAddress = localStorage.getItem(`${LOCALSTORAGE_KEY_DAY_PASS_ADDRESS}_${chainName}`) ?? ""
+
+    switch (chainName) {
+      case "GOERLI":
+        return mayAddress ?? SPACE_CAN;
+      case "MATICMUM":
+        return mayAddress ?? MUMBAI_SPACE_CAN_COLLECTION;
+    }
+
+    return mayAddress ?? "";
+  }, []);
+
+  useEffect(() => {
+    const chainName = (chain?.network ?? "").toUpperCase();
+
+    setNftContractAddress(loadNFTContractAddress(chainName));
+    setPaymasterAddress(localStorage.getItem(`${LOCALSTORAGE_PAYMASTER_ADDRESS}_${chainName}`) ?? "");
+  }, [chain?.network]);
+
+  const handleChange = (event: any) => setPaymasterAddress(event.target.value);
 
   const mint = async () => {
     setIsLoading(true);
@@ -58,29 +93,31 @@ export default function Home() {
       const socialWallet = new GoogleSocialWallet();
 
       const signer = await getZeroDevSigner({
-        projectId: process.env.NEXT_PUBLIC_ZERO_DEV_PROJECT_ID!,
+        projectId: projectID!,
         owner: await getSocialWalletOwner(
-          process.env.NEXT_PUBLIC_ZERO_DEV_PROJECT_ID!,
+          projectID!,
           socialWallet
         ),
       });
+
       signer.smartAccountAPI.paymasterAPI = new contractOnlyPaymaster(
         paymasterAddress
       );
 
       const contract = new Contract(
-        NFT_CONTRACT_ADDRESS,
+        nftContractAddress!,
         new Interface(nftArtifact.abi),
         signer
       );
 
       const txn: providers.TransactionResponse = await contract.mint(1);
       setTransactionHash(txn.hash as any);
+
       const receipt = await txn.wait();
-      setIsLoading(false);
     } catch (e) {
       console.log(e);
       setErrorMessage("Minting Failed. Retry");
+    } finally {
       setIsLoading(false);
     }
   };
@@ -100,7 +137,7 @@ export default function Home() {
         LOCALSTORAGE_PAYMASTER_ADDRESS
       );
       if (paymasterAddress) {
-        setpaymasterAddress(paymasterAddress);
+        setPaymasterAddress(paymasterAddress);
       }
     }
   }, []);
@@ -141,7 +178,7 @@ export default function Home() {
               <Button
                 bg="#FF44EC"
                 onClick={mint}
-                isDisabled={!isConnected}
+                isDisabled={!address}
                 width="50vw"
               >
                 {isLoading
