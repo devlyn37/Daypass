@@ -12,6 +12,7 @@ contract Hackathon721 is ERC721Enumerable, Ownable {
 
     string public uri = "https://gateway.pinata.cloud/ipfs/QmPux5QgyPHfxjuCBf1GL6bnbYRoDdzwh9UGdnz2UXx58D";
 
+    bool isTransferable;
     mapping(uint256 => uint256) public mintedAt;
 
     // ERRORS & MODIFIERS
@@ -19,6 +20,7 @@ contract Hackathon721 is ERC721Enumerable, Ownable {
     error IncorrectValue();
     error TooManyTokens();
     error WithdrawTransfer();
+    error NotTransferable();
 
     modifier isCorrectPayment(uint256 quantity) {
         if (salePrice * quantity != msg.value) {
@@ -34,7 +36,13 @@ contract Hackathon721 is ERC721Enumerable, Ownable {
         _;
     }
 
-    constructor() payable ERC721("Daypass", "DPASS") {}
+    constructor(
+        string memory name,
+        string memory symbol,
+        bool _isTransferable
+    ) payable ERC721(name, symbol) {
+        isTransferable = _isTransferable;
+    }
 
     // PUBLIC
 
@@ -93,4 +101,19 @@ contract Hackathon721 is ERC721Enumerable, Ownable {
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
         return uri;
     }
+
+    // Override
+    function _beforeTokenTransfer(
+        address from,
+        address to,
+        uint256 firstTokenId,
+        uint256 batchSize
+    ) internal override {
+        super._beforeTokenTransfer(from, to, firstTokenId, batchSize);
+
+        if (from != address(0x0) && !isTransferable) {
+            revert NotTransferable();
+        }
+    }
+
 }
