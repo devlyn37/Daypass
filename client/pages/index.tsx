@@ -17,7 +17,6 @@ const AdminDashboardPage = () => {
             <Box w="52px" h="1px" bg="#000000" mr="2" />
             <Heading variant="h1" height="30px">
               <Text
-                fontFamily="PolySans Median"
                 lineHeight="1.5"
                 fontWeight="regular"
                 fontSize="20px"
@@ -31,7 +30,6 @@ const AdminDashboardPage = () => {
           </Flex>
           <Heading variant="h2" mb="23px">
             <Text
-              fontFamily="PolySans Median"
               lineHeight="1.01"
               fontWeight="regular"
               fontSize="58px"
@@ -44,7 +42,6 @@ const AdminDashboardPage = () => {
             </Text>
           </Heading>
           <Text
-            fontFamily="PolySans Neutral"
             lineHeight="1.5"
             fontWeight="regular"
             fontSize="24px"

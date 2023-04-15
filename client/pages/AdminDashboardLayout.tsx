@@ -9,16 +9,9 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import "@rainbow-me/rainbowkit/styles.css";
 import DayPassLogo from "../components/DayPassLogo";
 
-const theme = extendTheme({
-  fonts: {
-    heading: "PolySans Median",
-    body: "PolySans Neutral",
-  },
-});
-
 const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
   return (
-    <ChakraProvider theme={theme}>
+    <ChakraProvider>
       <Flex
         marginTop="30px"
         marginLeft="70px"

@@ -1,4 +1,13 @@
-import { Button, Card, CardBody, Flex, Heading, Input, Text, Image as ChakraImage } from "@chakra-ui/react";
+import {
+  Button,
+  Card,
+  CardBody,
+  Flex,
+  Heading,
+  Input,
+  Text,
+  Image as ChakraImage,
+} from "@chakra-ui/react";
 import Head from "next/head";
 import WalletLayout from "./wallet/WalletLayout";
 import { useAccount } from "wagmi";
@@ -11,9 +20,7 @@ import { Contract, providers } from "ethers";
 import { Interface } from "ethers/lib/utils.js";
 import { PaymasterAPI } from "@account-abstraction/sdk";
 import { UserOperationStruct } from "@account-abstraction/contracts";
-import {
-  LOCALSTORAGE_PAYMASTER_ADDRESS,
-} from "../../consts/localstorage";
+import { LOCALSTORAGE_PAYMASTER_ADDRESS } from "../../consts/localstorage";
 
 import Link from "next/link";
 
@@ -36,8 +43,6 @@ class contractOnlyPaymaster extends PaymasterAPI {
 }
 
 export default function Home() {
-
-
   const { address, isConnected } = useAccount();
   const [isLoading, setIsLoading] = useState(false);
   const [mintingErrorMessage, setErrorMessage] = useState("");
@@ -87,17 +92,18 @@ export default function Home() {
     setErrorMessage("");
   }, [address]);
 
-
   useEffect(() => {
-    console.log("Every udpate rerender..")
+    console.log("Every udpate rerender..");
     if (localStorage) {
-      console.log('Local storage instance')
-      const paymasterAddress = localStorage.getItem(LOCALSTORAGE_PAYMASTER_ADDRESS);
+      console.log("Local storage instance");
+      const paymasterAddress = localStorage.getItem(
+        LOCALSTORAGE_PAYMASTER_ADDRESS
+      );
       if (paymasterAddress) {
-        setpaymasterAddress(paymasterAddress)
+        setpaymasterAddress(paymasterAddress);
       }
     }
-  }, [])
+  }, []);
   return (
     <>
       <WalletLayout>
@@ -116,30 +122,38 @@ export default function Home() {
           <Flex justifyContent="center" alignItems="center" flexDirection="row">
             <Flex flexDirection="column" mr="25px">
               <Heading color="#FFFFFF">Space Can NFT Collection</Heading>
-              <Text color="#FFFFFF" fontSize='md' width="50vw">
-                Space Cans is an NFT collection that features unique and playful 3D illustrations of soda cans floating in outer space. Each can has its own distinct personality and is ready to conquer the universe.
+              <Text color="#FFFFFF" fontSize="md" width="50vw">
+                Space Cans is an NFT collection that features unique and playful
+                3D illustrations of soda cans floating in outer space. Each can
+                has its own distinct personality and is ready to conquer the
+                universe.
               </Text>
               <Input
                 value={paymasterAddress}
                 onChange={handleChange}
                 placeholder="Paymaster Address"
-                color='#FFFFFF'
-                _placeholder={{ color: 'inherit', opacity: 1 }}
+                color="#FFFFFF"
+                _placeholder={{ color: "inherit", opacity: 1 }}
                 mt="28px"
                 mb="24px"
-                style={{ zIndex: 2, width: '50vw' }}
+                style={{ zIndex: 2, width: "50vw" }}
               />
-              <Button bg="#FF44EC" onClick={mint} isDisabled={!isConnected} width="50vw">
+              <Button
+                bg="#FF44EC"
+                onClick={mint}
+                isDisabled={!isConnected}
+                width="50vw"
+              >
                 {isLoading
                   ? "Minting in progress..."
                   : mintingErrorMessage !== ""
-                    ? mintingErrorMessage
-                    : "Mint NFT"}
+                  ? mintingErrorMessage
+                  : "Mint NFT"}
               </Button>
             </Flex>
             <Flex flexDirection="column">
               <Card>
-                <ChakraImage src="space-can.png" width="20vw"></ChakraImage>
+                <ChakraImage src="/space-can.png" width="20vw"></ChakraImage>
               </Card>
             </Flex>
           </Flex>

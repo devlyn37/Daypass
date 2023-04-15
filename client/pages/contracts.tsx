@@ -152,7 +152,6 @@ const AdminDashboardPage = () => {
                 >
                   <Heading variant="h1">
                     <Text
-                      fontFamily="PolySans Median"
                       lineHeight="1.5"
                       fontWeight="regular"
                       fontSize="24px"
@@ -169,7 +168,6 @@ const AdminDashboardPage = () => {
                   >
                     <Circle size="28px" background="#0075FF">
                       <Text
-                        fontFamily="PolySans Neutral"
                         lineHeight="1.5"
                         fontWeight="regular"
                         fontSize="14px"
@@ -180,7 +178,6 @@ const AdminDashboardPage = () => {
                       </Text>
                     </Circle>
                     <Text
-                      fontFamily="PolySans Neutral"
                       lineHeight="1.5"
                       fontWeight="regular"
                       fontSize="14px"
@@ -192,7 +189,6 @@ const AdminDashboardPage = () => {
 
                     <Box w="72px" h="1px" bg="#E2E8F0"></Box>
                     <Text
-                      fontFamily="PolySans Neutral"
                       lineHeight="1.5"
                       fontWeight="regular"
                       fontSize="14px"
@@ -203,7 +199,6 @@ const AdminDashboardPage = () => {
                     </Text>
                     <Circle size="28px" background="#A0AEC0">
                       <Text
-                        fontFamily="PolySans Neutral"
                         lineHeight="1.5"
                         fontWeight="regular"
                         fontSize="14px"
@@ -219,7 +214,6 @@ const AdminDashboardPage = () => {
                   <Box>
                     <Heading variant="h2">
                       <Text
-                        fontFamily="PolySans Median"
                         lineHeight="1.5"
                         fontWeight="regular"
                         fontSize="18px"
@@ -243,7 +237,6 @@ const AdminDashboardPage = () => {
                   <Box w="320px" pl="5">
                     <Heading variant="h2">
                       <Text
-                        fontFamily="PolySans Median"
                         lineHeight="1.5"
                         fontWeight="regular"
                         fontSize="18px"
@@ -268,7 +261,6 @@ const AdminDashboardPage = () => {
                 </Flex>
                 <Heading variant="h2">
                   <Text
-                    fontFamily="PolySans Median"
                     lineHeight="1.5"
                     fontWeight="regular"
                     fontSize="18px"
@@ -280,7 +272,6 @@ const AdminDashboardPage = () => {
                   </Text>
                 </Heading>
                 <Text
-                  fontFamily="PolySans Neutral"
                   lineHeight="1.5"
                   fontWeight="regular"
                   fontSize="16px"
@@ -305,20 +296,12 @@ const AdminDashboardPage = () => {
                     py="4"
                   >
                     <Heading variant="h3" mb="1">
-                      <Text
-                        fontFamily="PolySans Median"
-                        lineHeight="1.5"
-                        fontSize="16px"
-                      >
+                      <Text lineHeight="1.5" fontSize="16px">
                         Type
                       </Text>
                     </Heading>
                     <Heading variant="h3" w="50%">
-                      <Text
-                        fontFamily="PolySans Median"
-                        lineHeight="1.5"
-                        fontSize="16px"
-                      >
+                      <Text lineHeight="1.5" fontSize="16px">
                         Action
                       </Text>
                     </Heading>
@@ -332,16 +315,11 @@ const AdminDashboardPage = () => {
                   >
                     <Box>
                       <Heading variant="h3" mb="1">
-                        <Text
-                          fontFamily="PolySans Neutral"
-                          lineHeight="1.5"
-                          fontSize="16px"
-                        >
+                        <Text lineHeight="1.5" fontSize="16px">
                           Allow to transfer
                         </Text>
                       </Heading>
                       <Text
-                        fontFamily="PolySans Neutral"
                         lineHeight="1.5"
                         fontWeight="regular"
                         fontSize="16px"
@@ -357,7 +335,6 @@ const AdminDashboardPage = () => {
                       w="50%"
                     >
                       <Text
-                        fontFamily="PolySans Neutral"
                         lineHeight="1.5"
                         fontWeight="regular"
                         fontSize="16px"
@@ -371,7 +348,6 @@ const AdminDashboardPage = () => {
                         {...register("enableTransfer")}
                       />
                       <Text
-                        fontFamily="PolySans Neutral"
                         lineHeight="1.5"
                         fontWeight="regular"
                         fontSize="16px"
@@ -392,16 +368,11 @@ const AdminDashboardPage = () => {
                   >
                     <Box>
                       <Heading variant="h3" mb="1">
-                        <Text
-                          fontFamily="PolySans Neutral"
-                          lineHeight="1.5"
-                          fontSize="16px"
-                        >
+                        <Text lineHeight="1.5" fontSize="16px">
                           Allow to trade
                         </Text>
                       </Heading>
                       <Text
-                        fontFamily="PolySans Neutral"
                         lineHeight="1.5"
                         fontWeight="regular"
                         fontSize="16px"
@@ -417,7 +388,6 @@ const AdminDashboardPage = () => {
                       w="50%"
                     >
                       <Text
-                        fontFamily="PolySans Neutral"
                         lineHeight="1.5"
                         fontWeight="regular"
                         fontSize="16px"
@@ -431,7 +401,6 @@ const AdminDashboardPage = () => {
                         {...register("enableTrade")}
                       />
                       <Text
-                        fontFamily="PolySans Neutral"
                         lineHeight="1.5"
                         fontWeight="regular"
                         fontSize="16px"
@@ -452,16 +421,11 @@ const AdminDashboardPage = () => {
                   >
                     <Box w="50%" pr="2">
                       <Heading variant="h3" mb="1">
-                        <Text
-                          fontFamily="PolySans Neutral"
-                          lineHeight="1.5"
-                          fontSize="16px"
-                        >
+                        <Text lineHeight="1.5" fontSize="16px">
                           Gas limit
                         </Text>
                       </Heading>
                       <Text
-                        fontFamily="PolySans Neutral"
                         lineHeight="1.5"
                         fontWeight="regular"
                         fontSize="16px"
@@ -481,7 +445,6 @@ const AdminDashboardPage = () => {
                       <Box w="40%">
                         <Stack direction="row" justify="left" align="center">
                           <Text
-                            fontFamily="PolySans Neutral"
                             lineHeight="1.5"
                             fontWeight="regular"
                             fontSize="16px"
@@ -495,7 +458,6 @@ const AdminDashboardPage = () => {
                             {...register("enableGasLimit")}
                           />
                           <Text
-                            fontFamily="PolySans Neutral"
                             lineHeight="1.5"
                             fontWeight="regular"
                             fontSize="16px"
@@ -534,16 +496,11 @@ const AdminDashboardPage = () => {
                   >
                     <Box w="50%" pr="2">
                       <Heading variant="h3" mb="1">
-                        <Text
-                          fontFamily="PolySans Neutral"
-                          lineHeight="1.5"
-                          fontSize="16px"
-                        >
+                        <Text lineHeight="1.5" fontSize="16px">
                           Spending limit
                         </Text>
                       </Heading>
                       <Text
-                        fontFamily="PolySans Neutral"
                         lineHeight="1.5"
                         fontWeight="regular"
                         fontSize="16px"
@@ -562,7 +519,6 @@ const AdminDashboardPage = () => {
                       <Box w="40%">
                         <Stack direction="row" justify="left" align="center">
                           <Text
-                            fontFamily="PolySans Neutral"
                             lineHeight="1.5"
                             fontWeight="regular"
                             fontSize="16px"
@@ -576,7 +532,6 @@ const AdminDashboardPage = () => {
                             {...register("enableSpendingLimit")}
                           />
                           <Text
-                            fontFamily="PolySans Neutral"
                             lineHeight="1.5"
                             fontWeight="regular"
                             fontSize="16px"
@@ -615,16 +570,11 @@ const AdminDashboardPage = () => {
                   >
                     <Box w="50%" pr="2">
                       <Heading variant="h3" mb="1">
-                        <Text
-                          fontFamily="PolySans Neutral"
-                          lineHeight="1.5"
-                          fontSize="16px"
-                        >
+                        <Text lineHeight="1.5" fontSize="16px">
                           Time limit
                         </Text>
                       </Heading>
                       <Text
-                        fontFamily="PolySans Neutral"
                         lineHeight="1.5"
                         fontWeight="regular"
                         fontSize="16px"
@@ -642,7 +592,6 @@ const AdminDashboardPage = () => {
                       <Box w="40%">
                         <Stack direction="row" justify="left" align="center">
                           <Text
-                            fontFamily="PolySans Neutral"
                             lineHeight="1.5"
                             fontWeight="regular"
                             fontSize="16px"
@@ -656,7 +605,6 @@ const AdminDashboardPage = () => {
                             {...register("enableTimeLimit")}
                           />
                           <Text
-                            fontFamily="PolySans Neutral"
                             lineHeight="1.5"
                             fontWeight="regular"
                             fontSize="16px"
@@ -672,7 +620,6 @@ const AdminDashboardPage = () => {
                           <Stack direction="row">
                             <Radio value="week" {...register("timeLimit")}>
                               <Text
-                                fontFamily="PolySans Neutral"
                                 lineHeight="1.5"
                                 fontWeight="regular"
                                 fontSize="14px"
@@ -684,7 +631,6 @@ const AdminDashboardPage = () => {
                             </Radio>
                             <Radio value="month" {...register("timeLimit")}>
                               <Text
-                                fontFamily="PolySans Neutral"
                                 lineHeight="1.5"
                                 fontWeight="regular"
                                 fontSize="14px"
@@ -696,7 +642,6 @@ const AdminDashboardPage = () => {
                             </Radio>
                             <Radio value="3_months" {...register("timeLimit")}>
                               <Text
-                                fontFamily="PolySans Neutral"
                                 lineHeight="1.5"
                                 fontWeight="regular"
                                 fontSize="14px"

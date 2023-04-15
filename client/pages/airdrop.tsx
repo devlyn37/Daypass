@@ -45,7 +45,6 @@ const AirdropPage = () => {
         >
           <Heading variant="h1">
             <Text
-              fontFamily="PolySans Median"
               lineHeight="1.5"
               fontWeight="regular"
               fontSize="24px"

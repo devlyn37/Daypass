@@ -2880,8 +2880,8 @@
       }
     },
     "script/DeployPaymaster.s.sol": {
-      "lastModificationDate": 1681551705792,
-      "contentHash": "577f21b64a7029eb2aeb9412f077a04b",
+      "lastModificationDate": 1681581521002,
+      "contentHash": "df4b6d515787fdcf194e35704f285d51",
       "sourceName": "script/DeployPaymaster.s.sol",
       "solcConfig": {
         "settings": {
@@ -2966,6 +2966,183 @@
       "artifacts": {
         "DeployPaymasterScript": {
           "0.8.19+commit.7dd6d404.Darwin.appleclang": "DeployPaymaster.s.sol/DeployPaymasterScript.json"
+        }
+      }
+    },
+    "script/DeployPaymasterByHelper.s.sol": {
+      "lastModificationDate": 1681581521002,
+      "contentHash": "b94e4d688fe45484415b98746a8db7c9",
+      "sourceName": "script/DeployPaymasterByHelper.s.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "lib/account-abstraction/contracts/core/BaseAccount.sol",
+        "lib/account-abstraction/contracts/core/BasePaymaster.sol",
+        "lib/account-abstraction/contracts/interfaces/IAccount.sol",
+        "lib/account-abstraction/contracts/interfaces/IAggregator.sol",
+        "lib/account-abstraction/contracts/interfaces/IEntryPoint.sol",
+        "lib/account-abstraction/contracts/interfaces/IPaymaster.sol",
+        "lib/account-abstraction/contracts/interfaces/IStakeManager.sol",
+        "lib/account-abstraction/contracts/interfaces/UserOperation.sol",
+        "lib/account-abstraction/contracts/samples/SimpleAccount.sol",
+        "lib/forge-std/src/Base.sol",
+        "lib/forge-std/src/Script.sol",
+        "lib/forge-std/src/StdChains.sol",
+        "lib/forge-std/src/StdCheats.sol",
+        "lib/forge-std/src/StdJson.sol",
+        "lib/forge-std/src/StdMath.sol",
+        "lib/forge-std/src/StdStorage.sol",
+        "lib/forge-std/src/StdUtils.sol",
+        "lib/forge-std/src/Vm.sol",
+        "lib/forge-std/src/console.sol",
+        "lib/forge-std/src/console2.sol",
+        "lib/forge-std/src/interfaces/IMulticall3.sol",
+        "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
+        "lib/openzeppelin-contracts/contracts/interfaces/draft-IERC1822.sol",
+        "lib/openzeppelin-contracts/contracts/proxy/ERC1967/ERC1967Upgrade.sol",
+        "lib/openzeppelin-contracts/contracts/proxy/beacon/IBeacon.sol",
+        "lib/openzeppelin-contracts/contracts/proxy/utils/Initializable.sol",
+        "lib/openzeppelin-contracts/contracts/proxy/utils/UUPSUpgradeable.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/IERC721Receiver.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721Enumerable.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/IERC721Enumerable.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/IERC721Metadata.sol",
+        "lib/openzeppelin-contracts/contracts/utils/Address.sol",
+        "lib/openzeppelin-contracts/contracts/utils/Base64.sol",
+        "lib/openzeppelin-contracts/contracts/utils/Context.sol",
+        "lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol",
+        "lib/openzeppelin-contracts/contracts/utils/Strings.sol",
+        "lib/openzeppelin-contracts/contracts/utils/cryptography/ECDSA.sol",
+        "lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol",
+        "lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol",
+        "lib/openzeppelin-contracts/contracts/utils/math/Math.sol",
+        "src/Hackathon721.sol",
+        "src/HackathonPaymaster.sol",
+        "src/SetupHelper.sol"
+      ],
+      "versionRequirement": "^0.8.19",
+      "artifacts": {
+        "DeployPaymasterByHelperScript": {
+          "0.8.19+commit.7dd6d404.Darwin.appleclang": "DeployPaymasterByHelper.s.sol/DeployPaymasterByHelperScript.json"
+        }
+      }
+    },
+    "script/DeploySetupHelper.sol": {
+      "lastModificationDate": 1681581521002,
+      "contentHash": "2d93edb4e993ce9a03e46121a325c837",
+      "sourceName": "script/DeploySetupHelper.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "lib/account-abstraction/contracts/core/BaseAccount.sol",
+        "lib/account-abstraction/contracts/core/BasePaymaster.sol",
+        "lib/account-abstraction/contracts/core/EntryPoint.sol",
+        "lib/account-abstraction/contracts/core/Helpers.sol",
+        "lib/account-abstraction/contracts/core/SenderCreator.sol",
+        "lib/account-abstraction/contracts/core/StakeManager.sol",
+        "lib/account-abstraction/contracts/interfaces/IAccount.sol",
+        "lib/account-abstraction/contracts/interfaces/IAggregator.sol",
+        "lib/account-abstraction/contracts/interfaces/IEntryPoint.sol",
+        "lib/account-abstraction/contracts/interfaces/IPaymaster.sol",
+        "lib/account-abstraction/contracts/interfaces/IStakeManager.sol",
+        "lib/account-abstraction/contracts/interfaces/UserOperation.sol",
+        "lib/account-abstraction/contracts/samples/SimpleAccount.sol",
+        "lib/account-abstraction/contracts/utils/Exec.sol",
+        "lib/forge-std/src/Base.sol",
+        "lib/forge-std/src/Script.sol",
+        "lib/forge-std/src/StdChains.sol",
+        "lib/forge-std/src/StdCheats.sol",
+        "lib/forge-std/src/StdJson.sol",
+        "lib/forge-std/src/StdMath.sol",
+        "lib/forge-std/src/StdStorage.sol",
+        "lib/forge-std/src/StdUtils.sol",
+        "lib/forge-std/src/Vm.sol",
+        "lib/forge-std/src/console.sol",
+        "lib/forge-std/src/console2.sol",
+        "lib/forge-std/src/interfaces/IMulticall3.sol",
+        "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
+        "lib/openzeppelin-contracts/contracts/interfaces/draft-IERC1822.sol",
+        "lib/openzeppelin-contracts/contracts/proxy/ERC1967/ERC1967Upgrade.sol",
+        "lib/openzeppelin-contracts/contracts/proxy/beacon/IBeacon.sol",
+        "lib/openzeppelin-contracts/contracts/proxy/utils/Initializable.sol",
+        "lib/openzeppelin-contracts/contracts/proxy/utils/UUPSUpgradeable.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/IERC721Receiver.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721Enumerable.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/IERC721Enumerable.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/IERC721Metadata.sol",
+        "lib/openzeppelin-contracts/contracts/utils/Address.sol",
+        "lib/openzeppelin-contracts/contracts/utils/Base64.sol",
+        "lib/openzeppelin-contracts/contracts/utils/Context.sol",
+        "lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol",
+        "lib/openzeppelin-contracts/contracts/utils/Strings.sol",
+        "lib/openzeppelin-contracts/contracts/utils/cryptography/ECDSA.sol",
+        "lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol",
+        "lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol",
+        "lib/openzeppelin-contracts/contracts/utils/math/Math.sol",
+        "src/Hackathon721.sol",
+        "src/HackathonPaymaster.sol",
+        "src/SetupHelper.sol"
+      ],
+      "versionRequirement": "^0.8.19",
+      "artifacts": {
+        "DeploySetupHelperScript": {
+          "0.8.19+commit.7dd6d404.Darwin.appleclang": "DeploySetupHelper.sol/DeploySetupHelperScript.json"
         }
       }
     },
@@ -3138,7 +3315,7 @@
       }
     },
     "script/SetupDaypass.s.sol": {
-      "lastModificationDate": 1681564290130,
+      "lastModificationDate": 1681581521002,
       "contentHash": "6d3f4843f5d05ceefa3e28435f7c221a",
       "sourceName": "script/SetupDaypass.s.sol",
       "solcConfig": {
@@ -3328,8 +3505,8 @@
       }
     },
     "src/HackathonPaymaster.sol": {
-      "lastModificationDate": 1681565882434,
-      "contentHash": "15334c31c91e6aa981f5a082cdcdc74d",
+      "lastModificationDate": 1681587677330,
+      "contentHash": "9101561bf6c7af4a7f4cfc5c185350ea",
       "sourceName": "src/HackathonPaymaster.sol",
       "solcConfig": {
         "settings": {
@@ -3390,7 +3567,7 @@
       }
     },
     "src/SetupHelper.sol": {
-      "lastModificationDate": 1681563343946,
+      "lastModificationDate": 1681581521003,
       "contentHash": "123a3c28a3d4b383cbf4497d8c734ff1",
       "sourceName": "src/SetupHelper.sol",
       "solcConfig": {
@@ -3588,7 +3765,7 @@
       }
     },
     "test/HackathonPaymaster.t.sol": {
-      "lastModificationDate": 1681559912665,
+      "lastModificationDate": 1681581521003,
       "contentHash": "9b71f239dda2416e3ce88e751b62822d",
       "sourceName": "test/HackathonPaymaster.t.sol",
       "solcConfig": {
@@ -3694,7 +3871,7 @@
       }
     },
     "test/SetupHelper.t.sol": {
-      "lastModificationDate": 1681563223391,
+      "lastModificationDate": 1681581521004,
       "contentHash": "3b64f3601c20aac0c1c83e5fb2353268",
       "sourceName": "test/SetupHelper.t.sol",
       "solcConfig": {

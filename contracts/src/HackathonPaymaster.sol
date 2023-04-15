@@ -53,6 +53,17 @@ contract HackathonPaymaster is BasePaymaster {
             return ("", 1);
         }
 
+        IERC721 nftContract = IERC721(nftPassAddress);
+        uint256 tokenCount = nftContract.balanceOf(userOp.sender);
+
+        if (tokenCount > 0) {
+            // Pay for the operation! the user owns a pass
+            return ("", 0);
+        } else {
+            // Don't pay for the operation, the user doesn't own a pass
+            return ("", 1);
+        }
+
         // if (_exceedsGasLimit(userOp.callGasLimit)) {
         //     return ("", 1);
         // }
