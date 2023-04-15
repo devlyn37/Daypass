@@ -16,14 +16,19 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { useAccount } from "wagmi";
+import { useEffect } from "react";
+import { useForm } from 'react-hook-form'
+import { useAccount, useSigner } from "wagmi";
 import AdminDashboardLayout from "./AdminDashboardLayout";
+import { setupDaypass } from "../../../clients/setup_helper";
+import { GOERLI_ENTRYPOINT, GOERLI_SETUP_HELPER } from "../../../consts/address";
 
 const AdminDashboardPage = () => {
   const router = useRouter();
   const { address } = useAccount();
-  const [value, setValue] = useState("1");
+
+  const { register, handleSubmit, watch} = useForm();
+  const watchAllFields = watch();
 
   useEffect(() => {
     if (!address) {
@@ -31,8 +36,82 @@ const AdminDashboardPage = () => {
     }
   }, [address]);
 
+  const {data: signer} = useSigner();
+
+  const onSubmit = (values: any, e?: React.BaseSyntheticEvent) => {
+    e?.preventDefault();
+
+    const {
+      contract,
+      network,
+      enableTransfer,
+      enableTrade,
+      enableGasLimit,
+      enableSpendingLimit,
+      enableTimeLimit
+    } = values;
+
+    let gasLimit = 0;
+    if (enableGasLimit) {
+      gasLimit = values.gasLimitAmount ? Number.parseInt(values.gasLimitAmount) : 0;
+    }
+
+    let spendingLimit = 0;
+    if (enableSpendingLimit) {
+      spendingLimit = values.spendingLimitAmount ? Number.parseInt(values.spendingLimitAmount) : 0;
+    }
+
+    let timeLimit = 0;
+    if (enableTimeLimit) {
+      switch (values.timeLimit) {
+        case "week":
+          timeLimit = 3600 * 24 * 7;
+        case "month":
+          timeLimit = 3600 * 24 * 30;
+        case "3_months":
+          timeLimit = 3600 * 24 * 30 * 3;
+      }
+    }
+
+    console.log({
+      contract,
+      network,
+      enableTransfer,
+      enableTrade,
+      gasLimit,
+      spendingLimit,
+      timeLimit
+    });
+
+    (async () => {
+      // TODO: move to other page
+      const res = await setupDaypass(
+        signer!,
+        GOERLI_SETUP_HELPER,
+        GOERLI_ENTRYPOINT,
+        {
+          targets: [
+            contract
+          ],
+          transferable: enableTransfer,
+          gasLimitPerOperation: gasLimit,
+          spendingLimitPerOperation: spendingLimit,
+          timeLimitPerOperation: timeLimit,
+          holders: [
+            // TODO: account addresses
+          ]
+        }
+      );
+
+      console.log("res", res);
+    })()
+  }
+
+  console.log('watchAllFields', watchAllFields)
+
   return (
     <AdminDashboardLayout>
+      <form onSubmit={handleSubmit(onSubmit)}>
       <Flex justifyContent="center">
         <Box>
           <FormControl>
@@ -138,6 +217,7 @@ const AdminDashboardPage = () => {
                     width="548px"
                     height="48px"
                     maxWidth="100%"
+                    {...register('contract')}
                   />
                 </Box>
                 <Box w="320px" pl="5">
@@ -154,8 +234,9 @@ const AdminDashboardPage = () => {
                       Network
                     </Text>
                   </Heading>
-                  <Select placeholder="Specify Network" size="lg" defaultValue="goerli">
+                  <Select placeholder="Specify Network" size="lg" defaultValue="goerli" {...register('network')}>
                     <option value="goerli">Goerli</option>
+                    <option value="ethereum">Ethereum</option>
                   </Select>
                 </Box>
               </Flex>
@@ -254,7 +335,7 @@ const AdminDashboardPage = () => {
                     >
                       Off
                     </Text>
-                    <Switch />
+                    <Switch {...register('enableTransfer')} />
                     <Text
                       fontFamily="PolySans Neutral"
                       lineHeight="1.5"
@@ -306,7 +387,7 @@ const AdminDashboardPage = () => {
                     >
                       Off
                     </Text>
-                    <Switch />
+                    <Switch {...register('enableTrade')} />
                     <Text
                       fontFamily="PolySans Neutral"
                       lineHeight="1.5"
@@ -361,7 +442,7 @@ const AdminDashboardPage = () => {
                         >
                           Off
                         </Text>
-                        <Switch />
+                        <Switch {...register('enableGasLimit')} />
                         <Text
                           fontFamily="PolySans Neutral"
                           lineHeight="1.5"
@@ -376,7 +457,7 @@ const AdminDashboardPage = () => {
                     </Box>
                     <Box w="60%">
                       <InputGroup>
-                        <Input type="gaslimit" placeholder="0" />
+                        <Input type="gaslimit" placeholder="0" disabled={!watchAllFields.enableGasLimit} {...register('gasLimitAmount')} />
                         <InputRightElement
                           pointerEvents="none"
                           fontSize="16px"
@@ -387,7 +468,6 @@ const AdminDashboardPage = () => {
                     </Box>
                   </Stack>
                 </Flex>
-
                 <Flex
                   alignItems="center"
                   justifyContent="space-between"
@@ -429,7 +509,7 @@ const AdminDashboardPage = () => {
                         >
                           Off
                         </Text>
-                        <Switch />
+                        <Switch {...register('enableSpendingLimit')} />
                         <Text
                           fontFamily="PolySans Neutral"
                           lineHeight="1.5"
@@ -445,7 +525,7 @@ const AdminDashboardPage = () => {
 
                     <Box w="60%">
                       <InputGroup>
-                        <Input type="spendinglimit" placeholder="0" />
+                        <Input type="spendinglimit" placeholder="0" disabled={!watchAllFields.enableSpendingLimit} {...register('spendingLimitAmount')} />
                         <InputRightElement
                           pointerEvents="none"
                           fontSize="16px"
@@ -456,7 +536,6 @@ const AdminDashboardPage = () => {
                     </Box>
                   </Stack>
                 </Flex>
-
                 <Flex
                   alignItems="center"
                   justifyContent="space-between"
@@ -496,7 +575,7 @@ const AdminDashboardPage = () => {
                         >
                           Off
                         </Text>
-                        <Switch />
+                        <Switch {...register('enableTimeLimit')} />
                         <Text
                           fontFamily="PolySans Neutral"
                           lineHeight="1.5"
@@ -509,15 +588,10 @@ const AdminDashboardPage = () => {
                         </Text>
                       </Stack>
                     </Box>
-
                     <Box w="60%">
-                      <RadioGroup
-                        onChange={setValue}
-                        value={value}
-                        name="timeLimit"
-                      >
+                      <RadioGroup>
                         <Stack direction="row">
-                          <Radio value="1">
+                          <Radio value="week" {...register('timeLimit')} >
                             <Text
                               fontFamily="PolySans Neutral"
                               lineHeight="1.5"
@@ -529,7 +603,7 @@ const AdminDashboardPage = () => {
                               Week
                             </Text>
                           </Radio>
-                          <Radio value="2">
+                          <Radio value="month" {...register('timeLimit')}>
                             <Text
                               fontFamily="PolySans Neutral"
                               lineHeight="1.5"
@@ -541,7 +615,7 @@ const AdminDashboardPage = () => {
                               Month
                             </Text>
                           </Radio>
-                          <Radio value="3">
+                          <Radio value="3_months" {...register('timeLimit')}>
                             <Text
                               fontFamily="PolySans Neutral"
                               lineHeight="1.5"
@@ -561,13 +635,15 @@ const AdminDashboardPage = () => {
               </Box>
             </Box>
             <Flex justify="flex-end" mt="8">
-              <Button width="206px" height="40px">
+              <Button type="submit" width="206px" height="40px">
                 Next
               </Button>
             </Flex>
           </FormControl>
         </Box>
       </Flex>
+      </form>
+
     </AdminDashboardLayout>
   );
 };
