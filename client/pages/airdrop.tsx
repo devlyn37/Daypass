@@ -14,7 +14,6 @@ const DEFAULT_NFT_CONTRACT_ADDRESS =
 // const DaypassAddress = "0xa1F209805fBc1eb69BDeE37D7Ce629e80b31B722";
 
 const AirdropPage = () => {
-  const router = useRouter();
   const { address } = useAccount();
   const [airdropAddress, setAirdropAddress] = useState("");
   const handleChange = (event: any) => setAirdropAddress(event.target.value);
@@ -64,6 +63,7 @@ const AirdropPage = () => {
             disabled={submiting}
           />
           <Button
+            isDisabled={!address}
             isLoading={submiting}
             colorScheme="blue"
             mt="16px"

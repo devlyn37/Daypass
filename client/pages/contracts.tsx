@@ -719,6 +719,7 @@ const AdminDashboardPage = () => {
                   width="206px"
                   height="40px"
                   isLoading={submitting}
+                  isDisabled={!address}
                 >
                   Next
                 </Button>
