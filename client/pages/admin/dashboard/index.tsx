@@ -1,9 +1,19 @@
 import { Stack, Text } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { useAccount } from "wagmi";
 import AdminDashboardLayout from "./AdminDashboardLayout";
 
 const AdminDashboardPage = () => {
   const { address } = useAccount();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (address) {
+      router.push("/admin/dashboard/contracts");
+    }
+  }, [address]);
+
   return (
     <AdminDashboardLayout>
       <Stack justify="flex-start" align="flex-start" spacing="9px">
