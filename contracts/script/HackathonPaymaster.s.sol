@@ -6,7 +6,7 @@ import "../src/HackathonPaymaster.sol";
 
 contract MyScript is Script {
     function run() external {
-        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+        uint256 deployerPrivateKey = vm.envUint("OWNER_PRIVATE_KEY");
         vm.startBroadcast(deployerPrivateKey);
 
         // Sample entry point address, replace with the actual address
