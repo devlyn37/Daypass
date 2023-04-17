@@ -4,6 +4,8 @@ Send an NFT and automatically cover the recipients gas! Daypass allows the distr
 
 Here's an example of a daypass NFT: [Example Daypass NFT on OpenSea Testnet](https://testnets.opensea.io/assets/goerli/0x9be69e0c05ec9e9deb4ea16de4fc8e08a500f198/1)
 
+We build this for ETHTokyo!
+
 ## How to use the Demo
 
 Things are a little rough around the edges right now, and very much optimized for the happy path XD. Here are the steps:
