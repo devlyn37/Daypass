@@ -2653,49 +2653,6 @@
         }
       }
     },
-    "lib/solmate/src/tokens/ERC1155.sol": {
-      "lastModificationDate": 1680475687605,
-      "contentHash": "558676409e429f6c4f2deef39106e3c0",
-      "sourceName": "lib/solmate/src/tokens/ERC1155.sol",
-      "solcConfig": {
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "metadata": {
-            "bytecodeHash": "ipfs",
-            "appendCBOR": true
-          },
-          "outputSelection": {
-            "*": {
-              "": [
-                "ast"
-              ],
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ]
-            }
-          },
-          "evmVersion": "london",
-          "libraries": {}
-        }
-      },
-      "imports": [],
-      "versionRequirement": ">=0.8.0",
-      "artifacts": {
-        "ERC1155": {
-          "0.8.19+commit.7dd6d404.Darwin.appleclang": "ERC1155.sol/ERC1155.json"
-        },
-        "ERC1155TokenReceiver": {
-          "0.8.19+commit.7dd6d404.Darwin.appleclang": "ERC1155.sol/ERC1155TokenReceiver.json"
-        }
-      }
-    },
     "script/AirdropNFTScript.s.sol": {
       "lastModificationDate": 1681536300808,
       "contentHash": "e930b3628dfd9e547f8fb052d0869a82",
@@ -3405,50 +3362,6 @@
         }
       }
     },
-    "src/Hackathon1155.sol": {
-      "lastModificationDate": 1680477528250,
-      "contentHash": "053d2c47f5c5823bb55944f0f0837a51",
-      "sourceName": "src/Hackathon1155.sol",
-      "solcConfig": {
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "metadata": {
-            "bytecodeHash": "ipfs",
-            "appendCBOR": true
-          },
-          "outputSelection": {
-            "*": {
-              "": [
-                "ast"
-              ],
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ]
-            }
-          },
-          "evmVersion": "london",
-          "libraries": {}
-        }
-      },
-      "imports": [
-        "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
-        "lib/openzeppelin-contracts/contracts/utils/Context.sol",
-        "lib/solmate/src/tokens/ERC1155.sol"
-      ],
-      "versionRequirement": "^0.8.19",
-      "artifacts": {
-        "Hackathon1155": {
-          "0.8.19+commit.7dd6d404.Darwin.appleclang": "Hackathon1155.sol/Hackathon1155.json"
-        }
-      }
-    },
     "src/Hackathon721.sol": {
       "lastModificationDate": 1681555468392,
       "contentHash": "6a6750394f9e99a26f37d636dd039cec",
@@ -3505,8 +3418,8 @@
       }
     },
     "src/HackathonPaymaster.sol": {
-      "lastModificationDate": 1681587677330,
-      "contentHash": "9101561bf6c7af4a7f4cfc5c185350ea",
+      "lastModificationDate": 1681698268592,
+      "contentHash": "e059970e4fabe035cc6e6b839d7ef2ed",
       "sourceName": "src/HackathonPaymaster.sol",
       "solcConfig": {
         "settings": {
@@ -3567,7 +3480,7 @@
       }
     },
     "src/SetupHelper.sol": {
-      "lastModificationDate": 1681581521003,
+      "lastModificationDate": 1681698279145,
       "contentHash": "123a3c28a3d4b383cbf4497d8c734ff1",
       "sourceName": "src/SetupHelper.sol",
       "solcConfig": {
@@ -3626,68 +3539,6 @@
       "artifacts": {
         "SetupHelper": {
           "0.8.19+commit.7dd6d404.Darwin.appleclang": "SetupHelper.sol/SetupHelper.json"
-        }
-      }
-    },
-    "test/Hackathon1155.t.sol": {
-      "lastModificationDate": 1681360146111,
-      "contentHash": "c6c1cb0f6c797f058f3f3b86e8178c32",
-      "sourceName": "test/Hackathon1155.t.sol",
-      "solcConfig": {
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "metadata": {
-            "bytecodeHash": "ipfs",
-            "appendCBOR": true
-          },
-          "outputSelection": {
-            "*": {
-              "": [
-                "ast"
-              ],
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ]
-            }
-          },
-          "evmVersion": "london",
-          "libraries": {}
-        }
-      },
-      "imports": [
-        "lib/forge-std/lib/ds-test/src/test.sol",
-        "lib/forge-std/src/Base.sol",
-        "lib/forge-std/src/StdAssertions.sol",
-        "lib/forge-std/src/StdChains.sol",
-        "lib/forge-std/src/StdCheats.sol",
-        "lib/forge-std/src/StdError.sol",
-        "lib/forge-std/src/StdInvariant.sol",
-        "lib/forge-std/src/StdJson.sol",
-        "lib/forge-std/src/StdMath.sol",
-        "lib/forge-std/src/StdStorage.sol",
-        "lib/forge-std/src/StdStyle.sol",
-        "lib/forge-std/src/StdUtils.sol",
-        "lib/forge-std/src/Test.sol",
-        "lib/forge-std/src/Vm.sol",
-        "lib/forge-std/src/console.sol",
-        "lib/forge-std/src/console2.sol",
-        "lib/forge-std/src/interfaces/IMulticall3.sol",
-        "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
-        "lib/openzeppelin-contracts/contracts/utils/Context.sol",
-        "lib/solmate/src/tokens/ERC1155.sol",
-        "src/Hackathon1155.sol"
-      ],
-      "versionRequirement": "^0.8.19",
-      "artifacts": {
-        "Hackathon1155Test": {
-          "0.8.19+commit.7dd6d404.Darwin.appleclang": "Hackathon1155.t.sol/Hackathon1155Test.json"
         }
       }
     },
@@ -3871,7 +3722,7 @@
       }
     },
     "test/SetupHelper.t.sol": {
-      "lastModificationDate": 1681581521004,
+      "lastModificationDate": 1681587862907,
       "contentHash": "3b64f3601c20aac0c1c83e5fb2353268",
       "sourceName": "test/SetupHelper.t.sol",
       "solcConfig": {

@@ -5,7 +5,9 @@ import WalletProvider from "../providers/wallet";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  // if path is /admin, use WalletProvider
+
+  // TODO can we consolidate these?
+
   if (router.pathname.startsWith("/user")) {
     return (
       <AAWalletProvider>

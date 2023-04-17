@@ -50,7 +50,7 @@ contract HackathonPaymaster is BasePaymaster {
     {
         (address dest, uint256 value, bytes memory func) = abi.decode(userOp.callData[4:], (address, uint256, bytes));
         if (!_isInWhiteList(dest)) {
-            return ("", 1);
+            return ("", 1); // TODO revert here instead
         }
 
         IERC721 nftContract = IERC721(nftPassAddress);
@@ -63,6 +63,8 @@ contract HackathonPaymaster is BasePaymaster {
             // Don't pay for the operation, the user doesn't own a pass
             return ("", 1);
         }
+
+        // TODO Fix up the additional restrictions w/ EFs recommendations
 
         // if (_exceedsGasLimit(userOp.callGasLimit)) {
         //     return ("", 1);
@@ -98,6 +100,7 @@ contract HackathonPaymaster is BasePaymaster {
         return spendingLimitPerOperation != 0 && maxCost > spendingLimitPerOperation;
     }
 
+    // TODO fix, certain opcodes are banned from within the paymaster's verify func
     function _hasAvailablePass(address sender) internal view returns (bool) {
         Hackathon721 nft = Hackathon721(nftPassAddress);
         uint256 tokenCount = nft.balanceOf(sender);
