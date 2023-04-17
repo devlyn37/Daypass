@@ -4,7 +4,8 @@ Send an NFT and automatically cover the recipients gas! Daypass allows the distr
 
 Here's an example of a daypass NFT: [Example Daypass NFT on OpenSea Testnet](https://testnets.opensea.io/assets/goerli/0x9be69e0c05ec9e9deb4ea16de4fc8e08a500f198/1)
 
-We build this for ETHTokyo!
+We build this for ETHTokyo,
+[Here's the showcase](https://ethglobal.com/showcase/daypass-jf7vx)
 
 ## How to use the Demo
 
@@ -30,6 +31,11 @@ Things are a little rough around the edges right now, and very much optimized fo
     https://www.jiffyscan.xyz/userOpHash/0x88a848130614fae589f4210f82189ab00ccfa06cd0f6b413c719bfd5b739834f?network=goerli
 
 5. Send this address an NFT from the airdrop page.
+
+    - You'll get a cute little NFT that displays how much time it's valid for
+
+<img width="1481" alt="Screenshot 2023-04-17 at 11 34 10 AM" src="https://user-images.githubusercontent.com/17352012/232365823-59a69dbf-f69d-41cb-b00c-ee46ff233331.png">
+
 
 6. On the mint page you just connected your social wallet to, hit the mint button!
     - You're gonna see the paymaster address appear in the input, that's a little hackathon local storage magic for the purposes of the demo
