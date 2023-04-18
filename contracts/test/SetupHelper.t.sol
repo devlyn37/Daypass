@@ -50,14 +50,13 @@ contract SetupHelperTest is Test {
         passHolders[0] = address(11);
         passHolders[1] = address(22);
 
-        (Daypass dayPassContract, Simple721 nftContract, DaypassPaymaster paymasterContract) =
+        (Daypass dayPassContract, DaypassPaymaster paymasterContract) =
             setupHelper.setupDaypass{value: 1 ether}(entryPoint, whiteListedAddresses, false, 0, 0, 0, passHolders);
 
         // call should own both of the deployed contracts
         assertEq(dayPassContract.owner(), normalAddress);
         assertEq(dayPassContract.getIsTransferable(), false);
-        // Since we've forked here and we've hardcoded the simple nft contract's address, this doesn't apply rn
-        // assertEq(nftContract.owner(), normalAddress);
+
         assertEq(paymasterContract.owner(), normalAddress);
         assertEq(paymasterContract.getDeposit(), 0.5 ether);
 

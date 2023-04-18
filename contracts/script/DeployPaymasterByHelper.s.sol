@@ -32,7 +32,7 @@ contract DeployPaymasterByHelperScript is Script {
         accounts[0] = vm.addr(deployerPrivateKey);
 
         vm.startBroadcast(deployerPrivateKey);
-        (dayPass, nft, paymaster) = setupHelper.setupDaypass{value: 2 ether}(
+        (dayPass, paymaster) = setupHelper.setupDaypass{value: 2 ether}(
             IEntryPoint(payable(0x0576a174D229E3cFA37253523E645A78A0C91B57)),
             whiteListedAddresses,
             false,

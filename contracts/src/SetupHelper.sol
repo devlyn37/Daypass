@@ -7,27 +7,23 @@ import "./Simple721.sol";
 import "./DaypassPaymaster.sol";
 
 contract SetupHelper {
-    event DaypassSetUp(address dayPass, address spaceCanNFT, address payMaster);
+    event DaypassSetUp(address dayPass, address payMaster);
 
     function setupDaypass(
         IEntryPoint entryPoint,
-        address[] memory targetAdddresses, // List of target contracts which AA can call
+        address[] memory targetAddresses, // List of target contracts which AA can call
         bool isDayPassTransferble, // NFT or SBT
         uint256 gasLimitPerOperation, // How much gas AA can consume in a user operation
         uint256 spendingLimitPerOperation, // How much token AA can transfer in a user transaction
         uint256 timeLimitInSecond, // how long the NFT is available
         address[] memory addresses // list of AA address that gets DayPass NFT
-    )
-        public
-        payable
-        returns (Daypass dayPassContract, Simple721 spaceCanNFTContract, DaypassPaymaster paymasterContract)
-    {
+    ) public payable returns (Daypass dayPassContract, DaypassPaymaster paymasterContract) {
         // Deploy the NFT contract
         dayPassContract = new Daypass("Daypass", "DPASS", isDayPassTransferble);
 
         // Deploy the Hackathon Paymaster Contract, then deposit and stake
         paymasterContract =
-        new DaypassPaymaster(entryPoint, address(dayPassContract), targetAdddresses, gasLimitPerOperation, spendingLimitPerOperation, timeLimitInSecond);
+        new DaypassPaymaster(entryPoint, address(dayPassContract), targetAddresses, gasLimitPerOperation, spendingLimitPerOperation, timeLimitInSecond);
         paymasterContract.deposit{value: msg.value / 2}();
         paymasterContract.addStake{value: msg.value / 2}(86400);
 
@@ -40,8 +36,8 @@ contract SetupHelper {
         paymasterContract.transferOwnership(msg.sender);
         dayPassContract.transferOwnership(msg.sender);
 
-        emit DaypassSetUp(address(dayPassContract), address(spaceCanNFTContract), address(paymasterContract));
+        emit DaypassSetUp(address(dayPassContract), address(paymasterContract));
 
-        return (dayPassContract, Simple721(0x38853627cadCB75B7537453b12bFc2AB6eE16E23), paymasterContract);
+        return (dayPassContract, paymasterContract);
     }
 }
