@@ -29,7 +29,7 @@ forge create --rpc-url $GOERLI_RPC_URL \
     --private-key $PRIVATE_KEY \
     --etherscan-api-key $ETHERSCAN_API_KEY \
     --verify \
-    src/Hackathon721.sol:Hackathon721
+    src/Simple721.sol:Simple721
 ```
 
 To deploy the paymaster with the script

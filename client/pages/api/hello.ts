@@ -6,7 +6,7 @@ import {
   PaymasterAPI,
   calcPreVerificationGas,
 } from "@account-abstraction/sdk";
-import Hackathon721Output from "../../contracts/Hackathon721.sol/Hackathon721.json";
+import Simple721Output from "../../contracts/Simple721.sol/Simple721.json";
 import { BigNumber, Contract, Wallet, ethers, providers } from "ethers";
 import { UserOperationStruct } from "@account-abstraction/contracts";
 import {
@@ -57,7 +57,7 @@ export default async function handler(
   const latestDaypassAddress = "0xf682611A1FC6080aa23463F8E614A79Eb9eDb87e";
   const nftContract = new Contract(
     latestDaypassAddress,
-    new Interface(Hackathon721Output.abi),
+    new Interface(Simple721Output.abi),
     signer
   );
   const response = await nftContract.mintTo(
