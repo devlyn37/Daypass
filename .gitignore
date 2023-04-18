@@ -3,7 +3,7 @@
 # Ignore .env files
 .env
 .env.*
-!.env.example
+!.env.template
 
 # Node modules and dependencies
 **/node_modules/
