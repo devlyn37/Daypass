@@ -8,7 +8,7 @@ import "../lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol";
 import "./Daypass.sol";
 
 // Sample Paymaster Contract
-contract HackathonPaymaster is BasePaymaster {
+contract DaypassPaymaster is BasePaymaster {
     using UserOperationLib for UserOperation;
 
     error ExceedingGasLimit();

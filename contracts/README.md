@@ -35,7 +35,7 @@ forge create --rpc-url $GOERLI_RPC_URL \
 To deploy the paymaster with the script
 
 ```
-forge script script/HackathonPaymaster.s.sol:MyScript --rpc-url $GOERLI_RPC_URL --broadcast --etherscan-api-key $ETHERSCAN_API_KEY --verify -vvvv
+forge script script/DaypassPaymaster.s.sol:MyScript --rpc-url $GOERLI_RPC_URL --broadcast --etherscan-api-key $ETHERSCAN_API_KEY --verify -vvvv
 ```
 
 ## Testing Contracts

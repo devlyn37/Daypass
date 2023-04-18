@@ -2,7 +2,7 @@
 pragma solidity ^0.8.19;
 
 import "../lib/forge-std/src/Script.sol";
-import "../src/HackathonPaymaster.sol";
+import "../src/DaypassPaymaster.sol";
 import "../src/Daypass.sol";
 import "../src/Simple721.sol";
 import "../src/SetupHelper.sol";
@@ -13,7 +13,7 @@ contract DeployPaymasterByHelperScript is Script {
     uint256 deployerPrivateKey;
     SetupHelper setupHelper;
 
-    HackathonPaymaster paymaster;
+    DaypassPaymaster paymaster;
     Daypass dayPass;
     Simple721 nft;
 

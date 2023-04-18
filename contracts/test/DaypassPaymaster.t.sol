@@ -1,7 +1,7 @@
 pragma solidity 0.8.19;
 
 import "../lib/forge-std/src/Test.sol";
-import "../src/HackathonPaymaster.sol";
+import "../src/DaypassPaymaster.sol";
 import "../src/Daypass.sol";
 import "../src/Simple721.sol";
 import "../lib/account-abstraction/contracts/core/EntryPoint.sol";
@@ -19,13 +19,13 @@ contract SimpleAccountNFTReceiver is SimpleAccount {
     }
 }
 
-contract HackathonPaymasterTest is Test {
+contract DaypassPaymasterTest is Test {
     uint256 goerliFork;
     uint256 ownerKey;
     address owner;
     SimpleAccountNFTReceiver player;
     EntryPoint entrypoint;
-    HackathonPaymaster hackathonPaymaster;
+    DaypassPaymaster paymaster;
     Daypass nftPass;
     Simple721 randomNFT;
 
@@ -56,11 +56,10 @@ contract HackathonPaymasterTest is Test {
 
         entrypoint = EntryPoint(payable(0x0576a174D229E3cFA37253523E645A78A0C91B57));
         // entrypoint = new EntryPoint();
-        hackathonPaymaster =
-            new HackathonPaymaster(entrypoint, address(nftPass), whiteListedAddresses, 500000_00, 0, 5000);
-        hackathonPaymaster.addStake{value: 500 ether}(100000);
-        hackathonPaymaster.deposit{value: 500 ether}();
-        // hackathonPaymaster = HackathonPaymaster(payable(0x38A310a0D9a015d23B973478c1EF961C3e44Ee62));
+        paymaster = new DaypassPaymaster(entrypoint, address(nftPass), whiteListedAddresses, 500000_00, 0, 5000);
+        paymaster.addStake{value: 500 ether}(100000);
+        paymaster.deposit{value: 500 ether}();
+        // daypassPass = DaypassPaymaster(payable(0x38A310a0D9a015d23B973478c1EF961C3e44Ee62));
 
         //Some AA wallet
         player = new SimpleAccountNFTReceiver(entrypoint);
@@ -102,7 +101,7 @@ contract HackathonPaymasterTest is Test {
         uint256 preVerificationGas = 20000_00;
         uint256 maxFeePerGas = 10000000000;
         uint256 maxPriorityFeePerGas = 100000000;
-        bytes memory paymasterAndData = abi.encodePacked(address(hackathonPaymaster));
+        bytes memory paymasterAndData = abi.encodePacked(address(paymaster));
 
         // Sign the hash
         UserOperation memory userOp = UserOperation(
