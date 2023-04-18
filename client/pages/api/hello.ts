@@ -6,7 +6,7 @@ import {
   PaymasterAPI,
   calcPreVerificationGas,
 } from "@account-abstraction/sdk";
-import Simple721Output from "../../contracts/Simple721.sol/Simple721.json";
+import DaypassContractOutput from "../../contracts/Daypass.sol/Daypass.json";
 import { BigNumber, Contract, Wallet, ethers, providers } from "ethers";
 import { UserOperationStruct } from "@account-abstraction/contracts";
 import {
@@ -55,12 +55,12 @@ export default async function handler(
   // );
 
   const latestDaypassAddress = "0xf682611A1FC6080aa23463F8E614A79Eb9eDb87e";
-  const nftContract = new Contract(
+  const daypassContract = new Contract(
     latestDaypassAddress,
-    new Interface(Simple721Output.abi),
+    new Interface(DaypassContractOutput.abi),
     signer
   );
-  const response = await nftContract.mintTo(
+  const response = await daypassContract.mintTo(
     1,
     "0xb2Fa18B41e77EbB56e318c676A288290F3330894"
   );
