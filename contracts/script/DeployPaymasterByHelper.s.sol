@@ -3,7 +3,8 @@ pragma solidity ^0.8.19;
 
 import "../lib/forge-std/src/Script.sol";
 import "../src/HackathonPaymaster.sol";
-import "../src/Hackathon721.sol";
+import "../src/Daypass.sol";
+import "../src/Simple721.sol";
 import "../src/SetupHelper.sol";
 import "../lib/account-abstraction/contracts/samples/SimpleAccount.sol";
 import "../lib/account-abstraction/contracts/interfaces/IEntryPoint.sol";
@@ -13,8 +14,8 @@ contract DeployPaymasterByHelperScript is Script {
     SetupHelper setupHelper;
 
     HackathonPaymaster paymaster;
-    Hackathon721 dayPass;
-    Hackathon721 nft;
+    Daypass dayPass;
+    Simple721 nft;
 
     using ECDSA for bytes32;
 
@@ -23,7 +24,7 @@ contract DeployPaymasterByHelperScript is Script {
 
         setupHelper = SetupHelper(0xd4C747bDE076B5c9340ae4aFeab0611970Ea0e68);
 
-        Hackathon721 nftPass = Hackathon721(payable(0xe358557b9e2a9a67318c32c09Daa3CD781b1A58b));
+        Daypass nftPass = Daypass(payable(0xe358557b9e2a9a67318c32c09Daa3CD781b1A58b));
         address[] memory whiteListedAddresses = new address[](1);
         whiteListedAddresses[0] = address(nftPass);
 

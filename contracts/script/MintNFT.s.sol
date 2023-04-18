@@ -3,7 +3,7 @@ pragma solidity ^0.8.19;
 
 import "../lib/forge-std/src/Script.sol";
 import "../src/HackathonPaymaster.sol";
-import "../src/Hackathon721.sol";
+import "../src/Daypass.sol";
 import "../lib/account-abstraction/contracts/samples/SimpleAccount.sol";
 import "../lib/account-abstraction/contracts/core/EntryPoint.sol";
 
@@ -28,7 +28,7 @@ contract MintNFTScript is Script {
         deployerPrivateKey = vm.envUint("OWNER_PRIVATE_KEY");
         entrypoint = EntryPoint(payable(0x0576a174D229E3cFA37253523E645A78A0C91B57));
         hackathonPaymaster = HackathonPaymaster(payable(0x32710e951D76c48D5b62aD9B38d4faf13a0AF80A));
-        Hackathon721 nftPass = Hackathon721(payable(0xe358557b9e2a9a67318c32c09Daa3CD781b1A58b));
+        Daypass nftPass = Daypass(payable(0xe358557b9e2a9a67318c32c09Daa3CD781b1A58b));
 
         uint256 mintAmount = 1;
         uint256 salePrice = 0 ether * mintAmount;

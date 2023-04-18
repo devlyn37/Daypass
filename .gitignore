@@ -12,6 +12,7 @@
 **/.next/
 /out/
 
+
 # Foundry Stuff
 contracts/broadcast/**
 contracts/cache/**

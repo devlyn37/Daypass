@@ -2,7 +2,7 @@ import axios from "axios";
 import { ethers } from "ethers";
 import { useEffect, useState } from "react";
 import { useProvider } from "wagmi";
-import abi from "./../../../contracts/Hackathon721.sol/Hackathon721.json";
+import abi from "./../../../contracts/Daypass.sol/Daypass.json";
 
 interface NFT {
   tokenId: string;

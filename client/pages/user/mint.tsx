@@ -12,7 +12,7 @@ import Head from "next/head";
 import WalletLayout from "./wallet/WalletLayout";
 import { useAccount } from "wagmi";
 import { getZeroDevSigner, getSocialWalletOwner } from "@zerodevapp/sdk";
-import nftArtifact from "../../contracts/Hackathon721.sol/Hackathon721.json";
+import nftArtifact from "../../contracts/Simple721.sol/Simple721.json";
 import { GoogleSocialWallet } from "@zerodevapp/social-wallet";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Contract, providers } from "ethers";
@@ -21,7 +21,10 @@ import { PaymasterAPI } from "@account-abstraction/sdk";
 import { UserOperationStruct } from "@account-abstraction/contracts";
 import Link from "next/link";
 import { useNetwork } from "wagmi";
-import { LOCALSTORAGE_KEY_DAY_PASS_ADDRESS, LOCALSTORAGE_PAYMASTER_ADDRESS } from "../../consts/localstorage";
+import {
+  LOCALSTORAGE_KEY_DAY_PASS_ADDRESS,
+  LOCALSTORAGE_PAYMASTER_ADDRESS,
+} from "../../consts/localstorage";
 import { MUMBAI_SPACE_CAN_COLLECTION, SPACE_CAN } from "../../consts/address";
 
 // const NFT_CONTRACT_ADDRESS = "0x38853627cadCB75B7537453b12bFc2AB6eE16E23";
@@ -50,7 +53,7 @@ export default function Home() {
   const [mintingErrorMessage, setErrorMessage] = useState("");
   const [transactionHash, setTransactionHash] = useState(undefined);
 
-  const [nftContractAddress, setNftContractAddress] = useState('');
+  const [nftContractAddress, setNftContractAddress] = useState("");
   const [paymasterAddress, setPaymasterAddress] = useState("");
 
   const projectID = useMemo(() => {
@@ -65,7 +68,10 @@ export default function Home() {
   console.log("paymasterAddress", paymasterAddress);
 
   const loadNFTContractAddress = useCallback((chainName: string) => {
-    const mayAddress = localStorage.getItem(`${LOCALSTORAGE_KEY_DAY_PASS_ADDRESS}_${chainName}`) ?? ""
+    const mayAddress =
+      localStorage.getItem(
+        `${LOCALSTORAGE_KEY_DAY_PASS_ADDRESS}_${chainName}`
+      ) ?? "";
 
     switch (chainName) {
       case "GOERLI":
@@ -81,7 +87,10 @@ export default function Home() {
     const chainName = (chain?.network ?? "").toUpperCase();
 
     setNftContractAddress(loadNFTContractAddress(chainName));
-    setPaymasterAddress(localStorage.getItem(`${LOCALSTORAGE_PAYMASTER_ADDRESS}_${chainName}`) ?? "");
+    setPaymasterAddress(
+      localStorage.getItem(`${LOCALSTORAGE_PAYMASTER_ADDRESS}_${chainName}`) ??
+        ""
+    );
   }, [chain?.network]);
 
   const handleChange = (event: any) => setPaymasterAddress(event.target.value);
@@ -94,10 +103,7 @@ export default function Home() {
 
       const signer = await getZeroDevSigner({
         projectId: projectID!,
-        owner: await getSocialWalletOwner(
-          projectID!,
-          socialWallet
-        ),
+        owner: await getSocialWalletOwner(projectID!, socialWallet),
       });
 
       signer.smartAccountAPI.paymasterAPI = new contractOnlyPaymaster(

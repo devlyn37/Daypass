@@ -2,7 +2,8 @@ pragma solidity 0.8.19;
 
 import "../lib/forge-std/src/Test.sol";
 import "../src/HackathonPaymaster.sol";
-import "../src/Hackathon721.sol";
+import "../src/Daypass.sol";
+import "../src/Simple721.sol";
 import "../lib/account-abstraction/contracts/core/EntryPoint.sol";
 import "../lib/account-abstraction/contracts/interfaces/IEntryPoint.sol";
 import "../lib/account-abstraction/contracts/interfaces/UserOperation.sol";
@@ -25,8 +26,8 @@ contract HackathonPaymasterTest is Test {
     SimpleAccountNFTReceiver player;
     EntryPoint entrypoint;
     HackathonPaymaster hackathonPaymaster;
-    Hackathon721 nftPass;
-    Hackathon721 randomNFT;
+    Daypass nftPass;
+    Simple721 randomNFT;
 
     using ECDSA for bytes32;
     using UserOperationLib for UserOperation;
@@ -47,8 +48,8 @@ contract HackathonPaymasterTest is Test {
         // Paymaster stakes
 
         vm.startPrank(owner);
-        nftPass = new Hackathon721("", "", false);
-        randomNFT = new Hackathon721("", "", true);
+        nftPass = new Daypass("", "", false);
+        randomNFT = new Simple721();
 
         address[] memory whiteListedAddresses = new address[](1);
         whiteListedAddresses[0] = address(randomNFT);
@@ -64,11 +65,9 @@ contract HackathonPaymasterTest is Test {
         //Some AA wallet
         player = new SimpleAccountNFTReceiver(entrypoint);
         player.initialize(owner);
-        vm.stopPrank();
 
         // Give the AA wallet the NFTPass
-        vm.startPrank(address(player));
-        nftPass.mint(1);
+        nftPass.mintTo(1, address(player));
         vm.stopPrank();
 
         vm.label(address(player), "player");
@@ -76,9 +75,12 @@ contract HackathonPaymasterTest is Test {
 
     function test_mint_erc721_free_mint() external {
         // Give a user DayPass NFT to allow randomNFT minting
-        vm.prank(address(player));
-        nftPass.mint(1);
 
+        vm.prank(owner);
+        nftPass.mintTo(1, address(player));
+        vm.stopPrank();
+
+        vm.prank(address(player));
         uint256 mintAmount = 1;
         bytes memory mintFunction = abi.encodeWithSignature("mint(uint256)", mintAmount);
         bytes memory callData =

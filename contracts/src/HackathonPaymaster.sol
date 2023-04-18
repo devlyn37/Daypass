@@ -5,7 +5,7 @@ pragma solidity ^0.8.19;
 
 import "../lib/account-abstraction/contracts/core/BasePaymaster.sol";
 import "../lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol";
-import "./Hackathon721.sol";
+import "./Daypass.sol";
 
 // Sample Paymaster Contract
 contract HackathonPaymaster is BasePaymaster {
@@ -102,7 +102,7 @@ contract HackathonPaymaster is BasePaymaster {
 
     // TODO fix, certain opcodes are banned from within the paymaster's verify func
     function _hasAvailablePass(address sender) internal view returns (bool) {
-        Hackathon721 nft = Hackathon721(nftPassAddress);
+        Daypass nft = Daypass(nftPassAddress);
         uint256 tokenCount = nft.balanceOf(sender);
 
         for (uint256 i = 0; i < tokenCount; i++) {

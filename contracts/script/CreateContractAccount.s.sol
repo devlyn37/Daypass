@@ -3,7 +3,6 @@ pragma solidity ^0.8.19;
 
 import "../lib/forge-std/src/Script.sol";
 import "../src/HackathonPaymaster.sol";
-import "../src/Hackathon721.sol";
 import "../lib/account-abstraction/contracts/samples/SimpleAccount.sol";
 import "../lib/account-abstraction/contracts/core/EntryPoint.sol";
 
