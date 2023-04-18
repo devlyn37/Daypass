@@ -34,9 +34,7 @@ contract SetupDayPassScript is Script {
 
         vm.startBroadcast(deployerPrivateKey);
         console.log(vm.addr(deployerPrivateKey));
-        (Daypass dayPassContract, Simple721 spaceCanNFTContract, DaypassPaymaster paymaster) = setupHelper.setupDaypass{
-            value: 1 ether
-        }(
+        (Daypass dayPassContract, DaypassPaymaster paymaster) = setupHelper.setupDaypass{value: 1 ether}(
             entrypoint,
             whiteListedAddresses, // List of target contracts which AA can call
             true, // NFT or SBT
@@ -48,10 +46,8 @@ contract SetupDayPassScript is Script {
         vm.stopBroadcast();
 
         vm.label(address(dayPassContract), "Daypass");
-        vm.label(address(spaceCanNFTContract), "Spacecan");
         vm.label(address(setupHelper), "setupHelper");
         console.log(address(dayPassContract));
-        console.log(address(spaceCanNFTContract));
         console.log(address(setupHelper));
         console.log(address(paymaster));
         // console.log("DayPass address %s", address(dayPassContract));
