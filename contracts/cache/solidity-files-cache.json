@@ -2654,8 +2654,8 @@
       }
     },
     "script/AirdropNFTScript.s.sol": {
-      "lastModificationDate": 1681536300808,
-      "contentHash": "e930b3628dfd9e547f8fb052d0869a82",
+      "lastModificationDate": 1681784905267,
+      "contentHash": "2cd8071032cb97168564a807782b7349",
       "sourceName": "script/AirdropNFTScript.s.sol",
       "solcConfig": {
         "settings": {
@@ -2733,7 +2733,7 @@
         "lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol",
         "lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol",
         "lib/openzeppelin-contracts/contracts/utils/math/Math.sol",
-        "src/Hackathon721.sol",
+        "src/Daypass.sol",
         "src/HackathonPaymaster.sol"
       ],
       "versionRequirement": "^0.8.19",
@@ -2744,8 +2744,8 @@
       }
     },
     "script/CreateContractAccount.s.sol": {
-      "lastModificationDate": 1681541261907,
-      "contentHash": "a1d1c77b3ce6fe5a55472d194c22024a",
+      "lastModificationDate": 1681784942500,
+      "contentHash": "eb41ccb5ce08d4e2a2115b5c7a32796c",
       "sourceName": "script/CreateContractAccount.s.sol",
       "solcConfig": {
         "settings": {
@@ -2823,7 +2823,7 @@
         "lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol",
         "lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol",
         "lib/openzeppelin-contracts/contracts/utils/math/Math.sol",
-        "src/Hackathon721.sol",
+        "src/Daypass.sol",
         "src/HackathonPaymaster.sol"
       ],
       "versionRequirement": "^0.8.19",
@@ -2837,8 +2837,8 @@
       }
     },
     "script/DeployPaymaster.s.sol": {
-      "lastModificationDate": 1681581521002,
-      "contentHash": "df4b6d515787fdcf194e35704f285d51",
+      "lastModificationDate": 1681785479890,
+      "contentHash": "04a19cf7a7f91df2d848f2f198a070fa",
       "sourceName": "script/DeployPaymaster.s.sol",
       "solcConfig": {
         "settings": {
@@ -2916,7 +2916,7 @@
         "lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol",
         "lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol",
         "lib/openzeppelin-contracts/contracts/utils/math/Math.sol",
-        "src/Hackathon721.sol",
+        "src/Daypass.sol",
         "src/HackathonPaymaster.sol"
       ],
       "versionRequirement": "^0.8.19",
@@ -2927,8 +2927,8 @@
       }
     },
     "script/DeployPaymasterByHelper.s.sol": {
-      "lastModificationDate": 1681581521002,
-      "contentHash": "b94e4d688fe45484415b98746a8db7c9",
+      "lastModificationDate": 1681785047597,
+      "contentHash": "ec855a8079e620c39aac1c150d6fe10f",
       "sourceName": "script/DeployPaymasterByHelper.s.sol",
       "solcConfig": {
         "settings": {
@@ -3001,9 +3001,10 @@
         "lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol",
         "lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol",
         "lib/openzeppelin-contracts/contracts/utils/math/Math.sol",
-        "src/Hackathon721.sol",
+        "src/Daypass.sol",
         "src/HackathonPaymaster.sol",
-        "src/SetupHelper.sol"
+        "src/SetupHelper.sol",
+        "src/Simple721.sol"
       ],
       "versionRequirement": "^0.8.19",
       "artifacts": {
@@ -3092,9 +3093,10 @@
         "lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol",
         "lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol",
         "lib/openzeppelin-contracts/contracts/utils/math/Math.sol",
-        "src/Hackathon721.sol",
+        "src/Daypass.sol",
         "src/HackathonPaymaster.sol",
-        "src/SetupHelper.sol"
+        "src/SetupHelper.sol",
+        "src/Simple721.sol"
       ],
       "versionRequirement": "^0.8.19",
       "artifacts": {
@@ -3168,7 +3170,7 @@
         "lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol",
         "lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol",
         "lib/openzeppelin-contracts/contracts/utils/math/Math.sol",
-        "src/Hackathon721.sol",
+        "src/Daypass.sol",
         "src/HackathonPaymaster.sol"
       ],
       "versionRequirement": "^0.8.19",
@@ -3179,8 +3181,8 @@
       }
     },
     "script/MintNFT.s.sol": {
-      "lastModificationDate": 1681541261907,
-      "contentHash": "3727e32353e7bb298a68e5c01a47b712",
+      "lastModificationDate": 1681785117495,
+      "contentHash": "efd5bcaa0b6ffb5552ac5cf1f65adbec",
       "sourceName": "script/MintNFT.s.sol",
       "solcConfig": {
         "settings": {
@@ -3258,7 +3260,7 @@
         "lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol",
         "lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol",
         "lib/openzeppelin-contracts/contracts/utils/math/Math.sol",
-        "src/Hackathon721.sol",
+        "src/Daypass.sol",
         "src/HackathonPaymaster.sol"
       ],
       "versionRequirement": "^0.8.19",
@@ -3272,8 +3274,8 @@
       }
     },
     "script/SetupDaypass.s.sol": {
-      "lastModificationDate": 1681581521002,
-      "contentHash": "6d3f4843f5d05ceefa3e28435f7c221a",
+      "lastModificationDate": 1681784472282,
+      "contentHash": "7b1c54990424fb99a4e157d28909c38f",
       "sourceName": "script/SetupDaypass.s.sol",
       "solcConfig": {
         "settings": {
@@ -3351,9 +3353,10 @@
         "lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol",
         "lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol",
         "lib/openzeppelin-contracts/contracts/utils/math/Math.sol",
-        "src/Hackathon721.sol",
+        "src/Daypass.sol",
         "src/HackathonPaymaster.sol",
-        "src/SetupHelper.sol"
+        "src/SetupHelper.sol",
+        "src/Simple721.sol"
       ],
       "versionRequirement": "^0.8.19",
       "artifacts": {
@@ -3362,10 +3365,10 @@
         }
       }
     },
-    "src/Hackathon721.sol": {
-      "lastModificationDate": 1681555468392,
-      "contentHash": "6a6750394f9e99a26f37d636dd039cec",
-      "sourceName": "src/Hackathon721.sol",
+    "src/Daypass.sol": {
+      "lastModificationDate": 1681783621848,
+      "contentHash": "c5c7751e52394ab79a00c11948b2b6e0",
+      "sourceName": "src/Daypass.sol",
       "solcConfig": {
         "settings": {
           "optimizer": {
@@ -3412,14 +3415,14 @@
       ],
       "versionRequirement": "^0.8.19",
       "artifacts": {
-        "Hackathon721": {
-          "0.8.19+commit.7dd6d404.Darwin.appleclang": "Hackathon721.sol/Hackathon721.json"
+        "Daypass": {
+          "0.8.19+commit.7dd6d404.Darwin.appleclang": "Daypass.sol/Daypass.json"
         }
       }
     },
     "src/HackathonPaymaster.sol": {
-      "lastModificationDate": 1681698268592,
-      "contentHash": "e059970e4fabe035cc6e6b839d7ef2ed",
+      "lastModificationDate": 1681785537250,
+      "contentHash": "04bdd21c2837c8064ef4fe7ddb15c34a",
       "sourceName": "src/HackathonPaymaster.sol",
       "solcConfig": {
         "settings": {
@@ -3470,7 +3473,7 @@
         "lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol",
         "lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol",
         "lib/openzeppelin-contracts/contracts/utils/math/Math.sol",
-        "src/Hackathon721.sol"
+        "src/Daypass.sol"
       ],
       "versionRequirement": "^0.8.19",
       "artifacts": {
@@ -3480,8 +3483,8 @@
       }
     },
     "src/SetupHelper.sol": {
-      "lastModificationDate": 1681698279145,
-      "contentHash": "123a3c28a3d4b383cbf4497d8c734ff1",
+      "lastModificationDate": 1681785551277,
+      "contentHash": "3cdf003d8b88745894e9a5b14c2e33c5",
       "sourceName": "src/SetupHelper.sol",
       "solcConfig": {
         "settings": {
@@ -3532,8 +3535,9 @@
         "lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol",
         "lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol",
         "lib/openzeppelin-contracts/contracts/utils/math/Math.sol",
-        "src/Hackathon721.sol",
-        "src/HackathonPaymaster.sol"
+        "src/Daypass.sol",
+        "src/HackathonPaymaster.sol",
+        "src/Simple721.sol"
       ],
       "versionRequirement": "^0.8.19",
       "artifacts": {
@@ -3542,10 +3546,62 @@
         }
       }
     },
-    "test/Hackathon721.t.sol": {
-      "lastModificationDate": 1681551705793,
-      "contentHash": "13317e5f35f213aab298a2e6bd4b1a15",
-      "sourceName": "test/Hackathon721.t.sol",
+    "src/Simple721.sol": {
+      "lastModificationDate": 1681785962964,
+      "contentHash": "7a983c054bed658a454eca858a7749f8",
+      "sourceName": "src/Simple721.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/IERC721Receiver.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/IERC721Metadata.sol",
+        "lib/openzeppelin-contracts/contracts/utils/Address.sol",
+        "lib/openzeppelin-contracts/contracts/utils/Context.sol",
+        "lib/openzeppelin-contracts/contracts/utils/Strings.sol",
+        "lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol",
+        "lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol",
+        "lib/openzeppelin-contracts/contracts/utils/math/Math.sol"
+      ],
+      "versionRequirement": "^0.8.19",
+      "artifacts": {
+        "Simple721": {
+          "0.8.19+commit.7dd6d404.Darwin.appleclang": "Simple721.sol/Simple721.json"
+        }
+      }
+    },
+    "test/Daypass.t.sol": {
+      "lastModificationDate": 1681786874861,
+      "contentHash": "7420c42394da1857b19ae8d96c3d0837",
+      "sourceName": "test/Daypass.t.sol",
       "solcConfig": {
         "settings": {
           "optimizer": {
@@ -3606,18 +3662,18 @@
         "lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol",
         "lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol",
         "lib/openzeppelin-contracts/contracts/utils/math/Math.sol",
-        "src/Hackathon721.sol"
+        "src/Daypass.sol"
       ],
       "versionRequirement": "^0.8.19",
       "artifacts": {
-        "Hackathon721Test": {
-          "0.8.19+commit.7dd6d404.Darwin.appleclang": "Hackathon721.t.sol/Hackathon721Test.json"
+        "DaypassTest": {
+          "0.8.19+commit.7dd6d404.Darwin.appleclang": "Daypass.t.sol/DaypassTest.json"
         }
       }
     },
     "test/HackathonPaymaster.t.sol": {
-      "lastModificationDate": 1681581521003,
-      "contentHash": "9b71f239dda2416e3ce88e751b62822d",
+      "lastModificationDate": 1681785970821,
+      "contentHash": "d3d7da6bdca978b88c5634cbb30eaf53",
       "sourceName": "test/HackathonPaymaster.t.sol",
       "solcConfig": {
         "settings": {
@@ -3708,8 +3764,9 @@
         "lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol",
         "lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol",
         "lib/openzeppelin-contracts/contracts/utils/math/Math.sol",
-        "src/Hackathon721.sol",
-        "src/HackathonPaymaster.sol"
+        "src/Daypass.sol",
+        "src/HackathonPaymaster.sol",
+        "src/Simple721.sol"
       ],
       "versionRequirement": "=0.8.19",
       "artifacts": {
@@ -3722,8 +3779,8 @@
       }
     },
     "test/SetupHelper.t.sol": {
-      "lastModificationDate": 1681587862907,
-      "contentHash": "3b64f3601c20aac0c1c83e5fb2353268",
+      "lastModificationDate": 1681786303658,
+      "contentHash": "c4dfb4d36c2a003ca4292de0e21c76d5",
       "sourceName": "test/SetupHelper.t.sol",
       "solcConfig": {
         "settings": {
@@ -3791,14 +3848,85 @@
         "lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol",
         "lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol",
         "lib/openzeppelin-contracts/contracts/utils/math/Math.sol",
-        "src/Hackathon721.sol",
+        "src/Daypass.sol",
         "src/HackathonPaymaster.sol",
-        "src/SetupHelper.sol"
+        "src/SetupHelper.sol",
+        "src/Simple721.sol"
       ],
       "versionRequirement": "^0.8.19",
       "artifacts": {
         "SetupHelperTest": {
           "0.8.19+commit.7dd6d404.Darwin.appleclang": "SetupHelper.t.sol/SetupHelperTest.json"
+        }
+      }
+    },
+    "test/Simple721.t.sol": {
+      "lastModificationDate": 1681784179519,
+      "contentHash": "7049311859c65a90858acba1c55dd2ae",
+      "sourceName": "test/Simple721.t.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "lib/forge-std/lib/ds-test/src/test.sol",
+        "lib/forge-std/src/Base.sol",
+        "lib/forge-std/src/StdAssertions.sol",
+        "lib/forge-std/src/StdChains.sol",
+        "lib/forge-std/src/StdCheats.sol",
+        "lib/forge-std/src/StdError.sol",
+        "lib/forge-std/src/StdInvariant.sol",
+        "lib/forge-std/src/StdJson.sol",
+        "lib/forge-std/src/StdMath.sol",
+        "lib/forge-std/src/StdStorage.sol",
+        "lib/forge-std/src/StdStyle.sol",
+        "lib/forge-std/src/StdUtils.sol",
+        "lib/forge-std/src/Test.sol",
+        "lib/forge-std/src/Vm.sol",
+        "lib/forge-std/src/console.sol",
+        "lib/forge-std/src/console2.sol",
+        "lib/forge-std/src/interfaces/IMulticall3.sol",
+        "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/IERC721Receiver.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/IERC721Metadata.sol",
+        "lib/openzeppelin-contracts/contracts/utils/Address.sol",
+        "lib/openzeppelin-contracts/contracts/utils/Context.sol",
+        "lib/openzeppelin-contracts/contracts/utils/Strings.sol",
+        "lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol",
+        "lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol",
+        "lib/openzeppelin-contracts/contracts/utils/math/Math.sol",
+        "src/Simple721.sol"
+      ],
+      "versionRequirement": "^0.8.19",
+      "artifacts": {
+        "Simple721Test": {
+          "0.8.19+commit.7dd6d404.Darwin.appleclang": "Simple721.t.sol/Simple721Test.json"
         }
       }
     }

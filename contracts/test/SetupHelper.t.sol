@@ -3,7 +3,8 @@ pragma solidity ^0.8.19;
 
 import "../lib/forge-std/src/Test.sol";
 import "../src/SetupHelper.sol";
-import "../src/Hackathon721.sol";
+import "../src/Daypass.sol";
+import "../src/Simple721.sol";
 import "../src/HackathonPaymaster.sol";
 
 contract SetupHelperTest is Test {
@@ -49,14 +50,14 @@ contract SetupHelperTest is Test {
         passHolders[0] = address(11);
         passHolders[1] = address(22);
 
-        (Hackathon721 dayPassContract, Hackathon721 nftContract, HackathonPaymaster paymasterContract) =
+        (Daypass dayPassContract, Simple721 nftContract, HackathonPaymaster paymasterContract) =
             setupHelper.setupDaypass{value: 1 ether}(entryPoint, whiteListedAddresses, false, 0, 0, 0, passHolders);
 
         // call should own both of the deployed contracts
         assertEq(dayPassContract.owner(), normalAddress);
         assertEq(dayPassContract.getIsTransferable(), false);
-        assertEq(nftContract.owner(), normalAddress);
-        assertEq(nftContract.getIsTransferable(), true);
+        // Since we've forked here and we've hardcoded the simple nft contract's address, this doesn't apply rn
+        // assertEq(nftContract.owner(), normalAddress);
         assertEq(paymasterContract.owner(), normalAddress);
         assertEq(paymasterContract.getDeposit(), 0.5 ether);
 

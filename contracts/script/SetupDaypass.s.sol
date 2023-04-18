@@ -4,7 +4,8 @@ pragma solidity ^0.8.19;
 import "../lib/forge-std/src/Script.sol";
 import "../src/HackathonPaymaster.sol";
 import "../src/SetupHelper.sol";
-import "../src/Hackathon721.sol";
+import "../src/Daypass.sol";
+import "../src/Simple721.sol";
 import "../lib/account-abstraction/contracts/samples/SimpleAccount.sol";
 import "../lib/account-abstraction/contracts/core/EntryPoint.sol";
 
@@ -33,8 +34,8 @@ contract SetupDayPassScript is Script {
 
         vm.startBroadcast(deployerPrivateKey);
         console.log(vm.addr(deployerPrivateKey));
-        (Hackathon721 dayPassContract, Hackathon721 spaceCanNFTContract, HackathonPaymaster paymasterContract) =
-        setupHelper.setupDaypass{value: 1 ether}(
+        (Daypass dayPassContract, Simple721 spaceCanNFTContract, HackathonPaymaster paymasterContract) = setupHelper
+            .setupDaypass{value: 1 ether}(
             entrypoint,
             whiteListedAddresses, // List of target contracts which AA can call
             true, // NFT or SBT

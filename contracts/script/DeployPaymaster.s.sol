@@ -3,7 +3,7 @@ pragma solidity ^0.8.19;
 
 import "../lib/forge-std/src/Script.sol";
 import "../src/HackathonPaymaster.sol";
-import "../src/Hackathon721.sol";
+import "../src/Daypass.sol";
 import "../lib/account-abstraction/contracts/samples/SimpleAccount.sol";
 import "../lib/account-abstraction/contracts/core/EntryPoint.sol";
 
@@ -17,7 +17,7 @@ contract DeployPaymasterScript is Script {
     function run() external {
         deployerPrivateKey = vm.envUint("OWNER_PRIVATE_KEY");
 
-        Hackathon721 nftPass = Hackathon721(payable(0xe358557b9e2a9a67318c32c09Daa3CD781b1A58b));
+        Daypass nftPass = Daypass(payable(0xe358557b9e2a9a67318c32c09Daa3CD781b1A58b));
         address[] memory whiteListedAddresses = new address[](1);
         whiteListedAddresses[0] = address(nftPass);
 
