@@ -17,9 +17,6 @@
 contracts/broadcast/**
 contracts/cache/**
 
-# Contract build output
-client/contracts/
-
 # TypeScript build output
 /dist/
 /tsconfig.tsbuildinfo

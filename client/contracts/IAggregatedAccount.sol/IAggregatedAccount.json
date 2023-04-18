@@ -1,0 +1,496 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "name": "getAggregator",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "sender",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "nonce",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "initCode",
+              "type": "bytes"
+            },
+            {
+              "internalType": "bytes",
+              "name": "callData",
+              "type": "bytes"
+            },
+            {
+              "internalType": "uint256",
+              "name": "callGasLimit",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "verificationGasLimit",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "preVerificationGas",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "maxFeePerGas",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "maxPriorityFeePerGas",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "paymasterAndData",
+              "type": "bytes"
+            },
+            {
+              "internalType": "bytes",
+              "name": "signature",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct UserOperation",
+          "name": "userOp",
+          "type": "tuple"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "userOpHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "missingAccountFunds",
+          "type": "uint256"
+        }
+      ],
+      "name": "validateUserOp",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "validationData",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "getAggregator()": "3ad59dbc",
+    "validateUserOp((address,uint256,bytes,bytes,uint256,uint256,uint256,uint256,uint256,bytes,bytes),bytes32,uint256)": "3a871cdd"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"getAggregator\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"initCode\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"callData\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"callGasLimit\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"verificationGasLimit\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"preVerificationGas\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxFeePerGas\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxPriorityFeePerGas\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"paymasterAndData\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"signature\",\"type\":\"bytes\"}],\"internalType\":\"struct UserOperation\",\"name\":\"userOp\",\"type\":\"tuple\"},{\"internalType\":\"bytes32\",\"name\":\"userOpHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"missingAccountFunds\",\"type\":\"uint256\"}],\"name\":\"validateUserOp\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"validationData\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"validateUserOp((address,uint256,bytes,bytes,uint256,uint256,uint256,uint256,uint256,bytes,bytes),bytes32,uint256)\":{\"details\":\"Must validate caller is the entryPoint.      Must validate the signature and nonce\",\"params\":{\"missingAccountFunds\":\"missing funds on the account's deposit in the entrypoint.      This is the minimum amount to transfer to the sender(entryPoint) to be able to make the call.      The excess is left as a deposit in the entrypoint, for future calls.      can be withdrawn anytime using \\\"entryPoint.withdrawTo()\\\"      In case there is a paymaster in the request (or the current deposit is high enough), this value will be zero.\",\"userOp\":\"the operation that is about to be executed.\",\"userOpHash\":\"hash of the user's request data. can be used as the basis for signature.\"},\"returns\":{\"validationData\":\"packaged ValidationData structure. use `_packValidationData` and `_unpackValidationData` to encode and decode      <20-byte> sigAuthorizer - 0 for valid signature, 1 to mark signature failure,         otherwise, an address of an \\\"authorizer\\\" contract.      <6-byte> validUntil - last timestamp this operation is valid. 0 for \\\"indefinite\\\"      <6-byte> validAfter - first timestamp this operation is valid      If an account doesn't use time-range, it is enough to return SIG_VALIDATION_FAILED value (1) for signature failure.      Note that the validation code cannot use block.timestamp (or block.number) directly.\"}}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"getAggregator()\":{\"notice\":\"return the address of the signature aggregator the account supports.\"},\"validateUserOp((address,uint256,bytes,bytes,uint256,uint256,uint256,uint256,uint256,bytes,bytes),bytes32,uint256)\":{\"notice\":\"Validate user's signature and nonce the entryPoint will make the call to the recipient only if this validation call returns successfully. signature failure should be reported by returning SIG_VALIDATION_FAILED (1). This allows making a \\\"simulation call\\\" without a valid signature Other failures (e.g. nonce mismatch, or invalid signature format) should still revert to signal failure.\"}},\"notice\":\"Aggregated account, that support IAggregator. - the validateUserOp will be called only after the aggregator validated this account (with all other accounts of this aggregator). - the validateUserOp MUST valiate the aggregator parameter, and MAY ignore the userOp.signature field.\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"lib/account-abstraction/contracts/interfaces/IAggregatedAccount.sol\":\"IAggregatedAccount\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin/=lib/openzeppelin-contracts/\",\":account-abstraction/=lib/account-abstraction/contracts/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":forge-std/=lib/forge-std/src/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":solmate/=lib/solmate/src/\"]},\"sources\":{\"lib/account-abstraction/contracts/interfaces/IAccount.sol\":{\"keccak256\":\"0x6dbcce5729f8a590517c25c70fcefa9fdc7f8588db5b4ec09dc6b3d5b5e7e9f6\",\"license\":\"GPL-3.0\",\"urls\":[\"bzz-raw://1b28392800585cb126008b328dc3ccb0e33defcf988e2b99f104c3b1d3840451\",\"dweb:/ipfs/QmYdyTsA5UTnNX2itf3G1tRRxnZf5jrNK3G2YwvXR1h5K9\"]},\"lib/account-abstraction/contracts/interfaces/IAggregatedAccount.sol\":{\"keccak256\":\"0x6dc27a6cd5e6a3e929ecfaa619224a32d08ba687221082f66e5325870ab69985\",\"license\":\"GPL-3.0\",\"urls\":[\"bzz-raw://625b2d856d117e79439ea4c1fcbd67108eae53f7a01c673ad1492b7b17b22e11\",\"dweb:/ipfs/QmWh1F5zRU6i8EcFN7jZfVgQijETAfQm2Cw49GAHdQqqXm\"]},\"lib/account-abstraction/contracts/interfaces/IAggregator.sol\":{\"keccak256\":\"0x4fb508f4783ad56f4bb4f4f0bb2cce74adbf3ddc2b0534484b4f06b9a5978fb3\",\"license\":\"GPL-3.0\",\"urls\":[\"bzz-raw://22b844a90513e4f8cd1188c507284d6d9e79bd2c6447fea1ee88d50b9ec88c2e\",\"dweb:/ipfs/QmXEnA4bAXhwvpQXAMbU5JDjDh7yEFHLxMR18SFhXzgczv\"]},\"lib/account-abstraction/contracts/interfaces/UserOperation.sol\":{\"keccak256\":\"0x9d677e4299f7c97c820f0c444739bd39cda943def1c38cdb7960038191697bbc\",\"license\":\"GPL-3.0\",\"urls\":[\"bzz-raw://bd9abee48b95851f758e6e333e4bdf9aaed0e1a25fe6b2fb0e71c38782215df6\",\"dweb:/ipfs/QmRseGvgX9N8cHnJtbnuQKHxtd3JZYWR6quyUdrMQunYgq\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.19+commit.7dd6d404"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "getAggregator",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct UserOperation",
+              "name": "userOp",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "sender",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "nonce",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "bytes",
+                  "name": "initCode",
+                  "type": "bytes"
+                },
+                {
+                  "internalType": "bytes",
+                  "name": "callData",
+                  "type": "bytes"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "callGasLimit",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "verificationGasLimit",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "preVerificationGas",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "maxFeePerGas",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "maxPriorityFeePerGas",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "bytes",
+                  "name": "paymasterAndData",
+                  "type": "bytes"
+                },
+                {
+                  "internalType": "bytes",
+                  "name": "signature",
+                  "type": "bytes"
+                }
+              ]
+            },
+            {
+              "internalType": "bytes32",
+              "name": "userOpHash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "missingAccountFunds",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "validateUserOp",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "validationData",
+              "type": "uint256"
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "validateUserOp((address,uint256,bytes,bytes,uint256,uint256,uint256,uint256,uint256,bytes,bytes),bytes32,uint256)": {
+            "details": "Must validate caller is the entryPoint.      Must validate the signature and nonce",
+            "params": {
+              "missingAccountFunds": "missing funds on the account's deposit in the entrypoint.      This is the minimum amount to transfer to the sender(entryPoint) to be able to make the call.      The excess is left as a deposit in the entrypoint, for future calls.      can be withdrawn anytime using \"entryPoint.withdrawTo()\"      In case there is a paymaster in the request (or the current deposit is high enough), this value will be zero.",
+              "userOp": "the operation that is about to be executed.",
+              "userOpHash": "hash of the user's request data. can be used as the basis for signature."
+            },
+            "returns": {
+              "validationData": "packaged ValidationData structure. use `_packValidationData` and `_unpackValidationData` to encode and decode      <20-byte> sigAuthorizer - 0 for valid signature, 1 to mark signature failure,         otherwise, an address of an \"authorizer\" contract.      <6-byte> validUntil - last timestamp this operation is valid. 0 for \"indefinite\"      <6-byte> validAfter - first timestamp this operation is valid      If an account doesn't use time-range, it is enough to return SIG_VALIDATION_FAILED value (1) for signature failure.      Note that the validation code cannot use block.timestamp (or block.number) directly."
+            }
+          }
+        },
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {
+          "getAggregator()": {
+            "notice": "return the address of the signature aggregator the account supports."
+          },
+          "validateUserOp((address,uint256,bytes,bytes,uint256,uint256,uint256,uint256,uint256,bytes,bytes),bytes32,uint256)": {
+            "notice": "Validate user's signature and nonce the entryPoint will make the call to the recipient only if this validation call returns successfully. signature failure should be reported by returning SIG_VALIDATION_FAILED (1). This allows making a \"simulation call\" without a valid signature Other failures (e.g. nonce mismatch, or invalid signature format) should still revert to signal failure."
+          }
+        },
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        ":@openzeppelin/=lib/openzeppelin-contracts/",
+        ":account-abstraction/=lib/account-abstraction/contracts/",
+        ":ds-test/=lib/forge-std/lib/ds-test/src/",
+        ":forge-std/=lib/forge-std/src/",
+        ":openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        ":solmate/=lib/solmate/src/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "lib/account-abstraction/contracts/interfaces/IAggregatedAccount.sol": "IAggregatedAccount"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "lib/account-abstraction/contracts/interfaces/IAccount.sol": {
+        "keccak256": "0x6dbcce5729f8a590517c25c70fcefa9fdc7f8588db5b4ec09dc6b3d5b5e7e9f6",
+        "urls": [
+          "bzz-raw://1b28392800585cb126008b328dc3ccb0e33defcf988e2b99f104c3b1d3840451",
+          "dweb:/ipfs/QmYdyTsA5UTnNX2itf3G1tRRxnZf5jrNK3G2YwvXR1h5K9"
+        ],
+        "license": "GPL-3.0"
+      },
+      "lib/account-abstraction/contracts/interfaces/IAggregatedAccount.sol": {
+        "keccak256": "0x6dc27a6cd5e6a3e929ecfaa619224a32d08ba687221082f66e5325870ab69985",
+        "urls": [
+          "bzz-raw://625b2d856d117e79439ea4c1fcbd67108eae53f7a01c673ad1492b7b17b22e11",
+          "dweb:/ipfs/QmWh1F5zRU6i8EcFN7jZfVgQijETAfQm2Cw49GAHdQqqXm"
+        ],
+        "license": "GPL-3.0"
+      },
+      "lib/account-abstraction/contracts/interfaces/IAggregator.sol": {
+        "keccak256": "0x4fb508f4783ad56f4bb4f4f0bb2cce74adbf3ddc2b0534484b4f06b9a5978fb3",
+        "urls": [
+          "bzz-raw://22b844a90513e4f8cd1188c507284d6d9e79bd2c6447fea1ee88d50b9ec88c2e",
+          "dweb:/ipfs/QmXEnA4bAXhwvpQXAMbU5JDjDh7yEFHLxMR18SFhXzgczv"
+        ],
+        "license": "GPL-3.0"
+      },
+      "lib/account-abstraction/contracts/interfaces/UserOperation.sol": {
+        "keccak256": "0x9d677e4299f7c97c820f0c444739bd39cda943def1c38cdb7960038191697bbc",
+        "urls": [
+          "bzz-raw://bd9abee48b95851f758e6e333e4bdf9aaed0e1a25fe6b2fb0e71c38782215df6",
+          "dweb:/ipfs/QmRseGvgX9N8cHnJtbnuQKHxtd3JZYWR6quyUdrMQunYgq"
+        ],
+        "license": "GPL-3.0"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "lib/account-abstraction/contracts/interfaces/IAggregatedAccount.sol",
+    "id": 6021,
+    "exportedSymbols": {
+      "IAccount": [
+        6005
+      ],
+      "IAggregatedAccount": [
+        6020
+      ],
+      "IAggregator": [
+        6054
+      ],
+      "UserOperation": [
+        6418
+      ],
+      "UserOperationLib": [
+        6523
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "36:607:14",
+    "nodes": [
+      {
+        "id": 6007,
+        "nodeType": "PragmaDirective",
+        "src": "36:24:14",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".12"
+        ]
+      },
+      {
+        "id": 6008,
+        "nodeType": "ImportDirective",
+        "src": "62:29:14",
+        "nodes": [],
+        "absolutePath": "lib/account-abstraction/contracts/interfaces/UserOperation.sol",
+        "file": "./UserOperation.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 6021,
+        "sourceUnit": 6524,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "id": 6009,
+        "nodeType": "ImportDirective",
+        "src": "92:24:14",
+        "nodes": [],
+        "absolutePath": "lib/account-abstraction/contracts/interfaces/IAccount.sol",
+        "file": "./IAccount.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 6021,
+        "sourceUnit": 6006,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "id": 6010,
+        "nodeType": "ImportDirective",
+        "src": "117:27:14",
+        "nodes": [],
+        "absolutePath": "lib/account-abstraction/contracts/interfaces/IAggregator.sol",
+        "file": "./IAggregator.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 6021,
+        "sourceUnit": 6055,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "id": 6020,
+        "nodeType": "ContractDefinition",
+        "src": "443:199:14",
+        "nodes": [
+          {
+            "id": 6019,
+            "nodeType": "FunctionDefinition",
+            "src": "583:57:14",
+            "nodes": [],
+            "documentation": {
+              "id": 6014,
+              "nodeType": "StructuredDocumentation",
+              "src": "491:87:14",
+              "text": " return the address of the signature aggregator the account supports."
+            },
+            "functionSelector": "3ad59dbc",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getAggregator",
+            "nameLocation": "592:13:14",
+            "parameters": {
+              "id": 6015,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "605:2:14"
+            },
+            "returnParameters": {
+              "id": 6018,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6017,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6019,
+                  "src": "631:7:14",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 6016,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "631:7:14",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "630:9:14"
+            },
+            "scope": 6020,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 6012,
+              "name": "IAccount",
+              "nameLocations": [
+                "475:8:14"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 6005,
+              "src": "475:8:14"
+            },
+            "id": 6013,
+            "nodeType": "InheritanceSpecifier",
+            "src": "475:8:14"
+          }
+        ],
+        "canonicalName": "IAggregatedAccount",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 6011,
+          "nodeType": "StructuredDocumentation",
+          "src": "146:296:14",
+          "text": " Aggregated account, that support IAggregator.\n - the validateUserOp will be called only after the aggregator validated this account (with all other accounts of this aggregator).\n - the validateUserOp MUST valiate the aggregator parameter, and MAY ignore the userOp.signature field."
+        },
+        "fullyImplemented": false,
+        "linearizedBaseContracts": [
+          6020,
+          6005
+        ],
+        "name": "IAggregatedAccount",
+        "nameLocation": "453:18:14",
+        "scope": 6021,
+        "usedErrors": []
+      }
+    ],
+    "license": "GPL-3.0"
+  },
+  "id": 14
+}
