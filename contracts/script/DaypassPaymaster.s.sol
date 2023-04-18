@@ -2,7 +2,7 @@
 pragma solidity ^0.8.19;
 
 import "../lib/forge-std/src/Script.sol";
-import "../src/HackathonPaymaster.sol";
+import "../src/DaypassPaymaster.sol";
 
 contract MyScript is Script {
     function run() external {
@@ -19,7 +19,7 @@ contract MyScript is Script {
         address[] memory whiteListedAddresses = new address[](1);
         whiteListedAddresses[0] = 0xe358557b9e2a9a67318c32c09Daa3CD781b1A58b;
 
-        HackathonPaymaster paymaster = new HackathonPaymaster(entryPoint, nftPassAddress, whiteListedAddresses, 0, 0, 0);
+        DaypassPaymaster paymaster = new DaypassPaymaster(entryPoint, nftPassAddress, whiteListedAddresses, 0, 0, 0);
 
         vm.stopBroadcast();
     }

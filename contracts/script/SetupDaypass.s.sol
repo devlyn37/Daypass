@@ -2,7 +2,7 @@
 pragma solidity ^0.8.19;
 
 import "../lib/forge-std/src/Script.sol";
-import "../src/HackathonPaymaster.sol";
+import "../src/DaypassPaymaster.sol";
 import "../src/SetupHelper.sol";
 import "../src/Daypass.sol";
 import "../src/Simple721.sol";
@@ -34,8 +34,9 @@ contract SetupDayPassScript is Script {
 
         vm.startBroadcast(deployerPrivateKey);
         console.log(vm.addr(deployerPrivateKey));
-        (Daypass dayPassContract, Simple721 spaceCanNFTContract, HackathonPaymaster paymasterContract) = setupHelper
-            .setupDaypass{value: 1 ether}(
+        (Daypass dayPassContract, Simple721 spaceCanNFTContract, DaypassPaymaster paymaster) = setupHelper.setupDaypass{
+            value: 1 ether
+        }(
             entrypoint,
             whiteListedAddresses, // List of target contracts which AA can call
             true, // NFT or SBT
@@ -52,7 +53,7 @@ contract SetupDayPassScript is Script {
         console.log(address(dayPassContract));
         console.log(address(spaceCanNFTContract));
         console.log(address(setupHelper));
-        console.log(address(paymasterContract));
+        console.log(address(paymaster));
         // console.log("DayPass address %s", address(dayPassContract));
         // console.log("SpaceCan address %s", address(spaceCanNFTContract));
         // console.log("SetupHelper address %s", address(setupHelper));

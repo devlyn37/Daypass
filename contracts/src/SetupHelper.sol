@@ -4,7 +4,7 @@ pragma solidity ^0.8.19;
 
 import "./Daypass.sol";
 import "./Simple721.sol";
-import "./HackathonPaymaster.sol";
+import "./DaypassPaymaster.sol";
 
 contract SetupHelper {
     event DaypassSetUp(address dayPass, address spaceCanNFT, address payMaster);
@@ -20,14 +20,14 @@ contract SetupHelper {
     )
         public
         payable
-        returns (Daypass dayPassContract, Simple721 spaceCanNFTContract, HackathonPaymaster paymasterContract)
+        returns (Daypass dayPassContract, Simple721 spaceCanNFTContract, DaypassPaymaster paymasterContract)
     {
         // Deploy the NFT contract
         dayPassContract = new Daypass("Daypass", "DPASS", isDayPassTransferble);
 
         // Deploy the Hackathon Paymaster Contract, then deposit and stake
         paymasterContract =
-        new HackathonPaymaster(entryPoint, address(dayPassContract), targetAdddresses, gasLimitPerOperation, spendingLimitPerOperation, timeLimitInSecond);
+        new DaypassPaymaster(entryPoint, address(dayPassContract), targetAdddresses, gasLimitPerOperation, spendingLimitPerOperation, timeLimitInSecond);
         paymasterContract.deposit{value: msg.value / 2}();
         paymasterContract.addStake{value: msg.value / 2}(86400);
 

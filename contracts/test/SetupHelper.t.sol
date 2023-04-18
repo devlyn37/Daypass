@@ -5,7 +5,7 @@ import "../lib/forge-std/src/Test.sol";
 import "../src/SetupHelper.sol";
 import "../src/Daypass.sol";
 import "../src/Simple721.sol";
-import "../src/HackathonPaymaster.sol";
+import "../src/DaypassPaymaster.sol";
 
 contract SetupHelperTest is Test {
     using stdStorage for StdStorage;
@@ -50,7 +50,7 @@ contract SetupHelperTest is Test {
         passHolders[0] = address(11);
         passHolders[1] = address(22);
 
-        (Daypass dayPassContract, Simple721 nftContract, HackathonPaymaster paymasterContract) =
+        (Daypass dayPassContract, Simple721 nftContract, DaypassPaymaster paymasterContract) =
             setupHelper.setupDaypass{value: 1 ether}(entryPoint, whiteListedAddresses, false, 0, 0, 0, passHolders);
 
         // call should own both of the deployed contracts

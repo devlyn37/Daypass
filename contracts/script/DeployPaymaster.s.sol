@@ -2,7 +2,7 @@
 pragma solidity ^0.8.19;
 
 import "../lib/forge-std/src/Script.sol";
-import "../src/HackathonPaymaster.sol";
+import "../src/DaypassPaymaster.sol";
 import "../src/Daypass.sol";
 import "../lib/account-abstraction/contracts/samples/SimpleAccount.sol";
 import "../lib/account-abstraction/contracts/core/EntryPoint.sol";
@@ -10,7 +10,7 @@ import "../lib/account-abstraction/contracts/core/EntryPoint.sol";
 contract DeployPaymasterScript is Script {
     uint256 deployerPrivateKey;
     EntryPoint entrypoint;
-    HackathonPaymaster hackathonPaymaster;
+    DaypassPaymaster paymaster;
 
     using ECDSA for bytes32;
 
@@ -24,7 +24,7 @@ contract DeployPaymasterScript is Script {
         entrypoint = EntryPoint(payable(0x0576a174D229E3cFA37253523E645A78A0C91B57));
 
         vm.startBroadcast(deployerPrivateKey);
-        hackathonPaymaster = new HackathonPaymaster(
+        paymaster = new DaypassPaymaster(
             entrypoint,
             address(nftPass),
             whiteListedAddresses,
@@ -36,11 +36,11 @@ contract DeployPaymasterScript is Script {
 
         // If new paymaster
         vm.startBroadcast(deployerPrivateKey);
-        hackathonPaymaster.addStake{value: 1 ether}(100000);
+        paymaster.addStake{value: 1 ether}(100000);
         vm.stopBroadcast();
 
         vm.startBroadcast(deployerPrivateKey);
-        hackathonPaymaster.deposit{value: 1 ether}();
+        paymaster.deposit{value: 1 ether}();
         vm.stopBroadcast();
     }
 }

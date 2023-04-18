@@ -2,7 +2,7 @@
 pragma solidity ^0.8.19;
 
 import "../lib/forge-std/src/Script.sol";
-import "../src/HackathonPaymaster.sol";
+import "../src/DaypassPaymaster.sol";
 import "../src/Daypass.sol";
 import "../lib/account-abstraction/contracts/samples/SimpleAccount.sol";
 import "../lib/account-abstraction/contracts/core/EntryPoint.sol";
@@ -10,7 +10,7 @@ import "../lib/account-abstraction/contracts/core/EntryPoint.sol";
 contract AirdropNFT is Script {
     uint256 deployerPrivateKey;
     EntryPoint entrypoint;
-    HackathonPaymaster hackathonPaymaster;
+    DaypassPaymaster paymaster;
 
     using ECDSA for bytes32;
 

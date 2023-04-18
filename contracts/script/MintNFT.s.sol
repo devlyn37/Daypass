@@ -2,7 +2,7 @@
 pragma solidity ^0.8.19;
 
 import "../lib/forge-std/src/Script.sol";
-import "../src/HackathonPaymaster.sol";
+import "../src/DaypassPaymaster.sol";
 import "../src/Daypass.sol";
 import "../lib/account-abstraction/contracts/samples/SimpleAccount.sol";
 import "../lib/account-abstraction/contracts/core/EntryPoint.sol";
@@ -20,14 +20,14 @@ contract MintNFTScript is Script {
     uint256 deployerPrivateKey;
     SimpleAccountNFTReceiver player;
     EntryPoint entrypoint;
-    HackathonPaymaster hackathonPaymaster;
+    DaypassPaymaster paymaster;
 
     using ECDSA for bytes32;
 
     function run() external {
         deployerPrivateKey = vm.envUint("OWNER_PRIVATE_KEY");
         entrypoint = EntryPoint(payable(0x0576a174D229E3cFA37253523E645A78A0C91B57));
-        hackathonPaymaster = HackathonPaymaster(payable(0x32710e951D76c48D5b62aD9B38d4faf13a0AF80A));
+        paymaster = DaypassPaymaster(payable(0x32710e951D76c48D5b62aD9B38d4faf13a0AF80A));
         Daypass nftPass = Daypass(payable(0xe358557b9e2a9a67318c32c09Daa3CD781b1A58b));
 
         uint256 mintAmount = 1;
@@ -54,7 +54,7 @@ contract MintNFTScript is Script {
             20000_00,
             10000000000,
             100000000,
-            abi.encodePacked(address(hackathonPaymaster)),
+            abi.encodePacked(address(paymaster)),
             abi.encode()
         );
         bytes32 userOpHash = entrypoint.getUserOpHash(userOp).toEthSignedMessageHash();
