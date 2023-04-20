@@ -1424,7 +1424,7 @@
   },
   "ast": {
     "absolutePath": "test/Daypass.t.sol",
-    "id": 41779,
+    "id": 41744,
     "exportedSymbols": {
       "Address": [
         37939
@@ -1439,10 +1439,10 @@
         8761
       ],
       "Daypass": [
-        40972
+        40949
       ],
       "DaypassTest": [
-        41778
+        41743
       ],
       "ERC165": [
         38628
@@ -1530,7 +1530,7 @@
     "src": "39:1502:73",
     "nodes": [
       {
-        "id": 41585,
+        "id": 41550,
         "nodeType": "PragmaDirective",
         "src": "39:24:73",
         "nodes": [],
@@ -1542,44 +1542,44 @@
         ]
       },
       {
-        "id": 41586,
+        "id": 41551,
         "nodeType": "ImportDirective",
         "src": "65:39:73",
         "nodes": [],
         "absolutePath": "lib/forge-std/src/Test.sol",
         "file": "../lib/forge-std/src/Test.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 41779,
+        "scope": 41744,
         "sourceUnit": 17758,
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
-        "id": 41587,
+        "id": 41552,
         "nodeType": "ImportDirective",
         "src": "105:28:73",
         "nodes": [],
         "absolutePath": "src/Daypass.sol",
         "file": "../src/Daypass.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 41779,
-        "sourceUnit": 40973,
+        "scope": 41744,
+        "sourceUnit": 40950,
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
-        "id": 41778,
+        "id": 41743,
         "nodeType": "ContractDefinition",
         "src": "135:1405:73",
         "nodes": [
           {
-            "id": 41593,
+            "id": 41558,
             "nodeType": "UsingForDirective",
             "src": "170:32:73",
             "nodes": [],
             "global": false,
             "libraryName": {
-              "id": 41590,
+              "id": 41555,
               "name": "stdStorage",
               "nameLocations": [
                 "176:10:73"
@@ -1589,10 +1589,10 @@
               "src": "176:10:73"
             },
             "typeName": {
-              "id": 41592,
+              "id": 41557,
               "nodeType": "UserDefinedTypeName",
               "pathNode": {
-                "id": 41591,
+                "id": 41556,
                 "name": "StdStorage",
                 "nameLocations": [
                   "191:10:73"
@@ -1610,7 +1610,7 @@
             }
           },
           {
-            "id": 41596,
+            "id": 41561,
             "nodeType": "VariableDeclaration",
             "src": "208:19:73",
             "nodes": [],
@@ -1618,37 +1618,37 @@
             "mutability": "mutable",
             "name": "nft",
             "nameLocation": "224:3:73",
-            "scope": 41778,
+            "scope": 41743,
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_Daypass_$40972",
+              "typeIdentifier": "t_contract$_Daypass_$40949",
               "typeString": "contract Daypass"
             },
             "typeName": {
-              "id": 41595,
+              "id": 41560,
               "nodeType": "UserDefinedTypeName",
               "pathNode": {
-                "id": 41594,
+                "id": 41559,
                 "name": "Daypass",
                 "nameLocations": [
                   "208:7:73"
                 ],
                 "nodeType": "IdentifierPath",
-                "referencedDeclaration": 40972,
+                "referencedDeclaration": 40949,
                 "src": "208:7:73"
               },
-              "referencedDeclaration": 40972,
+              "referencedDeclaration": 40949,
               "src": "208:7:73",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Daypass_$40972",
+                "typeIdentifier": "t_contract$_Daypass_$40949",
                 "typeString": "contract Daypass"
               }
             },
             "visibility": "private"
           },
           {
-            "id": 41598,
+            "id": 41563,
             "nodeType": "VariableDeclaration",
             "src": "233:29:73",
             "nodes": [],
@@ -1656,7 +1656,7 @@
             "mutability": "mutable",
             "name": "normalAddress",
             "nameLocation": "249:13:73",
-            "scope": 41778,
+            "scope": 41743,
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -1664,7 +1664,7 @@
               "typeString": "address"
             },
             "typeName": {
-              "id": 41597,
+              "id": 41562,
               "name": "address",
               "nodeType": "ElementaryTypeName",
               "src": "233:7:73",
@@ -1677,7 +1677,7 @@
             "visibility": "private"
           },
           {
-            "id": 41600,
+            "id": 41565,
             "nodeType": "VariableDeclaration",
             "src": "268:31:73",
             "nodes": [],
@@ -1685,7 +1685,7 @@
             "mutability": "mutable",
             "name": "contractAddress",
             "nameLocation": "284:15:73",
-            "scope": 41778,
+            "scope": 41743,
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -1693,7 +1693,7 @@
               "typeString": "address"
             },
             "typeName": {
-              "id": 41599,
+              "id": 41564,
               "name": "address",
               "nodeType": "ElementaryTypeName",
               "src": "268:7:73",
@@ -1706,7 +1706,7 @@
             "visibility": "private"
           },
           {
-            "id": 41602,
+            "id": 41567,
             "nodeType": "VariableDeclaration",
             "src": "305:31:73",
             "nodes": [],
@@ -1714,7 +1714,7 @@
             "mutability": "mutable",
             "name": "deployerAddress",
             "nameLocation": "321:15:73",
-            "scope": 41778,
+            "scope": 41743,
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -1722,7 +1722,7 @@
               "typeString": "address"
             },
             "typeName": {
-              "id": 41601,
+              "id": 41566,
               "name": "address",
               "nodeType": "ElementaryTypeName",
               "src": "305:7:73",
@@ -1735,29 +1735,29 @@
             "visibility": "private"
           },
           {
-            "id": 41657,
+            "id": 41622,
             "nodeType": "FunctionDefinition",
             "src": "343:322:73",
             "nodes": [],
             "body": {
-              "id": 41656,
+              "id": 41621,
               "nodeType": "Block",
               "src": "367:298:73",
               "nodes": [],
               "statements": [
                 {
                   "expression": {
-                    "id": 41610,
+                    "id": 41575,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
-                      "id": 41605,
+                      "id": 41570,
                       "name": "deployerAddress",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 41602,
+                      "referencedDeclaration": 41567,
                       "src": "377:15:73",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -1770,7 +1770,7 @@
                       "arguments": [
                         {
                           "hexValue": "31",
-                          "id": 41608,
+                          "id": 41573,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -1792,7 +1792,7 @@
                             "typeString": "int_const 1"
                           }
                         ],
-                        "id": 41607,
+                        "id": 41572,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -1804,14 +1804,14 @@
                           "typeString": "type(address)"
                         },
                         "typeName": {
-                          "id": 41606,
+                          "id": 41571,
                           "name": "address",
                           "nodeType": "ElementaryTypeName",
                           "src": "395:7:73",
                           "typeDescriptions": {}
                         }
                       },
-                      "id": 41609,
+                      "id": 41574,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -1833,7 +1833,7 @@
                       "typeString": "address"
                     }
                   },
-                  "id": 41611,
+                  "id": 41576,
                   "nodeType": "ExpressionStatement",
                   "src": "377:28:73"
                 },
@@ -1841,11 +1841,11 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 41615,
+                        "id": 41580,
                         "name": "deployerAddress",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 41602,
+                        "referencedDeclaration": 41567,
                         "src": "424:15:73",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -1861,7 +1861,7 @@
                         }
                       ],
                       "expression": {
-                        "id": 41612,
+                        "id": 41577,
                         "name": "vm",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
@@ -1872,7 +1872,7 @@
                           "typeString": "contract Vm"
                         }
                       },
-                      "id": 41614,
+                      "id": 41579,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -1887,7 +1887,7 @@
                         "typeString": "function (address) external"
                       }
                     },
-                    "id": 41616,
+                    "id": 41581,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1903,26 +1903,26 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 41617,
+                  "id": 41582,
                   "nodeType": "ExpressionStatement",
                   "src": "415:25:73"
                 },
                 {
                   "expression": {
-                    "id": 41626,
+                    "id": 41591,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
-                      "id": 41618,
+                      "id": 41583,
                       "name": "nft",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 41596,
+                      "referencedDeclaration": 41561,
                       "src": "450:3:73",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_Daypass_$40972",
+                        "typeIdentifier": "t_contract$_Daypass_$40949",
                         "typeString": "contract Daypass"
                       }
                     },
@@ -1932,7 +1932,7 @@
                       "arguments": [
                         {
                           "hexValue": "44617970617373",
-                          "id": 41622,
+                          "id": 41587,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -1948,7 +1948,7 @@
                         },
                         {
                           "hexValue": "4450415353",
-                          "id": 41623,
+                          "id": 41588,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -1964,7 +1964,7 @@
                         },
                         {
                           "hexValue": "74727565",
-                          "id": 41624,
+                          "id": 41589,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -1994,7 +1994,7 @@
                             "typeString": "bool"
                           }
                         ],
-                        "id": 41621,
+                        "id": 41586,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -2002,31 +2002,31 @@
                         "nodeType": "NewExpression",
                         "src": "456:11:73",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_function_creation_payable$_t_string_memory_ptr_$_t_string_memory_ptr_$_t_bool_$returns$_t_contract$_Daypass_$40972_$",
+                          "typeIdentifier": "t_function_creation_payable$_t_string_memory_ptr_$_t_string_memory_ptr_$_t_bool_$returns$_t_contract$_Daypass_$40949_$",
                           "typeString": "function (string memory,string memory,bool) payable returns (contract Daypass)"
                         },
                         "typeName": {
-                          "id": 41620,
+                          "id": 41585,
                           "nodeType": "UserDefinedTypeName",
                           "pathNode": {
-                            "id": 41619,
+                            "id": 41584,
                             "name": "Daypass",
                             "nameLocations": [
                               "460:7:73"
                             ],
                             "nodeType": "IdentifierPath",
-                            "referencedDeclaration": 40972,
+                            "referencedDeclaration": 40949,
                             "src": "460:7:73"
                           },
-                          "referencedDeclaration": 40972,
+                          "referencedDeclaration": 40949,
                           "src": "460:7:73",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_contract$_Daypass_$40972",
+                            "typeIdentifier": "t_contract$_Daypass_$40949",
                             "typeString": "contract Daypass"
                           }
                         }
                       },
-                      "id": 41625,
+                      "id": 41590,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -2038,33 +2038,33 @@
                       "src": "456:37:73",
                       "tryCall": false,
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_Daypass_$40972",
+                        "typeIdentifier": "t_contract$_Daypass_$40949",
                         "typeString": "contract Daypass"
                       }
                     },
                     "src": "450:43:73",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_Daypass_$40972",
+                      "typeIdentifier": "t_contract$_Daypass_$40949",
                       "typeString": "contract Daypass"
                     }
                   },
-                  "id": 41627,
+                  "id": 41592,
                   "nodeType": "ExpressionStatement",
                   "src": "450:43:73"
                 },
                 {
                   "expression": {
-                    "id": 41633,
+                    "id": 41598,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
-                      "id": 41628,
+                      "id": 41593,
                       "name": "contractAddress",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 41600,
+                      "referencedDeclaration": 41565,
                       "src": "503:15:73",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -2076,14 +2076,14 @@
                     "rightHandSide": {
                       "arguments": [
                         {
-                          "id": 41631,
+                          "id": 41596,
                           "name": "nft",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 41596,
+                          "referencedDeclaration": 41561,
                           "src": "529:3:73",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_contract$_Daypass_$40972",
+                            "typeIdentifier": "t_contract$_Daypass_$40949",
                             "typeString": "contract Daypass"
                           }
                         }
@@ -2091,11 +2091,11 @@
                       "expression": {
                         "argumentTypes": [
                           {
-                            "typeIdentifier": "t_contract$_Daypass_$40972",
+                            "typeIdentifier": "t_contract$_Daypass_$40949",
                             "typeString": "contract Daypass"
                           }
                         ],
-                        "id": 41630,
+                        "id": 41595,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -2107,14 +2107,14 @@
                           "typeString": "type(address)"
                         },
                         "typeName": {
-                          "id": 41629,
+                          "id": 41594,
                           "name": "address",
                           "nodeType": "ElementaryTypeName",
                           "src": "521:7:73",
                           "typeDescriptions": {}
                         }
                       },
-                      "id": 41632,
+                      "id": 41597,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -2136,23 +2136,23 @@
                       "typeString": "address"
                     }
                   },
-                  "id": 41634,
+                  "id": 41599,
                   "nodeType": "ExpressionStatement",
                   "src": "503:30:73"
                 },
                 {
                   "expression": {
-                    "id": 41640,
+                    "id": 41605,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
-                      "id": 41635,
+                      "id": 41600,
                       "name": "normalAddress",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 41598,
+                      "referencedDeclaration": 41563,
                       "src": "543:13:73",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -2165,7 +2165,7 @@
                       "arguments": [
                         {
                           "hexValue": "32",
-                          "id": 41638,
+                          "id": 41603,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -2187,7 +2187,7 @@
                             "typeString": "int_const 2"
                           }
                         ],
-                        "id": 41637,
+                        "id": 41602,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -2199,14 +2199,14 @@
                           "typeString": "type(address)"
                         },
                         "typeName": {
-                          "id": 41636,
+                          "id": 41601,
                           "name": "address",
                           "nodeType": "ElementaryTypeName",
                           "src": "559:7:73",
                           "typeDescriptions": {}
                         }
                       },
-                      "id": 41639,
+                      "id": 41604,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -2228,7 +2228,7 @@
                       "typeString": "address"
                     }
                   },
-                  "id": 41641,
+                  "id": 41606,
                   "nodeType": "ExpressionStatement",
                   "src": "543:26:73"
                 },
@@ -2236,11 +2236,11 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 41645,
+                        "id": 41610,
                         "name": "deployerAddress",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 41602,
+                        "referencedDeclaration": 41567,
                         "src": "588:15:73",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -2249,7 +2249,7 @@
                       },
                       {
                         "hexValue": "313030",
-                        "id": 41646,
+                        "id": 41611,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -2277,7 +2277,7 @@
                         }
                       ],
                       "expression": {
-                        "id": 41642,
+                        "id": 41607,
                         "name": "vm",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
@@ -2288,7 +2288,7 @@
                           "typeString": "contract Vm"
                         }
                       },
-                      "id": 41644,
+                      "id": 41609,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -2303,7 +2303,7 @@
                         "typeString": "function (address,uint256) external"
                       }
                     },
-                    "id": 41647,
+                    "id": 41612,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2319,7 +2319,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 41648,
+                  "id": 41613,
                   "nodeType": "ExpressionStatement",
                   "src": "580:35:73"
                 },
@@ -2327,11 +2327,11 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 41652,
+                        "id": 41617,
                         "name": "normalAddress",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 41598,
+                        "referencedDeclaration": 41563,
                         "src": "633:13:73",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -2340,7 +2340,7 @@
                       },
                       {
                         "hexValue": "313030",
-                        "id": 41653,
+                        "id": 41618,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -2368,7 +2368,7 @@
                         }
                       ],
                       "expression": {
-                        "id": 41649,
+                        "id": 41614,
                         "name": "vm",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
@@ -2379,7 +2379,7 @@
                           "typeString": "contract Vm"
                         }
                       },
-                      "id": 41651,
+                      "id": 41616,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -2394,7 +2394,7 @@
                         "typeString": "function (address,uint256) external"
                       }
                     },
-                    "id": 41654,
+                    "id": 41619,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2410,7 +2410,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 41655,
+                  "id": 41620,
                   "nodeType": "ExpressionStatement",
                   "src": "625:33:73"
                 }
@@ -2423,29 +2423,29 @@
             "name": "setUp",
             "nameLocation": "352:5:73",
             "parameters": {
-              "id": 41603,
+              "id": 41568,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "357:2:73"
             },
             "returnParameters": {
-              "id": 41604,
+              "id": 41569,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "367:0:73"
             },
-            "scope": 41778,
+            "scope": 41743,
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
           },
           {
-            "id": 41709,
+            "id": 41674,
             "nodeType": "FunctionDefinition",
             "src": "671:330:73",
             "nodes": [],
             "body": {
-              "id": 41708,
+              "id": 41673,
               "nodeType": "Block",
               "src": "723:278:73",
               "nodes": [],
@@ -2454,11 +2454,11 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 41665,
+                        "id": 41630,
                         "name": "deployerAddress",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 41602,
+                        "referencedDeclaration": 41567,
                         "src": "747:15:73",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -2474,7 +2474,7 @@
                         }
                       ],
                       "expression": {
-                        "id": 41662,
+                        "id": 41627,
                         "name": "vm",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
@@ -2485,7 +2485,7 @@
                           "typeString": "contract Vm"
                         }
                       },
-                      "id": 41664,
+                      "id": 41629,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -2500,7 +2500,7 @@
                         "typeString": "function (address) external"
                       }
                     },
-                    "id": 41666,
+                    "id": 41631,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2516,7 +2516,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 41667,
+                  "id": 41632,
                   "nodeType": "ExpressionStatement",
                   "src": "733:30:73"
                 },
@@ -2526,11 +2526,11 @@
                       {
                         "arguments": [
                           {
-                            "id": 41671,
+                            "id": 41636,
                             "name": "normalAddress",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 41598,
+                            "referencedDeclaration": 41563,
                             "src": "796:13:73",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address",
@@ -2546,18 +2546,18 @@
                             }
                           ],
                           "expression": {
-                            "id": 41669,
+                            "id": 41634,
                             "name": "nft",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 41596,
+                            "referencedDeclaration": 41561,
                             "src": "782:3:73",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_Daypass_$40972",
+                              "typeIdentifier": "t_contract$_Daypass_$40949",
                               "typeString": "contract Daypass"
                             }
                           },
-                          "id": 41670,
+                          "id": 41635,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -2572,7 +2572,7 @@
                             "typeString": "function (address) view external returns (uint256)"
                           }
                         },
-                        "id": 41672,
+                        "id": 41637,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -2590,7 +2590,7 @@
                       },
                       {
                         "hexValue": "30",
-                        "id": 41673,
+                        "id": 41638,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -2616,7 +2616,7 @@
                           "typeString": "int_const 0"
                         }
                       ],
-                      "id": 41668,
+                      "id": 41633,
                       "name": "assertEq",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -2648,7 +2648,7 @@
                         "typeString": "function (uint256,uint256)"
                       }
                     },
-                    "id": 41674,
+                    "id": 41639,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2664,7 +2664,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 41675,
+                  "id": 41640,
                   "nodeType": "ExpressionStatement",
                   "src": "773:41:73"
                 },
@@ -2676,7 +2676,7 @@
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
                         },
-                        "id": 41685,
+                        "id": 41650,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -2686,17 +2686,17 @@
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
                           },
-                          "id": 41681,
+                          "id": 41646,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
                           "lValueRequested": false,
                           "leftExpression": {
-                            "id": 41679,
+                            "id": 41644,
                             "name": "quantity",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 41659,
+                            "referencedDeclaration": 41624,
                             "src": "835:8:73",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
@@ -2707,7 +2707,7 @@
                           "operator": "<",
                           "rightExpression": {
                             "hexValue": "313030",
-                            "id": 41680,
+                            "id": 41645,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
@@ -2734,17 +2734,17 @@
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
                           },
-                          "id": 41684,
+                          "id": 41649,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
                           "lValueRequested": false,
                           "leftExpression": {
-                            "id": 41682,
+                            "id": 41647,
                             "name": "quantity",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 41659,
+                            "referencedDeclaration": 41624,
                             "src": "853:8:73",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
@@ -2755,7 +2755,7 @@
                           "operator": ">",
                           "rightExpression": {
                             "hexValue": "30",
-                            "id": 41683,
+                            "id": 41648,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
@@ -2790,7 +2790,7 @@
                         }
                       ],
                       "expression": {
-                        "id": 41676,
+                        "id": 41641,
                         "name": "vm",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
@@ -2801,7 +2801,7 @@
                           "typeString": "contract Vm"
                         }
                       },
-                      "id": 41678,
+                      "id": 41643,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -2816,7 +2816,7 @@
                         "typeString": "function (bool) pure external"
                       }
                     },
-                    "id": 41686,
+                    "id": 41651,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2832,7 +2832,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 41687,
+                  "id": 41652,
                   "nodeType": "ExpressionStatement",
                   "src": "825:41:73"
                 },
@@ -2840,11 +2840,11 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 41691,
+                        "id": 41656,
                         "name": "quantity",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 41659,
+                        "referencedDeclaration": 41624,
                         "src": "887:8:73",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -2852,11 +2852,11 @@
                         }
                       },
                       {
-                        "id": 41692,
+                        "id": 41657,
                         "name": "normalAddress",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 41598,
+                        "referencedDeclaration": 41563,
                         "src": "897:13:73",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -2876,18 +2876,18 @@
                         }
                       ],
                       "expression": {
-                        "id": 41688,
+                        "id": 41653,
                         "name": "nft",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 41596,
+                        "referencedDeclaration": 41561,
                         "src": "876:3:73",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_Daypass_$40972",
+                          "typeIdentifier": "t_contract$_Daypass_$40949",
                           "typeString": "contract Daypass"
                         }
                       },
-                      "id": 41690,
+                      "id": 41655,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -2895,14 +2895,14 @@
                       "memberLocation": "880:6:73",
                       "memberName": "mintTo",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 40606,
+                      "referencedDeclaration": 40583,
                       "src": "876:10:73",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$_t_address_$returns$__$",
                         "typeString": "function (uint256,address) external"
                       }
                     },
-                    "id": 41693,
+                    "id": 41658,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2918,7 +2918,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 41694,
+                  "id": 41659,
                   "nodeType": "ExpressionStatement",
                   "src": "876:35:73"
                 },
@@ -2928,11 +2928,11 @@
                       {
                         "arguments": [
                           {
-                            "id": 41698,
+                            "id": 41663,
                             "name": "normalAddress",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 41598,
+                            "referencedDeclaration": 41563,
                             "src": "945:13:73",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address",
@@ -2948,18 +2948,18 @@
                             }
                           ],
                           "expression": {
-                            "id": 41696,
+                            "id": 41661,
                             "name": "nft",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 41596,
+                            "referencedDeclaration": 41561,
                             "src": "931:3:73",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_Daypass_$40972",
+                              "typeIdentifier": "t_contract$_Daypass_$40949",
                               "typeString": "contract Daypass"
                             }
                           },
-                          "id": 41697,
+                          "id": 41662,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -2974,7 +2974,7 @@
                             "typeString": "function (address) view external returns (uint256)"
                           }
                         },
-                        "id": 41699,
+                        "id": 41664,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -2991,11 +2991,11 @@
                         }
                       },
                       {
-                        "id": 41700,
+                        "id": 41665,
                         "name": "quantity",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 41659,
+                        "referencedDeclaration": 41624,
                         "src": "961:8:73",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -3014,7 +3014,7 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 41695,
+                      "id": 41660,
                       "name": "assertEq",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -3046,7 +3046,7 @@
                         "typeString": "function (uint256,uint256)"
                       }
                     },
-                    "id": 41701,
+                    "id": 41666,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3062,7 +3062,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 41702,
+                  "id": 41667,
                   "nodeType": "ExpressionStatement",
                   "src": "922:48:73"
                 },
@@ -3072,7 +3072,7 @@
                     "expression": {
                       "argumentTypes": [],
                       "expression": {
-                        "id": 41703,
+                        "id": 41668,
                         "name": "vm",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
@@ -3083,7 +3083,7 @@
                           "typeString": "contract Vm"
                         }
                       },
-                      "id": 41705,
+                      "id": 41670,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -3098,7 +3098,7 @@
                         "typeString": "function () external"
                       }
                     },
-                    "id": 41706,
+                    "id": 41671,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3114,7 +3114,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 41707,
+                  "id": 41672,
                   "nodeType": "ExpressionStatement",
                   "src": "980:14:73"
                 }
@@ -3127,17 +3127,17 @@
             "name": "testDaypassMintTo",
             "nameLocation": "680:17:73",
             "parameters": {
-              "id": 41660,
+              "id": 41625,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 41659,
+                  "id": 41624,
                   "mutability": "mutable",
                   "name": "quantity",
                   "nameLocation": "706:8:73",
                   "nodeType": "VariableDeclaration",
-                  "scope": 41709,
+                  "scope": 41674,
                   "src": "698:16:73",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3146,7 +3146,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 41658,
+                    "id": 41623,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "698:7:73",
@@ -3161,23 +3161,23 @@
               "src": "697:18:73"
             },
             "returnParameters": {
-              "id": 41661,
+              "id": 41626,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "723:0:73"
             },
-            "scope": 41778,
+            "scope": 41743,
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
           },
           {
-            "id": 41777,
+            "id": 41742,
             "nodeType": "FunctionDefinition",
             "src": "1007:531:73",
             "nodes": [],
             "body": {
-              "id": 41776,
+              "id": 41741,
               "nodeType": "Block",
               "src": "1041:497:73",
               "nodes": [],
@@ -3186,11 +3186,11 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 41715,
+                        "id": 41680,
                         "name": "deployerAddress",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 41602,
+                        "referencedDeclaration": 41567,
                         "src": "1065:15:73",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -3206,7 +3206,7 @@
                         }
                       ],
                       "expression": {
-                        "id": 41712,
+                        "id": 41677,
                         "name": "vm",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
@@ -3217,7 +3217,7 @@
                           "typeString": "contract Vm"
                         }
                       },
-                      "id": 41714,
+                      "id": 41679,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -3232,7 +3232,7 @@
                         "typeString": "function (address) external"
                       }
                     },
-                    "id": 41716,
+                    "id": 41681,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3248,7 +3248,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 41717,
+                  "id": 41682,
                   "nodeType": "ExpressionStatement",
                   "src": "1051:30:73"
                 },
@@ -3258,11 +3258,11 @@
                       {
                         "arguments": [
                           {
-                            "id": 41721,
+                            "id": 41686,
                             "name": "normalAddress",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 41598,
+                            "referencedDeclaration": 41563,
                             "src": "1114:13:73",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address",
@@ -3278,18 +3278,18 @@
                             }
                           ],
                           "expression": {
-                            "id": 41719,
+                            "id": 41684,
                             "name": "nft",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 41596,
+                            "referencedDeclaration": 41561,
                             "src": "1100:3:73",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_Daypass_$40972",
+                              "typeIdentifier": "t_contract$_Daypass_$40949",
                               "typeString": "contract Daypass"
                             }
                           },
-                          "id": 41720,
+                          "id": 41685,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -3304,7 +3304,7 @@
                             "typeString": "function (address) view external returns (uint256)"
                           }
                         },
-                        "id": 41722,
+                        "id": 41687,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -3322,7 +3322,7 @@
                       },
                       {
                         "hexValue": "30",
-                        "id": 41723,
+                        "id": 41688,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -3348,7 +3348,7 @@
                           "typeString": "int_const 0"
                         }
                       ],
-                      "id": 41718,
+                      "id": 41683,
                       "name": "assertEq",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -3380,7 +3380,7 @@
                         "typeString": "function (uint256,uint256)"
                       }
                     },
-                    "id": 41724,
+                    "id": 41689,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3396,7 +3396,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 41725,
+                  "id": 41690,
                   "nodeType": "ExpressionStatement",
                   "src": "1091:41:73"
                 },
@@ -3406,11 +3406,11 @@
                       {
                         "arguments": [
                           {
-                            "id": 41729,
+                            "id": 41694,
                             "name": "normalAddress",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 41598,
+                            "referencedDeclaration": 41563,
                             "src": "1168:13:73",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address",
@@ -3426,18 +3426,18 @@
                             }
                           ],
                           "expression": {
-                            "id": 41727,
+                            "id": 41692,
                             "name": "nft",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 41596,
+                            "referencedDeclaration": 41561,
                             "src": "1151:3:73",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_Daypass_$40972",
+                              "typeIdentifier": "t_contract$_Daypass_$40949",
                               "typeString": "contract Daypass"
                             }
                           },
-                          "id": 41728,
+                          "id": 41693,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -3445,14 +3445,14 @@
                           "memberLocation": "1155:12:73",
                           "memberName": "hasValidPass",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 40685,
+                          "referencedDeclaration": 40662,
                           "src": "1151:16:73",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_bool_$",
                             "typeString": "function (address) view external returns (bool)"
                           }
                         },
-                        "id": 41730,
+                        "id": 41695,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -3470,7 +3470,7 @@
                       },
                       {
                         "hexValue": "66616c7365",
-                        "id": 41731,
+                        "id": 41696,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -3496,7 +3496,7 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 41726,
+                      "id": 41691,
                       "name": "assertEq",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -3528,7 +3528,7 @@
                         "typeString": "function (bool,bool)"
                       }
                     },
-                    "id": 41732,
+                    "id": 41697,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3544,7 +3544,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 41733,
+                  "id": 41698,
                   "nodeType": "ExpressionStatement",
                   "src": "1142:48:73"
                 },
@@ -3553,7 +3553,7 @@
                     "arguments": [
                       {
                         "hexValue": "31",
-                        "id": 41737,
+                        "id": 41702,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -3568,11 +3568,11 @@
                         "value": "1"
                       },
                       {
-                        "id": 41738,
+                        "id": 41703,
                         "name": "normalAddress",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 41598,
+                        "referencedDeclaration": 41563,
                         "src": "1214:13:73",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -3592,18 +3592,18 @@
                         }
                       ],
                       "expression": {
-                        "id": 41734,
+                        "id": 41699,
                         "name": "nft",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 41596,
+                        "referencedDeclaration": 41561,
                         "src": "1200:3:73",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_Daypass_$40972",
+                          "typeIdentifier": "t_contract$_Daypass_$40949",
                           "typeString": "contract Daypass"
                         }
                       },
-                      "id": 41736,
+                      "id": 41701,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -3611,14 +3611,14 @@
                       "memberLocation": "1204:6:73",
                       "memberName": "mintTo",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 40606,
+                      "referencedDeclaration": 40583,
                       "src": "1200:10:73",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$_t_address_$returns$__$",
                         "typeString": "function (uint256,address) external"
                       }
                     },
-                    "id": 41739,
+                    "id": 41704,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3634,7 +3634,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 41740,
+                  "id": 41705,
                   "nodeType": "ExpressionStatement",
                   "src": "1200:28:73"
                 },
@@ -3644,11 +3644,11 @@
                       {
                         "arguments": [
                           {
-                            "id": 41744,
+                            "id": 41709,
                             "name": "normalAddress",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 41598,
+                            "referencedDeclaration": 41563,
                             "src": "1262:13:73",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address",
@@ -3664,18 +3664,18 @@
                             }
                           ],
                           "expression": {
-                            "id": 41742,
+                            "id": 41707,
                             "name": "nft",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 41596,
+                            "referencedDeclaration": 41561,
                             "src": "1248:3:73",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_Daypass_$40972",
+                              "typeIdentifier": "t_contract$_Daypass_$40949",
                               "typeString": "contract Daypass"
                             }
                           },
-                          "id": 41743,
+                          "id": 41708,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -3690,7 +3690,7 @@
                             "typeString": "function (address) view external returns (uint256)"
                           }
                         },
-                        "id": 41745,
+                        "id": 41710,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -3708,7 +3708,7 @@
                       },
                       {
                         "hexValue": "31",
-                        "id": 41746,
+                        "id": 41711,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -3734,7 +3734,7 @@
                           "typeString": "int_const 1"
                         }
                       ],
-                      "id": 41741,
+                      "id": 41706,
                       "name": "assertEq",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -3766,7 +3766,7 @@
                         "typeString": "function (uint256,uint256)"
                       }
                     },
-                    "id": 41747,
+                    "id": 41712,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3782,7 +3782,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 41748,
+                  "id": 41713,
                   "nodeType": "ExpressionStatement",
                   "src": "1239:41:73"
                 },
@@ -3792,11 +3792,11 @@
                       {
                         "arguments": [
                           {
-                            "id": 41752,
+                            "id": 41717,
                             "name": "normalAddress",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 41598,
+                            "referencedDeclaration": 41563,
                             "src": "1316:13:73",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address",
@@ -3812,18 +3812,18 @@
                             }
                           ],
                           "expression": {
-                            "id": 41750,
+                            "id": 41715,
                             "name": "nft",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 41596,
+                            "referencedDeclaration": 41561,
                             "src": "1299:3:73",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_Daypass_$40972",
+                              "typeIdentifier": "t_contract$_Daypass_$40949",
                               "typeString": "contract Daypass"
                             }
                           },
-                          "id": 41751,
+                          "id": 41716,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -3831,14 +3831,14 @@
                           "memberLocation": "1303:12:73",
                           "memberName": "hasValidPass",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 40685,
+                          "referencedDeclaration": 40662,
                           "src": "1299:16:73",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_bool_$",
                             "typeString": "function (address) view external returns (bool)"
                           }
                         },
-                        "id": 41753,
+                        "id": 41718,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -3856,7 +3856,7 @@
                       },
                       {
                         "hexValue": "74727565",
-                        "id": 41754,
+                        "id": 41719,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -3882,7 +3882,7 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 41749,
+                      "id": 41714,
                       "name": "assertEq",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -3914,7 +3914,7 @@
                         "typeString": "function (bool,bool)"
                       }
                     },
-                    "id": 41755,
+                    "id": 41720,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3930,7 +3930,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 41756,
+                  "id": 41721,
                   "nodeType": "ExpressionStatement",
                   "src": "1290:47:73"
                 },
@@ -3939,7 +3939,7 @@
                     "arguments": [
                       {
                         "hexValue": "31303030303030303030303030303030",
-                        "id": 41760,
+                        "id": 41725,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -3962,7 +3962,7 @@
                         }
                       ],
                       "expression": {
-                        "id": 41757,
+                        "id": 41722,
                         "name": "vm",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
@@ -3973,7 +3973,7 @@
                           "typeString": "contract Vm"
                         }
                       },
-                      "id": 41759,
+                      "id": 41724,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -3988,7 +3988,7 @@
                         "typeString": "function (uint256) external"
                       }
                     },
-                    "id": 41761,
+                    "id": 41726,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -4004,7 +4004,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 41762,
+                  "id": 41727,
                   "nodeType": "ExpressionStatement",
                   "src": "1423:25:73"
                 },
@@ -4014,11 +4014,11 @@
                       {
                         "arguments": [
                           {
-                            "id": 41766,
+                            "id": 41731,
                             "name": "normalAddress",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 41598,
+                            "referencedDeclaration": 41563,
                             "src": "1484:13:73",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address",
@@ -4034,18 +4034,18 @@
                             }
                           ],
                           "expression": {
-                            "id": 41764,
+                            "id": 41729,
                             "name": "nft",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 41596,
+                            "referencedDeclaration": 41561,
                             "src": "1467:3:73",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_Daypass_$40972",
+                              "typeIdentifier": "t_contract$_Daypass_$40949",
                               "typeString": "contract Daypass"
                             }
                           },
-                          "id": 41765,
+                          "id": 41730,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -4053,14 +4053,14 @@
                           "memberLocation": "1471:12:73",
                           "memberName": "hasValidPass",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 40685,
+                          "referencedDeclaration": 40662,
                           "src": "1467:16:73",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_bool_$",
                             "typeString": "function (address) view external returns (bool)"
                           }
                         },
-                        "id": 41767,
+                        "id": 41732,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -4078,7 +4078,7 @@
                       },
                       {
                         "hexValue": "66616c7365",
-                        "id": 41768,
+                        "id": 41733,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -4104,7 +4104,7 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 41763,
+                      "id": 41728,
                       "name": "assertEq",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -4136,7 +4136,7 @@
                         "typeString": "function (bool,bool)"
                       }
                     },
-                    "id": 41769,
+                    "id": 41734,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -4152,7 +4152,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 41770,
+                  "id": 41735,
                   "nodeType": "ExpressionStatement",
                   "src": "1458:48:73"
                 },
@@ -4162,7 +4162,7 @@
                     "expression": {
                       "argumentTypes": [],
                       "expression": {
-                        "id": 41771,
+                        "id": 41736,
                         "name": "vm",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
@@ -4173,7 +4173,7 @@
                           "typeString": "contract Vm"
                         }
                       },
-                      "id": 41773,
+                      "id": 41738,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -4188,7 +4188,7 @@
                         "typeString": "function () external"
                       }
                     },
-                    "id": 41774,
+                    "id": 41739,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -4204,7 +4204,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 41775,
+                  "id": 41740,
                   "nodeType": "ExpressionStatement",
                   "src": "1517:14:73"
                 }
@@ -4217,18 +4217,18 @@
             "name": "testDaypassTime",
             "nameLocation": "1016:15:73",
             "parameters": {
-              "id": 41710,
+              "id": 41675,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1031:2:73"
             },
             "returnParameters": {
-              "id": 41711,
+              "id": 41676,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1041:0:73"
             },
-            "scope": 41778,
+            "scope": 41743,
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
@@ -4238,7 +4238,7 @@
         "baseContracts": [
           {
             "baseName": {
-              "id": 41588,
+              "id": 41553,
               "name": "Test",
               "nameLocations": [
                 "159:4:73"
@@ -4247,19 +4247,19 @@
               "referencedDeclaration": 17757,
               "src": "159:4:73"
             },
-            "id": 41589,
+            "id": 41554,
             "nodeType": "InheritanceSpecifier",
             "src": "159:4:73"
           }
         ],
         "canonicalName": "DaypassTest",
         "contractDependencies": [
-          40972
+          40949
         ],
         "contractKind": "contract",
         "fullyImplemented": true,
         "linearizedBaseContracts": [
-          41778,
+          41743,
           17757,
           8821,
           8818,
@@ -4273,7 +4273,7 @@
         ],
         "name": "DaypassTest",
         "nameLocation": "144:11:73",
-        "scope": 41779,
+        "scope": 41744,
         "usedErrors": []
       }
     ],

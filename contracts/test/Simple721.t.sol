@@ -23,21 +23,21 @@ contract Simple721Test is Test {
         vm.deal(normalAddress, 100 ether);
     }
 
-    function testFailIncorrectValue(uint256 quantity) public {
+    function test_RevertWhen_IncorrectAmmount(uint256 quantity) public {
         vm.assume(quantity < nft.maxTokensPerTxn() && quantity > 0);
         vm.prank(normalAddress);
 
-        //vm.expectRevert(IncorrectValue.selector);
+        vm.expectRevert(IncorrectValue.selector);
         nft.mint{value: 0.00002 ether * quantity}(quantity);
     }
 
-    function testFailTooManyTokens(uint256 quantity) public {
+    function test_RevertWhen_TooManyTokens(uint256 quantity) public {
         vm.assume(quantity > nft.maxTokensPerTxn() && quantity < 100);
         uint256 salePrice = nft.salePrice();
 
         vm.prank(normalAddress);
 
-        //vm.expectRevert(TooManyTokens.selector);
+        vm.expectRevert(TooManyTokens.selector);
         nft.mint{value: salePrice * quantity}(quantity);
     }
 
