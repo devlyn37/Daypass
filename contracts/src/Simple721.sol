@@ -5,18 +5,16 @@ pragma solidity ^0.8.19;
 import "../lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol";
 import "../lib/openzeppelin-contracts/contracts/access/Ownable.sol";
 
+error IncorrectValue();
+error TooManyTokens();
+error WithdrawTransfer();
+
 contract Simple721 is ERC721, Ownable {
     uint256 public salePrice = 0 ether;
     uint256 public maxTokensPerTxn = 6;
     uint256 public currentTokenId;
 
     string public uri = "https://gateway.pinata.cloud/ipfs/QmPux5QgyPHfxjuCBf1GL6bnbYRoDdzwh9UGdnz2UXx58D";
-
-    // ERRORS & MODIFIERS
-
-    error IncorrectValue();
-    error TooManyTokens();
-    error WithdrawTransfer();
 
     modifier isCorrectPayment(uint256 quantity) {
         if (salePrice * quantity != msg.value) {

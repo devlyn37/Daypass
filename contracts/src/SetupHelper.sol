@@ -24,6 +24,8 @@ contract SetupHelper {
         // Deploy the Hackathon Paymaster Contract, then deposit and stake
         paymasterContract =
         new DaypassPaymaster(entryPoint, address(dayPassContract), targetAddresses, gasLimitPerOperation, spendingLimitPerOperation, timeLimitInSecond);
+
+        // TODO what's the minimum we need for each, doubt this is optimal
         paymasterContract.deposit{value: msg.value / 2}();
         paymasterContract.addStake{value: msg.value / 2}(86400);
 
