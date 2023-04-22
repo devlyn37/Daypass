@@ -8,7 +8,7 @@ export type SetupDaypassRequest = {
   spendingLimitPerOperation: number;
   timeLimitPerOperation: number;
   holders: string[];
-}
+};
 
 export const setupDaypass = async (
   signer: Signer,
@@ -28,7 +28,7 @@ export const setupDaypass = async (
     req.transferable,
     req.gasLimitPerOperation,
     req.spendingLimitPerOperation,
-    req.timeLimitPerOperation,
+    0,
     req.holders,
     {
       // for now 2 ether because needs to stake 1 ether at least
@@ -51,18 +51,15 @@ export const setupDaypass = async (
   }
 
   const passNFT = setupEvent.args![0];
-  const NFT = setupEvent.args![1];
-  const paymaster = setupEvent.args![2];
+  const paymaster = setupEvent.args![1];
 
   console.log("setup", {
     passNFT,
-    NFT,
     paymaster,
   });
 
   return {
     passNFT,
-    NFT,
     paymaster,
   };
 };

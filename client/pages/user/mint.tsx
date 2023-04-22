@@ -56,6 +56,9 @@ export default function Home() {
   const [nftContractAddress, setNftContractAddress] = useState("");
   const [paymasterAddress, setPaymasterAddress] = useState("");
 
+  console.log("Space cans address");
+  console.log(nftContractAddress);
+
   const projectID = useMemo(() => {
     switch (chain?.network) {
       case "goerli":
@@ -65,22 +68,21 @@ export default function Home() {
     }
   }, [chain?.network]);
 
+  console.log("ProjectId");
+  console.log(projectID);
+
   console.log("paymasterAddress", paymasterAddress);
 
   const loadNFTContractAddress = useCallback((chainName: string) => {
-    const mayAddress =
-      localStorage.getItem(
-        `${LOCALSTORAGE_KEY_DAY_PASS_ADDRESS}_${chainName}`
-      ) ?? "";
-
     switch (chainName) {
       case "GOERLI":
-        return mayAddress ?? SPACE_CAN;
+        return SPACE_CAN;
       case "MATICMUM":
-        return mayAddress ?? MUMBAI_SPACE_CAN_COLLECTION;
+        return MUMBAI_SPACE_CAN_COLLECTION;
+      default:
+        console.log("Unsupported demo chain, pls switch");
+        return SPACE_CAN;
     }
-
-    return mayAddress ?? "";
   }, []);
 
   useEffect(() => {
