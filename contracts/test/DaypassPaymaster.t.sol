@@ -48,7 +48,7 @@ contract DaypassPaymasterTest is Test {
         // Paymaster stakes
 
         vm.startPrank(owner);
-        nftPass = new Daypass("", "", false);
+        nftPass = new Daypass("", "", false, 86400);
         randomNFT = new Simple721();
 
         address[] memory whiteListedAddresses = new address[](1);

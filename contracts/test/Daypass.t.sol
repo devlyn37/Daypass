@@ -11,7 +11,7 @@ contract DaypassTest is Test {
     address private normalAddress;
     address private contractAddress;
     address private deployerAddress;
-    uint256 private oneDay;
+    uint48 private oneDay;
 
     function setUp() public {
         deployerAddress = address(1);
@@ -35,7 +35,7 @@ contract DaypassTest is Test {
         vm.stopPrank();
     }
 
-    function testValidUntilTimestamp(uint256 numDays) public {
+    function testValidUntilTimestamp(uint48 numDays) public {
         vm.startPrank(deployerAddress);
         vm.assume(numDays >= 0 && numDays < 14);
         nft = new Daypass("Daypass", "DPASS", true, oneDay * numDays);

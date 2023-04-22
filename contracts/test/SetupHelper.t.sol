@@ -55,7 +55,7 @@ contract SetupHelperTest is Test {
 
         // call should own both of the deployed contracts
         assertEq(dayPassContract.owner(), normalAddress);
-        assertEq(dayPassContract.getIsTransferable(), false);
+        assertEq(dayPassContract.isTransferable(), false);
 
         assertEq(paymasterContract.owner(), normalAddress);
         assertEq(paymasterContract.getDeposit(), 0.5 ether);

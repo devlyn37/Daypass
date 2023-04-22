@@ -11,13 +11,13 @@ error NotTransferable();
 
 contract Daypass is ERC721Enumerable, Ownable {
     uint256 public currentTokenId;
-    uint256 public duration;
+    uint48 public duration; // validUntil is 6-byte timestamp value (eip 4337)
     bool public isTransferable;
 
     // TODO we should consider storing this in the paymaster to avoid staking
-    mapping(uint256 => uint256) public validUntil;
+    mapping(uint256 => uint48) public validUntil;
 
-    constructor(string memory name, string memory symbol, bool _isTransferable, uint256 _duration)
+    constructor(string memory name, string memory symbol, bool _isTransferable, uint48 _duration)
         payable
         ERC721(name, symbol)
     {
@@ -30,19 +30,19 @@ contract Daypass is ERC721Enumerable, Ownable {
         for (uint256 i = 0; i < quantity; i++) {
             currentTokenId++;
             _mint(recipient, currentTokenId); // using unsafe mint right now for smart accounts that aren't 721 receivers
-            validUntil[currentTokenId] = block.timestamp + this.duration();
+            validUntil[currentTokenId] = uint48(block.timestamp) + this.duration();
         }
     }
 
     // A user may have more than one pass, this function finds the one that's valid
     // for the longest and returns that timestamp.
-    function hasGasCoveredUntil(address user) public view returns (uint256) {
+    function hasGasCoveredUntil(address user) public view returns (uint48) {
         uint256 tokenCount = balanceOf(user);
-        uint256 coveredUntil = block.timestamp - 1;
+        uint48 coveredUntil = uint48(block.timestamp) - 1;
 
         for (uint256 i = 0; i < tokenCount; i++) {
             uint256 tokenId = tokenOfOwnerByIndex(user, i);
-            uint256 curr = validUntil[tokenId];
+            uint48 curr = validUntil[tokenId];
             if (curr > coveredUntil) {
                 coveredUntil = curr;
             }
