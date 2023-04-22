@@ -11,13 +11,12 @@ contract DaypassTest is Test {
     address private normalAddress;
     address private contractAddress;
     address private deployerAddress;
+    uint256 private oneDay;
 
     function setUp() public {
         deployerAddress = address(1);
-        vm.prank(deployerAddress);
-        nft = new Daypass("Daypass", "DPASS", true);
-        contractAddress = address(nft);
         normalAddress = address(2);
+        oneDay = 86400;
 
         vm.deal(deployerAddress, 100 ether);
         vm.deal(normalAddress, 100 ether);
@@ -25,6 +24,8 @@ contract DaypassTest is Test {
 
     function testDaypassMintTo(uint256 quantity) public {
         vm.startPrank(deployerAddress);
+        nft = new Daypass("Daypass", "DPASS", true, oneDay);
+
         assertEq(nft.balanceOf(normalAddress), 0);
 
         vm.assume(quantity < 100 && quantity > 0);
@@ -34,19 +35,41 @@ contract DaypassTest is Test {
         vm.stopPrank();
     }
 
-    function testDaypassTime() public {
+    function testValidUntilTimestamp(uint256 numDays) public {
         vm.startPrank(deployerAddress);
+        vm.assume(numDays >= 0 && numDays < 14);
+        nft = new Daypass("Daypass", "DPASS", true, oneDay * numDays);
         assertEq(nft.balanceOf(normalAddress), 0);
-        assertEq(nft.hasValidPass(normalAddress), false);
+
         nft.mintTo(1, normalAddress);
-
         assertEq(nft.balanceOf(normalAddress), 1);
-        assertEq(nft.hasValidPass(normalAddress), true);
+        uint256 gasCoveredUntil = nft.hasGasCoveredUntil(normalAddress);
+        assertEq(gasCoveredUntil, block.timestamp + oneDay * numDays);
+        vm.stopPrank();
+    }
 
-        // Go way into the future, these passes shouldn't be valid anymore
-        vm.warp(1000000000000000);
-        assertEq(nft.hasValidPass(normalAddress), false);
+    function test_revertWhen_disallowedTransferAttempted() public {
+        vm.startPrank(deployerAddress);
+        nft = new Daypass("Daypass", "DPASS", false, oneDay);
+        nft.mintTo(1, normalAddress);
+        vm.stopPrank();
 
+        vm.startPrank(normalAddress);
+        vm.expectRevert(NotTransferable.selector);
+        nft.transferFrom(normalAddress, deployerAddress, 1);
+        vm.stopPrank();
+    }
+
+    function testAllowedTransfer() public {
+        vm.startPrank(deployerAddress);
+        nft = new Daypass("Daypass", "DPASS", true, oneDay);
+        nft.mintTo(1, normalAddress);
+        vm.stopPrank();
+
+        vm.startPrank(normalAddress);
+        nft.transferFrom(normalAddress, deployerAddress, 1);
+        assertEq(nft.balanceOf(normalAddress), 0);
+        assertEq(nft.balanceOf(deployerAddress), 1);
         vm.stopPrank();
     }
 }
