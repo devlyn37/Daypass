@@ -6,7 +6,6 @@ pragma solidity ^0.8.19;
 import "../lib/account-abstraction/contracts/core/BasePaymaster.sol";
 import "../lib/account-abstraction/contracts/core/Helpers.sol";
 import "../lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol";
-
 import "./Daypass.sol";
 
 error ExceedingGasLimit();
