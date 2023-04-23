@@ -3,18 +3,15 @@ import {
   connectorsForWallets,
   darkTheme,
 } from "@rainbow-me/rainbowkit";
-import "@rainbow-me/rainbowkit/styles.css";
 import {
   metaMaskWallet,
   walletConnectWallet,
+  rainbowWallet,
 } from "@rainbow-me/rainbowkit/wallets";
+import "@rainbow-me/rainbowkit/styles.css";
 import {
-  discordWallet,
-  enhanceWalletWithAAConnector,
-  facebookWallet,
   githubWallet,
   googleWallet,
-  twitchWallet,
   twitterWallet,
 } from "@zerodevapp/wagmi/rainbowkit";
 import { ReactNode } from "react";
@@ -40,52 +37,48 @@ const projectId = (() => {
 })();
 
 const { chains, provider, webSocketProvider } = configureChains(
-  [...((): any[] => {
-    switch (process.env.NEXT_PUBLIC_CHAIN!) {
-      case "ethereum":
-        return process.env.NEXT_PUBLIC_TESTNET === "true" ? [goerli] : [mainnet];
-      case "polygon":
-        return process.env.NEXT_PUBLIC_TESTNET === "true" ? [polygonMumbai] : [polygon];
-    }
+  [
+    ...((): any[] => {
+      switch (process.env.NEXT_PUBLIC_CHAIN!) {
+        case "ethereum":
+          return process.env.NEXT_PUBLIC_TESTNET === "true"
+            ? [goerli]
+            : [mainnet];
+        case "polygon":
+          return process.env.NEXT_PUBLIC_TESTNET === "true"
+            ? [polygonMumbai]
+            : [polygon];
+      }
 
-    return process.env.NEXT_PUBLIC_TESTNET === "true" ? [goerli] : [mainnet];
-  })()],
+      return process.env.NEXT_PUBLIC_TESTNET === "true" ? [goerli] : [mainnet];
+    })(),
+  ],
   [publicProvider()]
 );
 
+const appName = "Daypass";
+const demoAppInfo = {
+  appName,
+};
+
 const connectors = connectorsForWallets([
   {
-    groupName: "Social",
+    groupName: "Social Smart Accounts",
     wallets: [
       googleWallet({ options: { projectId } }),
-      facebookWallet({ options: { projectId } }),
       githubWallet({ options: { projectId } }),
-      discordWallet({ options: { projectId } }),
-      twitchWallet({ options: { projectId } }),
       twitterWallet({ options: { projectId } }),
     ],
   },
   {
-    groupName: "Web3 Wallets (AA-enabled)",
+    groupName: "Standard Wallets",
     wallets: [
-      enhanceWalletWithAAConnector(metaMaskWallet({ chains }), { projectId }),
-      enhanceWalletWithAAConnector(walletConnectWallet({ chains }), {
-        projectId,
-      }),
+      metaMaskWallet({ chains }),
+      rainbowWallet({ chains }),
+      walletConnectWallet({ chains }),
     ],
   },
 ]);
-
-const appName = "EVM Hackathon Starter";
-
-// const { chain } = getDefaultWallets({
-//   appName,
-//   chains,
-// });
-
-const demoAppInfo = {
-  appName,
-};
 
 const wagmiClient = createClient({
   autoConnect: true,
@@ -98,7 +91,7 @@ type WalletLayoutProps = {
   children: ReactNode;
 };
 
-const AAWalletProvider = ({ children }: WalletLayoutProps) => {
+const WalletProvider = ({ children }: WalletLayoutProps) => {
   return (
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider
@@ -114,4 +107,4 @@ const AAWalletProvider = ({ children }: WalletLayoutProps) => {
   );
 };
 
-export default AAWalletProvider;
+export default WalletProvider;
