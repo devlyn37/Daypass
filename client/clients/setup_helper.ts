@@ -28,7 +28,7 @@ export const setupDaypass = async (
     req.transferable,
     req.gasLimitPerOperation,
     req.spendingLimitPerOperation,
-    0,
+    req.timeLimitPerOperation,
     req.holders,
     {
       // for now 2 ether because needs to stake 1 ether at least
