@@ -38,7 +38,7 @@ contract Daypass is ERC721Enumerable, Ownable {
     // for the longest and returns that timestamp.
     function hasGasCoveredUntil(address user) public view returns (uint48) {
         uint256 tokenCount = balanceOf(user);
-        uint48 coveredUntil = uint48(block.timestamp) - 1;
+        uint48 coveredUntil = 1; // lowest non zero value
 
         for (uint256 i = 0; i < tokenCount; i++) {
             uint256 tokenId = tokenOfOwnerByIndex(user, i);
