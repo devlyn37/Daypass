@@ -4,6 +4,7 @@ import "../lib/forge-std/src/Test.sol";
 import "../src/DaypassPaymaster.sol";
 import "../src/Daypass.sol";
 import "../src/Simple721.sol";
+import "../src/setupHelper.sol";
 import "../lib/account-abstraction/contracts/core/EntryPoint.sol";
 import "../lib/account-abstraction/contracts/interfaces/IEntryPoint.sol";
 import "../lib/account-abstraction/contracts/interfaces/UserOperation.sol";
@@ -23,10 +24,14 @@ contract DaypassPaymasterTest is Test {
     uint256 goerliFork;
     uint256 ownerKey;
     address owner;
+    address[] whiteListedAddresses = new address[](1);
+    address[] airdropAddresses = new address[](1);
+    uint48 oneDay = 86400;
     SimpleAccountNFTReceiver player;
     EntryPoint entrypoint;
     DaypassPaymaster paymaster;
     Daypass nftPass;
+    SetupHelper setupHelper;
     Simple721 randomNFT;
 
     using ECDSA for bytes32;
@@ -40,60 +45,66 @@ contract DaypassPaymasterTest is Test {
 
         ownerKey = vm.envUint("OWNER_PRIVATE_KEY");
         owner = vm.addr(ownerKey);
+
         // Give some eth to the paymaster
         vm.selectFork(goerliFork);
-
         vm.deal(owner, 1001 ether);
-
-        // Paymaster stakes
+        entrypoint = EntryPoint(payable(0x0576a174D229E3cFA37253523E645A78A0C91B57));
 
         vm.startPrank(owner);
-        nftPass = new Daypass("", "", false);
+        setupHelper = new SetupHelper();
         randomNFT = new Simple721();
-
-        address[] memory whiteListedAddresses = new address[](1);
         whiteListedAddresses[0] = address(randomNFT);
-
-        entrypoint = EntryPoint(payable(0x0576a174D229E3cFA37253523E645A78A0C91B57));
-        // entrypoint = new EntryPoint();
-        paymaster = new DaypassPaymaster(entrypoint, address(nftPass), whiteListedAddresses, 500000_00, 0, 5000);
-        paymaster.addStake{value: 500 ether}(100000);
-        paymaster.deposit{value: 500 ether}();
-        // daypassPass = DaypassPaymaster(payable(0x38A310a0D9a015d23B973478c1EF961C3e44Ee62));
 
         //Some AA wallet
         player = new SimpleAccountNFTReceiver(entrypoint);
         player.initialize(owner);
-
-        // Give the AA wallet the NFTPass
-        nftPass.mintTo(1, address(player));
-        vm.stopPrank();
-
         vm.label(address(player), "player");
+        airdropAddresses[0] = address(player);
+
+        vm.stopPrank();
     }
 
     function test_mint_erc721_free_mint() external {
-        // Give a user DayPass NFT to allow randomNFT minting
-
         vm.prank(owner);
-        nftPass.mintTo(1, address(player));
-        vm.stopPrank();
-
-        vm.prank(address(player));
-        uint256 mintAmount = 1;
-        bytes memory mintFunction = abi.encodeWithSignature("mint(uint256)", mintAmount);
-        bytes memory callData =
-            abi.encodeWithSignature("execute(address,uint256,bytes)", address(randomNFT), 0, mintFunction);
-        // Make sure the main account has some funds
-        vm.deal(address(player), 1 ether);
+        (nftPass, paymaster) = setupHelper.setupDaypass{value: 10 ether}(
+            entrypoint, whiteListedAddresses, false, 500000_00, 0, oneDay, airdropAddresses
+        );
 
         vm.warp(4500);
-        sendUserOp(callData);
+
+        bytes memory mintFunction = abi.encodeWithSignature("mint(uint256)", 1);
+        UserOperation[] memory userOperations = new UserOperation[](1);
+        userOperations[0] = constructUserOp(mintFunction, address(randomNFT));
+
+        vm.prank(address(player));
+        entrypoint.handleOps(userOperations, payable(address(1)));
+
         address latestNftOwner = nftPass.ownerOf(nftPass.currentTokenId());
         assertEq(latestNftOwner, address(player));
     }
 
-    function sendUserOp(bytes memory data) internal {
+    function test_expired_pass() external {
+        vm.prank(owner);
+        (nftPass, paymaster) = setupHelper.setupDaypass{value: 10 ether}(
+            entrypoint, whiteListedAddresses, false, 500000_00, 0, oneDay, airdropAddresses
+        );
+
+        uint48 delay = oneDay + 1;
+        vm.warp(block.timestamp + delay);
+
+        bytes memory mintFunction = abi.encodeWithSignature("mint(uint256)", 1);
+        UserOperation[] memory userOperations = new UserOperation[](1);
+        userOperations[0] = constructUserOp(mintFunction, address(randomNFT));
+
+        vm.prank(address(player));
+        vm.expectRevert(abi.encodeWithSignature("FailedOp(uint256,string)", 0, "AA32 paymaster expired or not due"));
+        entrypoint.handleOps(userOperations, payable(address(1)));
+    }
+
+    function constructUserOp(bytes memory callData, address to) internal view returns (UserOperation memory userOp) {
+        bytes memory data = abi.encodeWithSignature("execute(address,uint256,bytes)", to, 0, callData);
+
         uint256 nonce = player.nonce();
         bytes memory initCode = abi.encode();
         uint256 callGasLimit = 40000_00;
@@ -120,10 +131,8 @@ contract DaypassPaymasterTest is Test {
         bytes32 userOpHash = entrypoint.getUserOpHash(userOp).toEthSignedMessageHash();
         (uint8 v, bytes32 r, bytes32 s) = vm.sign(ownerKey, userOpHash);
         userOp.signature = abi.encodePacked(r, s, v);
-        UserOperation[] memory userOperations = new UserOperation[](1);
-        userOperations[0] = userOp;
 
-        entrypoint.handleOps(userOperations, payable(address(1)));
+        return userOp;
     }
 
     function internalUserOpHash(UserOperation memory userOp) internal pure returns (bytes32) {

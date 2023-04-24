@@ -18,8 +18,7 @@ contract MyScript is Script {
         // Sample white-listed addresses, replace with the actual addresses
         address[] memory whiteListedAddresses = new address[](1);
         whiteListedAddresses[0] = 0xe358557b9e2a9a67318c32c09Daa3CD781b1A58b;
-
-        DaypassPaymaster paymaster = new DaypassPaymaster(entryPoint, nftPassAddress, whiteListedAddresses, 0, 0, 0);
+        new DaypassPaymaster(entryPoint, nftPassAddress, whiteListedAddresses, 0, 0, 0);
 
         vm.stopBroadcast();
     }

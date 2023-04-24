@@ -21,12 +21,12 @@ import { useForm } from "react-hook-form";
 import { useAccount, useNetwork, useSigner } from "wagmi";
 import AdminDashboardLayout from "./AdminDashboardLayout";
 import { setupDaypass } from "../clients/setup_helper";
-import { 
+import {
   GOERLI_ENTRYPOINT,
   GOERLI_SETUP_HELPER,
   MUMBAI_ENTRYPOINT,
   MUMBAI_SETUP_HELPER,
- } from "../consts/address";
+} from "../consts/address";
 import { BigNumber, ethers } from "ethers";
 import {
   LOCALSTORAGE_KEY_DAY_PASS_ADDRESS,
@@ -53,7 +53,7 @@ const AdminDashboardPage = () => {
     }
 
     return ["", ""];
-  }
+  };
 
   const onSubmit = (values: any, e?: React.BaseSyntheticEvent) => {
     e?.preventDefault();
@@ -108,7 +108,9 @@ const AdminDashboardPage = () => {
       setSubmitting(true);
 
       try {
-        const [setupHelper, entryPoint] = getSetupHelperAndEntryPoint(chain?.network!);
+        const [setupHelper, entryPoint] = getSetupHelperAndEntryPoint(
+          chain?.network!
+        );
 
         const { passNFT, paymaster } = await setupDaypass(
           signer!,
@@ -130,11 +132,18 @@ const AdminDashboardPage = () => {
           `Saved ${passNFT} into localstorage ${LOCALSTORAGE_KEY_DAY_PASS_ADDRESS}`
         );
 
-        console.log(`Saved ${passNFT} into localstorage ${LOCALSTORAGE_KEY_DAY_PASS_ADDRESS}_${chainName}`)
+        console.log(
+          `Saved ${passNFT} into localstorage ${LOCALSTORAGE_KEY_DAY_PASS_ADDRESS}_${chainName}`
+        );
 
-        localStorage.setItem(`${LOCALSTORAGE_PAYMASTER_ADDRESS}_${chainName}`, paymaster);
+        localStorage.setItem(
+          `${LOCALSTORAGE_PAYMASTER_ADDRESS}_${chainName}`,
+          paymaster
+        );
 
-        console.log(`Saved ${paymaster} into localstorage ${LOCALSTORAGE_PAYMASTER_ADDRESS}${chainName}`)
+        console.log(
+          `Saved ${paymaster} into localstorage ${LOCALSTORAGE_PAYMASTER_ADDRESS}${chainName}`
+        );
 
         router.push("/airdrop");
       } catch (error) {
@@ -145,7 +154,7 @@ const AdminDashboardPage = () => {
     })();
   };
 
-  console.log("chain?.network", chain?.network)
+  console.log("chain?.network", chain?.network);
 
   return (
     <AdminDashboardLayout>
