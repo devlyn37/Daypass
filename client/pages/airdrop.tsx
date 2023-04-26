@@ -1,22 +1,18 @@
-import { Box, Button, Flex, Heading, Input, Text } from "@chakra-ui/react";
-import { useRouter } from "next/router";
+import { Box, Button, Flex, Heading, Text, Textarea } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useAccount, useSigner } from "wagmi";
 import AdminDashboardLayout from "./AdminDashboardLayout";
 import { ethers } from "ethers";
-import { mintNFT } from "../clients/nft";
+import { airdropNFTs } from "../clients/nft";
 import { LOCALSTORAGE_KEY_DAY_PASS_ADDRESS } from "../consts/localstorage";
 
-// const NFT_CONTRACT_ADDRESS = "0x5a89d913b098c30fcb34f60382dce707177e171e";
-// const NFT_CONTRACT_ADDRESS="0xf03C1cB42c64628DE52d8828D534bFa2c6Fd65Df";
 const DEFAULT_NFT_CONTRACT_ADDRESS =
-  "0xf03C1cB42c64628DE52d8828D534bFa2c6Fd65Df";
-// const DaypassAddress = "0xa1F209805fBc1eb69BDeE37D7Ce629e80b31B722";
+  "0x2faf65bB673540061048259c06C4E1a9988F80e0";
 
 const AirdropPage = () => {
   const { address } = useAccount();
-  const [airdropAddress, setAirdropAddress] = useState("");
-  const handleChange = (event: any) => setAirdropAddress(event.target.value);
+  const [airdropAddresses, setAirdropAddresses] = useState("");
+  const handleChange = (event: any) => setAirdropAddresses(event.target.value);
   const [submiting, setSubmiting] = useState(false);
 
   const [nftContractAddress, setNftContractAddress] = useState("");
@@ -29,6 +25,28 @@ const AirdropPage = () => {
   }, []);
 
   const { data: signer } = useSigner();
+
+  const airdropDaypasses = async (addresses: string[]) => {
+    const hasBadAddress = addresses
+      .map(ethers.utils.isAddress)
+      .some((result) => result === false);
+
+    if (hasBadAddress) {
+      console.error("not address: " + address);
+      return;
+    }
+
+    if (!signer) {
+      console.error("signer is not ready");
+      return;
+    }
+
+    try {
+      await airdropNFTs(nftContractAddress!, signer, addresses);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <AdminDashboardLayout>
@@ -51,46 +69,33 @@ const AirdropPage = () => {
               letterSpacing="-0.02em"
               color="#000000"
             >
-              Send Daypass
+              Send Daypasses
             </Text>
           </Heading>
-          <Input
+          <Textarea
             mt="24px"
-            value={airdropAddress}
+            value={airdropAddresses}
             onChange={handleChange}
-            placeholder="recipient address"
+            placeholder="recipient addresses (comma separated)"
             disabled={submiting}
+            height="200px"
           />
           <Button
             isDisabled={!address}
             isLoading={submiting}
             colorScheme="blue"
             mt="16px"
-            onClick={() => {
-              if (!ethers.utils.isAddress(airdropAddress)) {
-                console.error("not address: " + airdropAddress);
-                return;
-              }
-
-              if (!signer) {
-                console.error("signer is not ready");
-                return;
-              }
-
-              (async () => {
-                setSubmiting(true);
-                try {
-                  await mintNFT(nftContractAddress!, signer, airdropAddress);
-                  setAirdropAddress("");
-                } catch (error) {
-                  console.error(error);
-                } finally {
-                  setSubmiting(false);
-                }
-              })();
+            onClick={async () => {
+              setSubmiting(true);
+              const addresses = airdropAddresses
+                .split(",")
+                .map((addr) => addr.trim());
+              await airdropDaypasses(addresses);
+              setAirdropAddresses("");
+              setSubmiting(false);
             }}
           >
-            Send Daypass
+            Send Daypasses
           </Button>
         </Box>
       </Flex>
