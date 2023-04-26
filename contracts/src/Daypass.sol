@@ -34,6 +34,14 @@ contract Daypass is ERC721Enumerable, Ownable {
         }
     }
 
+    function batchMint(address[] calldata recipients) external onlyOwner {
+        for (uint256 i = 0; i < recipients.length; i++) {
+            currentTokenId++;
+            _mint(recipients[i], currentTokenId);
+            validUntil[currentTokenId] = uint48(block.timestamp) + this.duration();
+        }
+    }
+
     // A user may have more than one pass, this function finds the one that's valid
     // for the longest and returns that timestamp.
     function hasGasCoveredUntil(address user) public view returns (uint48) {
