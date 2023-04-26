@@ -1,8 +1,7 @@
 import { Box, Button, Flex, Heading, Input, Text } from "@chakra-ui/react";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAccount, useSigner } from "wagmi";
-import AdminDashboardLayout from "./AdminDashboardLayout";
+import Layout from "./Layout";
 import { ethers } from "ethers";
 import { mintNFT } from "../clients/nft";
 import { LOCALSTORAGE_KEY_DAY_PASS_ADDRESS } from "../consts/localstorage";
@@ -31,7 +30,7 @@ const AirdropPage = () => {
   const { data: signer } = useSigner();
 
   return (
-    <AdminDashboardLayout>
+    <Layout>
       <Flex justifyContent="center">
         <Box
           borderRadius="20px"
@@ -94,7 +93,7 @@ const AirdropPage = () => {
           </Button>
         </Box>
       </Flex>
-    </AdminDashboardLayout>
+    </Layout>
   );
 };
 

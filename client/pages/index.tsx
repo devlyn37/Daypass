@@ -3,14 +3,14 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useAccount } from "wagmi";
-import AdminDashboardLayout from "./AdminDashboardLayout";
+import Layout from "./Layout";
 
 const AdminDashboardPage = () => {
   const { address } = useAccount();
   const router = useRouter();
 
   return (
-    <AdminDashboardLayout>
+    <Layout>
       <Container maxW="100%">
         <Box maxW="750px" pt="200px">
           <Flex alignItems="center" mb="3px">
@@ -72,7 +72,7 @@ const AdminDashboardPage = () => {
           Get Started
         </Button>
       </Container>
-    </AdminDashboardLayout>
+    </Layout>
   );
 };
 
