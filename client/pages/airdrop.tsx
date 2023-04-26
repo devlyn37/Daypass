@@ -12,10 +12,12 @@ const DEFAULT_NFT_CONTRACT_ADDRESS =
 const AirdropPage = () => {
   const { address } = useAccount();
   const [airdropAddresses, setAirdropAddresses] = useState("");
-  const handleChange = (event: any) => setAirdropAddresses(event.target.value);
+  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) =>
+    setAirdropAddresses(event.target.value);
   const [submiting, setSubmiting] = useState(false);
 
   const [nftContractAddress, setNftContractAddress] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     setNftContractAddress(
@@ -26,25 +28,33 @@ const AirdropPage = () => {
 
   const { data: signer } = useSigner();
 
-  const airdropDaypasses = async (addresses: string[]) => {
+  const airdropDaypasses = async () => {
+    const addresses = airdropAddresses.split(",").map((addr) => addr.trim());
     const hasBadAddress = addresses
       .map(ethers.utils.isAddress)
       .some((result) => result === false);
 
     if (hasBadAddress) {
-      console.error("not address: " + address);
+      setError("One or more addresses are invalid.");
       return;
     }
 
     if (!signer) {
-      console.error("signer is not ready");
+      setError("Signer is not ready.");
       return;
     }
 
+    setError("");
+    setSubmiting(true);
+
     try {
-      await airdropNFTs(nftContractAddress!, signer, addresses);
+      await airdropNFTs(nftContractAddress, signer, addresses);
+      setError("");
     } catch (error) {
-      console.error(error);
+      setError("Something went wrong during the airdrop.");
+    } finally {
+      setAirdropAddresses("");
+      setSubmiting(false);
     }
   };
 
@@ -81,22 +91,17 @@ const AirdropPage = () => {
             height="200px"
           />
           <Button
-            isDisabled={!address}
+            isDisabled={!address || airdropAddresses.trim() === ""}
             isLoading={submiting}
             colorScheme="blue"
             mt="16px"
-            onClick={async () => {
-              setSubmiting(true);
-              const addresses = airdropAddresses
-                .split(",")
-                .map((addr) => addr.trim());
-              await airdropDaypasses(addresses);
-              setAirdropAddresses("");
-              setSubmiting(false);
-            }}
+            onClick={airdropDaypasses}
           >
             Send Daypasses
           </Button>
+          <Text color="red.500" mt="2">
+            {error}
+          </Text>
         </Box>
       </Flex>
     </AdminDashboardLayout>
