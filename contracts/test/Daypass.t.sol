@@ -35,6 +35,26 @@ contract DaypassTest is Test {
         vm.stopPrank();
     }
 
+    // Add this new test function for batchMint
+    function testBatchMint(uint256 quantity) public {
+        vm.startPrank(deployerAddress);
+        nft = new Daypass("Daypass", "DPASS", true, oneDay);
+
+        vm.assume(quantity > 0 && quantity < 25);
+
+        address[] memory recipients = new address[](quantity);
+        for (uint256 i = 0; i < quantity; i++) {
+            recipients[i] = address(uint160(i + 1000)); // Use uint160 for type conversion
+        }
+
+        nft.batchMint(recipients);
+
+        for (uint256 i = 0; i < quantity; i++) {
+            assertEq(nft.balanceOf(recipients[i]), 1);
+        }
+        vm.stopPrank();
+    }
+
     function testValidUntilTimestamp(uint48 numDays) public {
         vm.startPrank(deployerAddress);
         vm.assume(numDays >= 0 && numDays < 14);

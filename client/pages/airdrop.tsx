@@ -1,24 +1,23 @@
-import { Box, Button, Flex, Heading, Input, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Text, Textarea } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useAccount, useSigner } from "wagmi";
 import Layout from "./Layout";
 import { ethers } from "ethers";
-import { mintNFT } from "../clients/nft";
+import { airdropNFTs } from "../clients/nft";
 import { LOCALSTORAGE_KEY_DAY_PASS_ADDRESS } from "../consts/localstorage";
 
-// const NFT_CONTRACT_ADDRESS = "0x5a89d913b098c30fcb34f60382dce707177e171e";
-// const NFT_CONTRACT_ADDRESS="0xf03C1cB42c64628DE52d8828D534bFa2c6Fd65Df";
 const DEFAULT_NFT_CONTRACT_ADDRESS =
-  "0xf03C1cB42c64628DE52d8828D534bFa2c6Fd65Df";
-// const DaypassAddress = "0xa1F209805fBc1eb69BDeE37D7Ce629e80b31B722";
+  "0x2faf65bB673540061048259c06C4E1a9988F80e0";
 
 const AirdropPage = () => {
   const { address } = useAccount();
-  const [airdropAddress, setAirdropAddress] = useState("");
-  const handleChange = (event: any) => setAirdropAddress(event.target.value);
+  const [airdropAddresses, setAirdropAddresses] = useState("");
+  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) =>
+    setAirdropAddresses(event.target.value);
   const [submiting, setSubmiting] = useState(false);
 
   const [nftContractAddress, setNftContractAddress] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     setNftContractAddress(
@@ -28,6 +27,36 @@ const AirdropPage = () => {
   }, []);
 
   const { data: signer } = useSigner();
+
+  const airdropDaypasses = async () => {
+    const addresses = airdropAddresses.split(",").map((addr) => addr.trim());
+    const hasBadAddress = addresses
+      .map(ethers.utils.isAddress)
+      .some((result) => result === false);
+
+    if (hasBadAddress) {
+      setError("One or more addresses are invalid.");
+      return;
+    }
+
+    if (!signer) {
+      setError("Signer is not ready.");
+      return;
+    }
+
+    setError("");
+    setSubmiting(true);
+
+    try {
+      await airdropNFTs(nftContractAddress, signer, addresses);
+      setError("");
+    } catch (error) {
+      setError("Something went wrong during the airdrop.");
+    } finally {
+      setAirdropAddresses("");
+      setSubmiting(false);
+    }
+  };
 
   return (
     <Layout>
@@ -50,47 +79,29 @@ const AirdropPage = () => {
               letterSpacing="-0.02em"
               color="#000000"
             >
-              Send Daypass
+              Send Daypasses
             </Text>
           </Heading>
-          <Input
+          <Textarea
             mt="24px"
-            value={airdropAddress}
+            value={airdropAddresses}
             onChange={handleChange}
-            placeholder="recipient address"
+            placeholder="recipient addresses (comma separated)"
             disabled={submiting}
+            height="200px"
           />
           <Button
-            isDisabled={!address}
+            isDisabled={!address || airdropAddresses.trim() === ""}
             isLoading={submiting}
             colorScheme="blue"
             mt="16px"
-            onClick={() => {
-              if (!ethers.utils.isAddress(airdropAddress)) {
-                console.error("not address: " + airdropAddress);
-                return;
-              }
-
-              if (!signer) {
-                console.error("signer is not ready");
-                return;
-              }
-
-              (async () => {
-                setSubmiting(true);
-                try {
-                  await mintNFT(nftContractAddress!, signer, airdropAddress);
-                  setAirdropAddress("");
-                } catch (error) {
-                  console.error(error);
-                } finally {
-                  setSubmiting(false);
-                }
-              })();
-            }}
+            onClick={airdropDaypasses}
           >
-            Send Daypass
+            Send Daypasses
           </Button>
+          <Text color="red.500" mt="2">
+            {error}
+          </Text>
         </Box>
       </Flex>
     </Layout>
