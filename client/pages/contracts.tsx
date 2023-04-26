@@ -19,7 +19,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAccount, useNetwork, useSigner } from "wagmi";
-import AdminDashboardLayout from "./AdminDashboardLayout";
+import Layout from "./Layout";
 import { setupDaypass } from "../clients/setup_helper";
 import {
   GOERLI_ENTRYPOINT,
@@ -157,7 +157,7 @@ const AdminDashboardPage = () => {
   console.log("chain?.network", chain?.network);
 
   return (
-    <AdminDashboardLayout>
+    <Layout>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Flex justifyContent="center">
           <Box>
@@ -703,7 +703,7 @@ const AdminDashboardPage = () => {
           </Box>
         </Flex>
       </form>
-    </AdminDashboardLayout>
+    </Layout>
   );
 };
 

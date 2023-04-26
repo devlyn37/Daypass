@@ -1,15 +1,12 @@
 import { ReactNode } from "react";
 
-type AdminDashboardLayoutProps = {
-  children: ReactNode;
-};
-
-import { ChakraProvider, Flex, extendTheme } from "@chakra-ui/react";
+import { ChakraProvider, Flex } from "@chakra-ui/react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import "@rainbow-me/rainbowkit/styles.css";
 import DayPassLogo from "../components/DayPassLogo";
+import Link from "next/link";
 
-const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
+const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <ChakraProvider>
       <Flex
@@ -25,7 +22,10 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
           alignItems="center"
           marginBottom="40px"
         >
-          <DayPassLogo />
+          <Link href="/">
+            <DayPassLogo />
+          </Link>
+
           <ConnectButton />
         </Flex>
         {children}
@@ -34,4 +34,4 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
   );
 };
 
-export default AdminDashboardLayout;
+export default Layout;
