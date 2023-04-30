@@ -67,7 +67,7 @@ contract DaypassPaymasterTest is Test {
         vm.stopPrank();
     }
 
-    function test_mint_erc721_free_mint() external {
+    function test_happyPath() external {
         vm.prank(owner);
         (nftPass, paymaster) = setupHelper.setupDaypass{value: 10 ether}(
             entrypoint, whiteListedAddresses, false, 500000_00, 0, oneDay, airdropAddresses
@@ -84,7 +84,7 @@ contract DaypassPaymasterTest is Test {
         assertEq(latestNftOwner, address(player));
     }
 
-    function test_expired_pass() external {
+    function test_expiredPass() external {
         vm.prank(owner);
         (nftPass, paymaster) = setupHelper.setupDaypass{value: 10 ether}(
             entrypoint, whiteListedAddresses, false, 500000_00, 0, oneDay, airdropAddresses
@@ -101,7 +101,7 @@ contract DaypassPaymasterTest is Test {
         entrypoint.handleOps(userOperations, payable(address(1)));
     }
 
-    function test_no_pass() external {
+    function test_revertWhen_noPass() external {
         vm.prank(owner);
         address[] memory emptyAirdropArray = new address[](0);
         (nftPass, paymaster) = setupHelper.setupDaypass{value: 10 ether}(
@@ -116,7 +116,7 @@ contract DaypassPaymasterTest is Test {
         entrypoint.handleOps(userOperations, payable(address(1)));
     }
 
-    function test_gas_too_high() external {
+    function test_revertWhen_gasTooHigh() external {
         vm.prank(owner);
         uint256 maximumGas = 1;
         (nftPass, paymaster) = setupHelper.setupDaypass{value: 10 ether}(
@@ -132,7 +132,7 @@ contract DaypassPaymasterTest is Test {
         entrypoint.handleOps(userOperations, payable(address(1)));
     }
 
-    function test_max_cost_too_high() external {
+    function test_revertWhen_maxCostTooHigh() external {
         vm.prank(owner);
         uint256 superLowSpendingLimit = 1;
         (nftPass, paymaster) = setupHelper.setupDaypass{value: 10 ether}(
