@@ -8,11 +8,6 @@ import "../lib/account-abstraction/contracts/core/Helpers.sol";
 import "../lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol";
 import "./Daypass.sol";
 
-error ExceedingGasLimit();
-error ExceedingSpendingLimit();
-error NoDaypass();
-error AddressNotAllowed();
-
 // Sample Paymaster Contract
 
 contract DaypassPaymaster is BasePaymaster {
@@ -59,19 +54,19 @@ contract DaypassPaymaster is BasePaymaster {
         uint256 tokenCount = daypassContract.balanceOf(userOp.sender);
 
         if (tokenCount < 1) {
-            revert NoDaypass();
+            revert("no daypass");
         }
 
         if (!_isInWhiteList(dest)) {
-            revert AddressNotAllowed();
+            revert("address not allowed");
         }
 
         if (_exceedsGasLimit(userOp.callGasLimit)) {
-            revert ExceedingGasLimit();
+            revert("gas limit too high");
         }
 
         if (_exceedsSpendingLimit(maxCost)) {
-            revert ExceedingSpendingLimit();
+            revert("max cost too high");
         }
 
         // Ok, the operation is valid as far as we're concerned
