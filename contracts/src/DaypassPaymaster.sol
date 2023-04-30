@@ -8,11 +8,6 @@ import "../lib/account-abstraction/contracts/core/Helpers.sol";
 import "../lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol";
 import "./Daypass.sol";
 
-error ExceedingGasLimit();
-error ExceedingSpendingLimit();
-error NoDaypass();
-error AddressNotAllowed();
-
 // Sample Paymaster Contract
 
 contract DaypassPaymaster is BasePaymaster {

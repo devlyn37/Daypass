@@ -24,6 +24,7 @@ contract DaypassPaymasterTest is Test {
     uint256 goerliFork;
     uint256 ownerKey;
     address owner;
+    bytes mintFunction;
     address[] whiteListedAddresses = new address[](1);
     address[] airdropAddresses = new address[](1);
     uint48 oneDay = 86400;
@@ -61,6 +62,7 @@ contract DaypassPaymasterTest is Test {
         player.initialize(owner);
         vm.label(address(player), "player");
         airdropAddresses[0] = address(player);
+        mintFunction = abi.encodeWithSignature("mint(uint256)", 1);
 
         vm.stopPrank();
     }
@@ -70,8 +72,6 @@ contract DaypassPaymasterTest is Test {
         (nftPass, paymaster) = setupHelper.setupDaypass{value: 10 ether}(
             entrypoint, whiteListedAddresses, false, 500000_00, 0, oneDay, airdropAddresses
         );
-
-        vm.warp(4500);
 
         bytes memory mintFunction = abi.encodeWithSignature("mint(uint256)", 1);
         UserOperation[] memory userOperations = new UserOperation[](1);
@@ -93,7 +93,6 @@ contract DaypassPaymasterTest is Test {
         uint48 delay = oneDay + 1;
         vm.warp(block.timestamp + delay);
 
-        bytes memory mintFunction = abi.encodeWithSignature("mint(uint256)", 1);
         UserOperation[] memory userOperations = new UserOperation[](1);
         userOperations[0] = constructUserOp(mintFunction, address(randomNFT), 80000);
 
@@ -109,9 +108,6 @@ contract DaypassPaymasterTest is Test {
             entrypoint, whiteListedAddresses, false, 500000_00, 0, oneDay, emptyAirdropArray
         );
 
-        vm.warp(4500);
-
-        bytes memory mintFunction = abi.encodeWithSignature("mint(uint256)", 1);
         UserOperation[] memory userOperations = new UserOperation[](1);
         userOperations[0] = constructUserOp(mintFunction, address(randomNFT), 80000);
 
@@ -122,17 +118,14 @@ contract DaypassPaymasterTest is Test {
 
     function test_gas_too_high() external {
         vm.prank(owner);
-        uint256 superLowGasLimit = 1;
+        uint256 maximumGas = 1;
         (nftPass, paymaster) = setupHelper.setupDaypass{value: 10 ether}(
-            entrypoint, whiteListedAddresses, false, superLowGasLimit, 0, oneDay, airdropAddresses
+            entrypoint, whiteListedAddresses, false, maximumGas, 0, oneDay, airdropAddresses
         );
 
-        vm.warp(4500);
-
-        bytes memory mintFunction = abi.encodeWithSignature("mint(uint256)", 1);
         UserOperation[] memory userOperations = new UserOperation[](1);
-        uint256 largeCallGasLimit = 120000;
-        userOperations[0] = constructUserOp(mintFunction, address(randomNFT), largeCallGasLimit);
+        uint256 bigGasLimit = 120000;
+        userOperations[0] = constructUserOp(mintFunction, address(randomNFT), bigGasLimit);
 
         vm.prank(address(player));
         vm.expectRevert(abi.encodeWithSignature("FailedOp(uint256,string)", 0, "AA33 reverted: gas limit too high"));
@@ -146,9 +139,6 @@ contract DaypassPaymasterTest is Test {
             entrypoint, whiteListedAddresses, false, 500000_00, superLowSpendingLimit, oneDay, airdropAddresses
         );
 
-        vm.warp(4500);
-
-        bytes memory mintFunction = abi.encodeWithSignature("mint(uint256)", 1);
         UserOperation[] memory userOperations = new UserOperation[](1);
         uint256 largeCallGasLimit = 120000;
         userOperations[0] = constructUserOp(mintFunction, address(randomNFT), largeCallGasLimit);
