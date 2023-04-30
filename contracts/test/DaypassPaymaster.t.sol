@@ -75,7 +75,7 @@ contract DaypassPaymasterTest is Test {
 
         bytes memory mintFunction = abi.encodeWithSignature("mint(uint256)", 1);
         UserOperation[] memory userOperations = new UserOperation[](1);
-        userOperations[0] = constructUserOp(mintFunction, address(randomNFT));
+        userOperations[0] = constructUserOp(mintFunction, address(randomNFT), 80000);
 
         vm.prank(address(player));
         entrypoint.handleOps(userOperations, payable(address(1)));
@@ -95,19 +95,78 @@ contract DaypassPaymasterTest is Test {
 
         bytes memory mintFunction = abi.encodeWithSignature("mint(uint256)", 1);
         UserOperation[] memory userOperations = new UserOperation[](1);
-        userOperations[0] = constructUserOp(mintFunction, address(randomNFT));
+        userOperations[0] = constructUserOp(mintFunction, address(randomNFT), 80000);
 
         vm.prank(address(player));
         vm.expectRevert(abi.encodeWithSignature("FailedOp(uint256,string)", 0, "AA32 paymaster expired or not due"));
         entrypoint.handleOps(userOperations, payable(address(1)));
     }
 
-    function constructUserOp(bytes memory callData, address to) internal view returns (UserOperation memory userOp) {
+    function test_no_pass() external {
+        vm.prank(owner);
+        address[] memory emptyAirdropArray = new address[](0);
+        (nftPass, paymaster) = setupHelper.setupDaypass{value: 10 ether}(
+            entrypoint, whiteListedAddresses, false, 500000_00, 0, oneDay, emptyAirdropArray
+        );
+
+        vm.warp(4500);
+
+        bytes memory mintFunction = abi.encodeWithSignature("mint(uint256)", 1);
+        UserOperation[] memory userOperations = new UserOperation[](1);
+        userOperations[0] = constructUserOp(mintFunction, address(randomNFT), 80000);
+
+        vm.prank(address(player));
+        vm.expectRevert(abi.encodeWithSignature("FailedOp(uint256,string)", 0, "AA33 reverted: no daypass"));
+        entrypoint.handleOps(userOperations, payable(address(1)));
+    }
+
+    function test_gas_too_high() external {
+        vm.prank(owner);
+        uint256 superLowGasLimit = 1;
+        (nftPass, paymaster) = setupHelper.setupDaypass{value: 10 ether}(
+            entrypoint, whiteListedAddresses, false, superLowGasLimit, 0, oneDay, airdropAddresses
+        );
+
+        vm.warp(4500);
+
+        bytes memory mintFunction = abi.encodeWithSignature("mint(uint256)", 1);
+        UserOperation[] memory userOperations = new UserOperation[](1);
+        uint256 largeCallGasLimit = 120000;
+        userOperations[0] = constructUserOp(mintFunction, address(randomNFT), largeCallGasLimit);
+
+        vm.prank(address(player));
+        vm.expectRevert(abi.encodeWithSignature("FailedOp(uint256,string)", 0, "AA33 reverted: gas limit too high"));
+        entrypoint.handleOps(userOperations, payable(address(1)));
+    }
+
+    function test_max_cost_too_high() external {
+        vm.prank(owner);
+        uint256 superLowSpendingLimit = 1;
+        (nftPass, paymaster) = setupHelper.setupDaypass{value: 10 ether}(
+            entrypoint, whiteListedAddresses, false, 500000_00, superLowSpendingLimit, oneDay, airdropAddresses
+        );
+
+        vm.warp(4500);
+
+        bytes memory mintFunction = abi.encodeWithSignature("mint(uint256)", 1);
+        UserOperation[] memory userOperations = new UserOperation[](1);
+        uint256 largeCallGasLimit = 120000;
+        userOperations[0] = constructUserOp(mintFunction, address(randomNFT), largeCallGasLimit);
+
+        vm.prank(address(player));
+        vm.expectRevert(abi.encodeWithSignature("FailedOp(uint256,string)", 0, "AA33 reverted: max cost too high"));
+        entrypoint.handleOps(userOperations, payable(address(1)));
+    }
+
+    function constructUserOp(bytes memory callData, address to, uint256 callGasLimit)
+        internal
+        view
+        returns (UserOperation memory userOp)
+    {
         bytes memory data = abi.encodeWithSignature("execute(address,uint256,bytes)", to, 0, callData);
 
         uint256 nonce = player.nonce();
         bytes memory initCode = abi.encode();
-        uint256 callGasLimit = 40000_00;
         uint256 verificationGasLimit = 40000_00;
         uint256 preVerificationGas = 20000_00;
         uint256 maxFeePerGas = 10000000000;
